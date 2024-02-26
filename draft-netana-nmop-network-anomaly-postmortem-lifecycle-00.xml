@@ -105,37 +105,22 @@
       </address>
     </author>
 
-    <!--    <author fullname="Alex Huang Feng" initials="A." surname="Huang Feng">-->
-
-    <!--      <organization>INSA-Lyon</organization>-->
-
-    <!--      <address>-->
-
-    <!--        <postal>-->
-
-    <!--          <street/>-->
-
-    <!--          <city>Lyon</city>-->
-
-    <!--          <region/>-->
-
-    <!--          <code/>-->
-
-    <!--          <country>France</country>-->
-
-    <!--        </postal>-->
-
-    <!--        <phone/>-->
-
-    <!--        <facsimile/>-->
-
-    <!--        <email>alex.huang-feng@insa-lyon.fr</email>-->
-
-    <!--        <uri/>-->
-
-    <!--      </address>-->
-
-    <!--    </author>-->
+    <author fullname="Alex Huang Feng" initials="A." surname="Huang Feng">
+      <organization>INSA-Lyon</organization>
+      <address>
+        <postal>
+          <street/>
+          <city>Lyon</city>
+          <region/>
+          <code/>
+          <country>France</country>
+        </postal>
+        <phone/>
+        <facsimile/>
+        <email>alex.huang-feng@insa-lyon.fr</email>
+        <uri/>
+      </address>
+    </author>
 
     <date day="25" month="February" year="2024"/>
 
@@ -325,17 +310,19 @@
       <t>The lifecycle of a network anomaly can be articulated in three
       phases, structured as a loop: Detection, Validation, Refinement.</t>
 
-      <artwork><![CDATA[
-                             +-------------+
-                  +--------> |  Detection  | ---------+
-      Adjustments |          +-------------+          | Symptoms
-                  |                                   |
-                  |                                   v
-           +------------+                       +------------+
-           | Refinement |<--------------------- | Validation |
-           +------------+        Incident       +------------+
-                               Confirmation
+      <t><figure anchor="simplified_lifecyc" title="Anomaly Detection Refinement Lifecycle">
+      <artwork align="center"><![CDATA[
+                        +-------------+
+            +--------> |  Detection  | ---------+
+Adjustments |          +-------------+          | Symptoms
+            |                                   |
+            |                                   v
+    +------------+                       +------------+
+    | Refinement |<--------------------- | Validation |
+    +------------+        Incident       +------------+
+                        Confirmation
       ]]></artwork>
+      </figure></t>
 
       <t>Each of these phases can either be performed by a network expert or
       an algorithm or complementing each other.</t>
@@ -389,7 +376,7 @@
 
       <section anchor="network_anomaly_validation"
                title="Network Anomaly Validation">
-        <t>The key objective of for the validation stage is clearly to decide
+        <t>The key objective for the validation stage is clearly to decide
         if the detected symptoms are signaling a real incident (a.k.a. require
         immediate action) or if they are to be treated as false positives
         (a.k.a. suppressing the alarm). For those symptoms surely having
@@ -424,11 +411,12 @@
     <section anchor="Incident_State_Machine"
              title="Network Anomaly State Machine">
       <t>From a network anomaly detection point of view a network incident is
-      defined as a collection of interrelated symptoms. From the network
-      anomaly detection point of view, an incident can be defined according to
-      the following states.</t>
-
-      <artwork><![CDATA[
+      defined as a collection of interrelated symptoms. From this perspective,
+      an incident can be defined according to the following states
+      (<xref target="state_machine"/>).</t>
+      
+      <t><figure anchor="state_machine" title="Network Anomaly State Machine">
+      <artwork align="center"><![CDATA[
                                              +---------+
                                              | Initial |-----------------+
                                              +---------+                 |
@@ -463,191 +451,211 @@
 | +------------------+  |
 +-------Refinement------+
       ]]></artwork>
+      </figure></t>
 
       <section anchor="network-anomaly-model-tree"
                title="Overview of the Model for the Network Anomaly Metadata">
         <figure anchor="ietf-network-anomaly-metadata-tree"
                 title="YANG tree diagram for ietf-network-anomaly-metadata">
-          <artwork><![CDATA[
-              module: ietf-network-anomaly-metadata
-               +--rw network-anomalies
-                 +--rw network-anomaly* [id author-name version state]
-                    +--rw id             yang:uuid
-                    +--rw description?   string
-                    +--rw author-name    string
-                    +--rw author
-                    |  +--rw author-type?    identityref
-                    |  +--rw algo-version?   uint8
-                    +--rw version        uint8
-                    +--rw state          identityref
-                    +--rw symptoms* [symptom_id]
-                       +--rw symptom_id    yang:uuid
+          <artwork align="center"><![CDATA[
+module: ietf-network-anomaly-metadata
+  +--rw network-anomalies
+     +--rw network-anomaly* [id author-name version state]
+        +--rw id             yang:uuid
+        +--rw description?   string
+        +--rw author-name    string
+        +--rw author
+        |  +--rw author-type?    identityref
+        |  +--rw algo-version?   uint8
+        +--rw version        uint8
+        +--rw state          identityref
+        +--rw symptoms* [symptom_id]
+           +--rw symptom_id    yang:uuid
             ]]></artwork>
         </figure>
 
         <figure anchor="ietf-network-anomaly-metadata-module"
                 title="YANG module for ietf-network-anomaly-metadata">
           <artwork><![CDATA[
+<CODE BEGINS> file "ietf-udp-notif-transport@2024-01-22.yang"
 module ietf-network-anomaly-metadata {
-    yang-version 1.1;
-    namespace "urn:ietf:params:xml:ns:yang:ietf-network-anomaly-metadata";
-    prefix network_anomaly_metadata;
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-network-anomaly-metadata";
+  prefix network_anomaly_metadata;
 
-    import ietf-yang-types {
-        prefix yang;
-        reference
-          "RFC 6991: Common YANG Data Types";
-    }
+  import ietf-yang-types {
+    prefix yang;
+    reference "RFC 6991: Common YANG Data Types";
+  }
 
-    organization
-        "TBD";
-    contact
-        "TBD";
+  organization
+    "IETF NMOP Working Group";
+  contact
+    "WG Web:   <https://datatracker.ietf.org/wg/nmop/>
+     WG List:  <mailto:nmop@ietf.org>
+
+     Authors:  Vincenzo Riccobene
+               <mailto:vincenzo.riccobene@huawei-partners.com>
+               Antonio Roberto
+               <mailto:antonio.roberto@huawei.com>
+               Thomas Graf
+               <mailto:thomas.graf@swisscom.com>
+               Wanting Du
+               <mailto:wanting.du@swisscom.com>
+               Alex Huang Feng
+               <mailto:alex.huang-feng@insa-lyon.fr>";
+  description
+    "This module defines objects for the description of network anomalies.
+      Network anomalies are a collection of symptoms observed on
+      the network nodes.
+
+      Copyright (c) 2024 IETF Trust and the persons identified as
+      authors of the code.  All rights reserved.
+
+      Redistribution and use in source and binary forms, with or
+      without modification, is permitted pursuant to, and subject
+      to the license terms contained in, the Revised BSD License
+      set forth in Section 4.c of the IETF Trust's Legal Provisions
+      Relating to IETF Documents
+      (https://trustee.ietf.org/license-info).
+      
+      This version of this YANG module is part of RFC XXXX; see the RFC
+      itself for full legal notices.";
+
+  revision 2024-02-26 {
     description
-        "This module defines objects for the description of network anomalies.
-         Network anomalies are a collection of symptoms observed on
-         the network nodes.
+      "Initial version";
+    reference
+      "RFCXXXX: Experiment: Network Anomaly Postmortem Lifecycle";
+  }
 
-         Copyright (c) 2023 IETF Trust and the persons identified as
-         authors of the code.  All rights reserved.
+  identity author-type {
+    description
+      "Type of the author of the network anomaly metadata";
+  }
 
-         Redistribution and use in source and binary forms, with or
-         without modification, is permitted pursuant to, and subject
-         to the license terms contained in, the Revised BSD License
-         set forth in Section 4.c of the IETF Trust's Legal Provisions
-         Relating to IETF Documents
-         (https://trustee.ietf.org/license-info).";
+  identity user {
+    base author-type;
+    description
+      "A real user (person) generated the network anomaly metadata";
+  }
 
-    revision 2023-10-30 {
+  identity algorithm {
+    base author-type;
+    description
+      "An algorithm generated the network anomaly metadata";
+  }
+
+  identity network-anomaly-state {
+    description
+      "Base identity for representing the state of the network anomaly";
+  }
+  identity incident-forecasted {
+    base network-anomaly-state;
+    description
+      "An incident has been forecasted, as it is expected that
+      the indicated list of symptoms will impact a service
+      in the near future";
+  }
+  identity incident-potential {
+    base network-anomaly-state;
+    description
+      "An incident has been detected with a confidence
+      lower than 100%. In order to confirm that this set of
+      symptoms are generating service impact, it requires further
+      validation";
+  }
+  identity incident-confirmed {
+    base network-anomaly-state;
+    description
+      "After validation, the incident has been confirmed";
+  }
+  identity discarded {
+    base network-anomaly-state;
+    description
+      "After validation, the network anomaly has been
+      discarded, as there is no evindence that it is causing an
+      incident";
+  }
+  identity analysed {
+    base network-anomaly-state;
+    description
+      "The anomaly detection went through analysis to identify
+      potential ways to further improve the detection process in
+      for future anomalies";
+  }
+  identity adjusted {
+    base network-anomaly-state;
+    description
+      "The network anomaly has been solved and analysed.
+      No further action is required.";
+  }
+
+  container network-anomalies {
+    description "Container having the network anomalies";
+    list network-anomaly {
+      key "id author-name version state";
+      description "A network anomaly identified by an id, author-name, version 
+        and state.";
+      leaf id {
+        type yang:uuid;
         description
-          "Initial version";
-        reference
-    }
-
-    identity author-type {
+            "Unique ID of the network network anomaly";
+      }
+      leaf description {
+        type string;
         description
-            "Type of the author of the network anomaly metadata";
-    }
-
-    identity user {
-        base author-type;
-        description
-            "A real user (person) generated the network anomaly metadata";
-    }
-
-    identity algorithm {
-        base author-type;
-        description
-            "An algorithm generated the network anomaly metadata";
-    }
-
-    identity network-anomaly-state {
-      description
-        "Base identity for representing the state of the network anomaly";
-    }
-    identity incident-forecasted {
-       base network-anomaly-state;
-       description
-         "An incident has been forecasted, as it is expected that
-         the indicated list of symptoms will impact a service
-         in the near future";
-    }
-    identity incident-potential {
-       base network-anomaly-state;
-       description
-         "An incident has been detected with a confidence
-         lower than 100%. In order to confirm that this set of
-         symptoms are generating service impact, it requires further
-         validation";
-    }
-    identity incident-confirmed {
-      base network-anomaly-state;
-      description
-        "After validation, the incident has been confirmed";
-    }
-    identity discarded {
-      base network-anomaly-state;
-      description
-        "After validation, the network anomaly has been
-        discarded, as there is no evindence that it is causing an
-        incident";
-    }
-    identity analysed {
-      base network-anomaly-state;
-      description
-        "The Anomaly detection went through analysis to identify
-        potential ways to further improve the detection process in
-        for future anomalies";
-    }
-    identity adjusted {
-      base network-anomaly-state;
-      description
-        "The network anomaly has been solved and analysed.
-        No further action is required.";
-    }
-
-    container network-anomalies {
-        list network-anomaly {
-            key "id author-name version state";
-            leaf id {
-                type yang:uuid;
-                mandatory "true";
-                description
-                    "Unique ID of the network network anomaly";
-            }
-            leaf description {
-                type string;
-                mandatory "false";
-                description
-                    "Textual description of the network anomaly";
-            }
-            leaf author-name {
-                type string;
-                description "Name of the user (person) or of the
-                algorithm that generated the network anomaly metadata";
-            }
-            container author {
-                leaf author-type {
-                    type identityref {
-                        base author-type;
-                    }
-                }
-                leaf algo-version {
-                    mandatory "false";
-                    type uint8;
-                    description "Version of the algorithm used to
-                    produce the netowrk anomaly metadata.  This is
-                    used only if the author type is an algorithm";
-                }
-            }
-            leaf version {
-                type uint8;
-                description
-                    "Version of the incident metadata object.
-                    It allows multiple versions of the metadata to be
-                    generated in order to support the definition of
-                    multiple incindent objects from the same source to
-                    facilitate improvements overtime";
-            }
-            leaf state {
-                mandatory "true";
-                type identityref {
-                    base network-anomaly-state;
-                }
-                description "";
-            }
-            list symptoms {
-                key "symptom_id";
-                leaf symptom_id {
-                    type yang:uuid;
-                    mandatory "true";
-                    description "UUID of the symptom that is part of this incident";
-                }
-            }
+          "Textual description of the network anomaly";
+      }
+      leaf author-name {
+        type string;
+        description "Name of the user (person) or of the
+          algorithm that generated the network anomaly metadata";
+      }
+      container author {
+        description "Container defining the type of the author and the
+          version of the algorithm if it is an algorithm who reported the anomaly.";
+        leaf author-type {
+          type identityref {
+              base author-type;
+          }
+          description "The type of author who reported the anomaly.";
         }
+        leaf algo-version {
+          type uint8;
+          description "Version of the algorithm used to
+          produce the netowrk anomaly metadata.  This is
+          used only if the author type is an algorithm";
+        }
+      }
+      leaf version {
+        type uint8;
+        description
+          "Version of the incident metadata object.
+          It allows multiple versions of the metadata to be
+          generated in order to support the definition of
+          multiple incindent objects from the same source to
+          facilitate improvements overtime";
+      }
+      leaf state {
+        type identityref {
+          base network-anomaly-state;
+        }
+        mandatory true;
+        description "State of the anomaly.";
+      }
+      list symptoms {
+        key "symptom_id";
+        description "List of symptoms identified by the symptom_id.";
+        leaf symptom_id {
+          type yang:uuid;
+          description "UUID of the symptom that is part of this incident";
+        }
+      }
     }
+  }
 }
-            ]]></artwork>
+<CODE ENDS>]]></artwork>
         </figure>
       </section>
     </section>
@@ -664,19 +672,14 @@ module ietf-network-anomaly-metadata {
 
   <back>
     <references title="Normative References">
-      <?rfc include='reference.RFC.2119'?>
-
-      <?rfc include='reference.RFC.8174'?>
-
-      <?rfc include='reference.RFC.9417'?>
-
-      <?rfc include='reference.RFC.9418'?>
-
-      <?rfc include='reference.RFC.9232'?>
-
-      <?rfc include='reference.I-D.netana-nmop-network-anomaly-semantics'?>
-
-      <?rfc include='reference.I-D.davis-nmop-incident-terminology'?>
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml"?>
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.8340.xml"?>
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.9417.xml"?>
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.9418.xml"?>
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.9232.xml"?>
+      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.netana-nmop-network-anomaly-semantics.xml"?>
+      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.davis-nmop-incident-terminology.xml"?>
 
       <reference anchor="Ahf23"
                  target="https://anrw23.hotcrp.com/doc/anrw23-paper8.pdf">

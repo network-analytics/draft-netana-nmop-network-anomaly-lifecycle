@@ -8,6 +8,8 @@ Intended status: Experimental                                     Huawei
 Expires: 28 August 2024                                          T. Graf
                                                                    W. Du
                                                                 Swisscom
+                                                           A. Huang Feng
+                                                               INSA-Lyon
                                                         25 February 2024
 
 
@@ -46,8 +48,6 @@ Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
    provisions of BCP 78 and BCP 79.
-
-
 
 
 
@@ -95,9 +95,9 @@ Table of Contents
      4.3.  Network Anomaly Refinement  . . . . . . . . . . . . . . .   7
    5.  Network Anomaly State Machine . . . . . . . . . . . . . . . .   8
      5.1.  Overview of the Model for the Network Anomaly Metadata  .   8
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  12
-   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  12
-   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  12
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  13
+   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  13
+   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  13
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  14
 
 1.  Status of this document
@@ -264,16 +264,16 @@ Internet-Draft          network-anomaly-lifecycle          February 2024
    phases, structured as a loop: Detection, Validation, Refinement.
 
                                 +-------------+
-                     +--------> |  Detection  | ---------+
-         Adjustments |          +-------------+          | Symptoms
-                     |                                   |
-                     |                                   v
-              +------------+                       +------------+
-              | Refinement |<--------------------- | Validation |
-              +------------+        Incident       +------------+
-                                  Confirmation
+                    +--------> |  Detection  | ---------+
+        Adjustments |          +-------------+          | Symptoms
+                    |                                   |
+                    |                                   v
+            +------------+                       +------------+
+            | Refinement |<--------------------- | Validation |
+            +------------+        Incident       +------------+
+                                Confirmation
 
-
+              Figure 1: Anomaly Detection Refinement Lifecycle
 
 
 
@@ -355,7 +355,7 @@ Internet-Draft          network-anomaly-lifecycle          February 2024
 
 4.2.  Network Anomaly Validation
 
-   The key objective of for the validation stage is clearly to decide if
+   The key objective for the validation stage is clearly to decide if
    the detected symptoms are signaling a real incident (a.k.a. require
    immediate action) or if they are to be treated as false positives
    (a.k.a. suppressing the alarm).  For those symptoms surely having
@@ -397,9 +397,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2024
 5.  Network Anomaly State Machine
 
    From a network anomaly detection point of view a network incident is
-   defined as a collection of interrelated symptoms.  From the network
-   anomaly detection point of view, an incident can be defined according
-   to the following states.
+   defined as a collection of interrelated symptoms.  From this
+   perspective, an incident can be defined according to the following
+   states (Figure 2).
 
                                              +---------+
                                              | Initial |-----------------+
@@ -435,9 +435,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2024
 | +------------------+  |
 +-------Refinement------+
 
+               Figure 2: Network Anomaly State Machine
+
 5.1.  Overview of the Model for the Network Anomaly Metadata
-
-
 
 
 
@@ -450,54 +450,54 @@ Riccobene, et al.        Expires 28 August 2024                 [Page 8]
 Internet-Draft          network-anomaly-lifecycle          February 2024
 
 
-                module: ietf-network-anomaly-metadata
-                 +--rw network-anomalies
-                   +--rw network-anomaly* [id author-name version state]
-                      +--rw id             yang:uuid
-                      +--rw description?   string
-                      +--rw author-name    string
-                      +--rw author
-                      |  +--rw author-type?    identityref
-                      |  +--rw algo-version?   uint8
-                      +--rw version        uint8
-                      +--rw state          identityref
-                      +--rw symptoms* [symptom_id]
-                         +--rw symptom_id    yang:uuid
+        module: ietf-network-anomaly-metadata
+          +--rw network-anomalies
+             +--rw network-anomaly* [id author-name version state]
+                +--rw id             yang:uuid
+                +--rw description?   string
+                +--rw author-name    string
+                +--rw author
+                |  +--rw author-type?    identityref
+                |  +--rw algo-version?   uint8
+                +--rw version        uint8
+                +--rw state          identityref
+                +--rw symptoms* [symptom_id]
+                   +--rw symptom_id    yang:uuid
 
-      Figure 1: YANG tree diagram for ietf-network-anomaly-metadata
+       Figure 3: YANG tree diagram for ietf-network-anomaly-metadata
 
-module ietf-network-anomaly-metadata {
-    yang-version 1.1;
-    namespace "urn:ietf:params:xml:ns:yang:ietf-network-anomaly-metadata";
-    prefix network_anomaly_metadata;
+   <CODE BEGINS> file "ietf-udp-notif-transport@2024-01-22.yang"
+   module ietf-network-anomaly-metadata {
+     yang-version 1.1;
+     namespace "urn:ietf:params:xml:ns:yang:ietf-network-anomaly-metadata";
+     prefix network_anomaly_metadata;
 
-    import ietf-yang-types {
-        prefix yang;
-        reference
-          "RFC 6991: Common YANG Data Types";
-    }
+     import ietf-yang-types {
+       prefix yang;
+       reference "RFC 6991: Common YANG Data Types";
+     }
 
-    organization
-        "TBD";
-    contact
-        "TBD";
-    description
-        "This module defines objects for the description of network anomalies.
+     organization
+       "IETF NMOP Working Group";
+     contact
+       "WG Web:   <https://datatracker.ietf.org/wg/nmop/>
+        WG List:  <mailto:nmop@ietf.org>
+
+        Authors:  Vincenzo Riccobene
+                  <mailto:vincenzo.riccobene@huawei-partners.com>
+                  Antonio Roberto
+                  <mailto:antonio.roberto@huawei.com>
+                  Thomas Graf
+                  <mailto:thomas.graf@swisscom.com>
+                  Wanting Du
+                  <mailto:wanting.du@swisscom.com>
+                  Alex Huang Feng
+                  <mailto:alex.huang-feng@insa-lyon.fr>";
+     description
+       "This module defines objects for the description of network anomalies.
          Network anomalies are a collection of symptoms observed on
          the network nodes.
 
-         Copyright (c) 2023 IETF Trust and the persons identified as
-         authors of the code.  All rights reserved.
-
-         Redistribution and use in source and binary forms, with or
-         without modification, is permitted pursuant to, and subject
-         to the license terms contained in, the Revised BSD License
-         set forth in Section 4.c of the IETF Trust's Legal Provisions
-         Relating to IETF Documents
-         (https://trustee.ietf.org/license-info).";
-
-    revision 2023-10-30 {
-        description
 
 
 
@@ -506,54 +506,54 @@ Riccobene, et al.        Expires 28 August 2024                 [Page 9]
 Internet-Draft          network-anomaly-lifecycle          February 2024
 
 
-          "Initial version";
-        reference
-    }
+         Copyright (c) 2024 IETF Trust and the persons identified as
+         authors of the code.  All rights reserved.
 
-    identity author-type {
-        description
-            "Type of the author of the network anomaly metadata";
-    }
+         Redistribution and use in source and binary forms, with or
+         without modification, is permitted pursuant to, and subject
+         to the license terms contained in, the Revised BSD License
+         set forth in Section 4.c of the IETF Trust's Legal Provisions
+         Relating to IETF Documents
+         (https://trustee.ietf.org/license-info).
 
-    identity user {
-        base author-type;
-        description
-            "A real user (person) generated the network anomaly metadata";
-    }
+         This version of this YANG module is part of RFC XXXX; see the RFC
+         itself for full legal notices.";
 
-    identity algorithm {
-        base author-type;
-        description
-            "An algorithm generated the network anomaly metadata";
-    }
+     revision 2024-02-26 {
+       description
+         "Initial version";
+       reference
+         "RFCXXXX: Experiment: Network Anomaly Postmortem Lifecycle";
+     }
 
-    identity network-anomaly-state {
-      description
-        "Base identity for representing the state of the network anomaly";
-    }
-    identity incident-forecasted {
+     identity author-type {
+       description
+         "Type of the author of the network anomaly metadata";
+     }
+
+     identity user {
+       base author-type;
+       description
+         "A real user (person) generated the network anomaly metadata";
+     }
+
+     identity algorithm {
+       base author-type;
+       description
+         "An algorithm generated the network anomaly metadata";
+     }
+
+     identity network-anomaly-state {
+       description
+         "Base identity for representing the state of the network anomaly";
+     }
+     identity incident-forecasted {
        base network-anomaly-state;
        description
          "An incident has been forecasted, as it is expected that
          the indicated list of symptoms will impact a service
          in the near future";
-    }
-    identity incident-potential {
-       base network-anomaly-state;
-       description
-         "An incident has been detected with a confidence
-         lower than 100%. In order to confirm that this set of
-         symptoms are generating service impact, it requires further
-         validation";
-    }
-    identity incident-confirmed {
-      base network-anomaly-state;
-      description
-        "After validation, the incident has been confirmed";
-    }
-    identity discarded {
-      base network-anomaly-state;
-      description
+     }
 
 
 
@@ -562,54 +562,54 @@ Riccobene, et al.        Expires 28 August 2024                [Page 10]
 Internet-Draft          network-anomaly-lifecycle          February 2024
 
 
-        "After validation, the network anomaly has been
-        discarded, as there is no evindence that it is causing an
-        incident";
-    }
-    identity analysed {
-      base network-anomaly-state;
-      description
-        "The Anomaly detection went through analysis to identify
-        potential ways to further improve the detection process in
-        for future anomalies";
-    }
-    identity adjusted {
-      base network-anomaly-state;
-      description
-        "The network anomaly has been solved and analysed.
-        No further action is required.";
-    }
+     identity incident-potential {
+       base network-anomaly-state;
+       description
+         "An incident has been detected with a confidence
+         lower than 100%. In order to confirm that this set of
+         symptoms are generating service impact, it requires further
+         validation";
+     }
+     identity incident-confirmed {
+       base network-anomaly-state;
+       description
+         "After validation, the incident has been confirmed";
+     }
+     identity discarded {
+       base network-anomaly-state;
+       description
+         "After validation, the network anomaly has been
+         discarded, as there is no evindence that it is causing an
+         incident";
+     }
+     identity analysed {
+       base network-anomaly-state;
+       description
+         "The anomaly detection went through analysis to identify
+         potential ways to further improve the detection process in
+         for future anomalies";
+     }
+     identity adjusted {
+       base network-anomaly-state;
+       description
+         "The network anomaly has been solved and analysed.
+         No further action is required.";
+     }
 
-    container network-anomalies {
-        list network-anomaly {
-            key "id author-name version state";
-            leaf id {
-                type yang:uuid;
-                mandatory "true";
-                description
-                    "Unique ID of the network network anomaly";
-            }
-            leaf description {
-                type string;
-                mandatory "false";
-                description
-                    "Textual description of the network anomaly";
-            }
-            leaf author-name {
-                type string;
-                description "Name of the user (person) or of the
-                algorithm that generated the network anomaly metadata";
-            }
-            container author {
-                leaf author-type {
-                    type identityref {
-                        base author-type;
-                    }
-                }
-                leaf algo-version {
-                    mandatory "false";
-                    type uint8;
-                    description "Version of the algorithm used to
+     container network-anomalies {
+       description "Container having the network anomalies";
+       list network-anomaly {
+         key "id author-name version state";
+         description "A network anomaly identified by an id, author-name, version
+           and state.";
+         leaf id {
+           type yang:uuid;
+           description
+               "Unique ID of the network network anomaly";
+         }
+         leaf description {
+           type string;
+           description
 
 
 
@@ -618,39 +618,67 @@ Riccobene, et al.        Expires 28 August 2024                [Page 11]
 Internet-Draft          network-anomaly-lifecycle          February 2024
 
 
-                    produce the netowrk anomaly metadata.  This is
-                    used only if the author type is an algorithm";
-                }
-            }
-            leaf version {
-                type uint8;
-                description
-                    "Version of the incident metadata object.
-                    It allows multiple versions of the metadata to be
-                    generated in order to support the definition of
-                    multiple incindent objects from the same source to
-                    facilitate improvements overtime";
-            }
-            leaf state {
-                mandatory "true";
-                type identityref {
-                    base network-anomaly-state;
-                }
-                description "";
-            }
-            list symptoms {
-                key "symptom_id";
-                leaf symptom_id {
-                    type yang:uuid;
-                    mandatory "true";
-                    description "UUID of the symptom that is part of this incident";
-                }
-            }
-        }
-    }
-}
+             "Textual description of the network anomaly";
+         }
+         leaf author-name {
+           type string;
+           description "Name of the user (person) or of the
+             algorithm that generated the network anomaly metadata";
+         }
+         container author {
+           description "Container defining the type of the author and the
+             version of the algorithm if it is an algorithm who reported the anomaly.";
+           leaf author-type {
+             type identityref {
+                 base author-type;
+             }
+             description "The type of author who reported the anomaly.";
+           }
+           leaf algo-version {
+             type uint8;
+             description "Version of the algorithm used to
+             produce the netowrk anomaly metadata.  This is
+             used only if the author type is an algorithm";
+           }
+         }
+         leaf version {
+           type uint8;
+           description
+             "Version of the incident metadata object.
+             It allows multiple versions of the metadata to be
+             generated in order to support the definition of
+             multiple incindent objects from the same source to
+             facilitate improvements overtime";
+         }
+         leaf state {
+           type identityref {
+             base network-anomaly-state;
+           }
+           mandatory true;
+           description "State of the anomaly.";
+         }
+         list symptoms {
+           key "symptom_id";
+           description "List of symptoms identified by the symptom_id.";
+           leaf symptom_id {
+             type yang:uuid;
+             description "UUID of the symptom that is part of this incident";
+           }
+         }
+       }
 
-       Figure 2: YANG module for ietf-network-anomaly-metadata
+
+
+Riccobene, et al.        Expires 28 August 2024                [Page 12]
+
+Internet-Draft          network-anomaly-lifecycle          February 2024
+
+
+     }
+   }
+   <CODE ENDS>
+
+          Figure 4: YANG module for ietf-network-anomaly-metadata
 
 6.  Security Considerations
 
@@ -662,17 +690,6 @@ Internet-Draft          network-anomaly-lifecycle          February 2024
    comments.
 
 8.  Normative References
-
-
-
-
-
-
-
-Riccobene, et al.        Expires 28 August 2024                [Page 12]
-
-Internet-Draft          network-anomaly-lifecycle          February 2024
-
 
    [Ahf23]    Huang Feng, A., "Daisy: Practical Anomaly Detection in
               large BGP/MPLS and BGP/SRv6 VPN Networks", IETF 117,
@@ -704,6 +721,19 @@ Internet-Draft          network-anomaly-lifecycle          February 2024
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
+
+
+
+
+Riccobene, et al.        Expires 28 August 2024                [Page 13]
+
+Internet-Draft          network-anomaly-lifecycle          February 2024
+
+
+   [RFC8340]  Bjorklund, M. and L. Berger, Ed., "YANG Tree Diagrams",
+              BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
+              <https://www.rfc-editor.org/info/rfc8340>.
+
    [RFC9232]  Song, H., Qin, F., Martinez-Julia, P., Ciavaglia, L., and
               A. Wang, "Network Telemetry Framework", RFC 9232,
               DOI 10.17487/RFC9232, May 2022,
@@ -722,13 +752,6 @@ Internet-Draft          network-anomaly-lifecycle          February 2024
    [TMF724A]  TMF, "Incident Management API Profile v1.0.0", 3 April
               2023, <https://www.tmforum.org/resources/standard/tmf724a-
               incident-management-api-profile-v1-0-0/>.
-
-
-
-Riccobene, et al.        Expires 28 August 2024                [Page 13]
-
-Internet-Draft          network-anomaly-lifecycle          February 2024
-
 
 Authors' Addresses
 
@@ -754,6 +777,15 @@ Authors' Addresses
    Email: thomas.graf@swisscom.com
 
 
+
+
+
+
+Riccobene, et al.        Expires 28 August 2024                [Page 14]
+
+Internet-Draft          network-anomaly-lifecycle          February 2024
+
+
    Wanting Du
    Swisscom
    Binzring 17
@@ -762,6 +794,11 @@ Authors' Addresses
    Email: wanting.du@swisscom.com
 
 
+   Alex Huang Feng
+   INSA-Lyon
+   Lyon
+   France
+   Email: alex.huang-feng@insa-lyon.fr
 
 
 
@@ -781,4 +818,23 @@ Authors' Addresses
 
 
 
-Riccobene, et al.        Expires 28 August 2024                [Page 14]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Riccobene, et al.        Expires 28 August 2024                [Page 15]
