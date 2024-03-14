@@ -181,7 +181,7 @@
       semantic for the annotation of network anomalies has been defined in
       order to support the exchange of related metadata between different
       actors, formalizing a semantically consistent representation of the
-      behaviors worth investigating. In the same documents, symptoms are
+      behaviors worth investigating. In the same document, symptoms are
       defined as the essential piece of information to analyze network
       anomalies and incidents.</t>
 
@@ -309,7 +309,7 @@
 
         <dt>Service Level Indicators (SLIs)</dt>
 
-        <dd>o An SLI is an observable metric that describes the state of a
+        <dd>An SLI is an observable metric that describes the state of a
         monitored subsystem. SLIs are a tool to gain measurable visibility
         about the behavior of a subsystem in the network. SLIs are usually the
         basis for SLOs, as the main difference between an SLI and SLO is that
@@ -407,7 +407,7 @@ Adjustments |          +-------------+          | Symptoms
         amounts of log entries, etc.).</t>
 
         <t>The first category requires immediate intervention (a.k.a. the
-        incident is "detected"), the second one provides pointers towards
+        incident is "confirmed"), the second one provides pointers towards
         early signs of an incident potentially happening in the near future
         (a.k.a. the incident is "forecasted"), and the third one requires some
         analysis to confirm if the detected symptom requires any attention or
@@ -708,7 +708,8 @@ module ietf-network-anomaly-metadata {
     </section>
 
     <section anchor="Security" title="Security Considerations">
-      <t>The security considerations.</t>
+      <t>The security considerations will have to be updated according to
+         "https://wiki.ietf.org/group/ops/yang-security-guidelines".</t>
     </section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
