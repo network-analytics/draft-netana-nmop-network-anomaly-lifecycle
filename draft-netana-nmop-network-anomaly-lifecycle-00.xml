@@ -711,7 +711,7 @@ module ietf-network-anomaly-metadata {
       Note to the RFC-editor: Please remove this before publishing.</t>
       <section anchor="Implementation-Antagonist" title="Antagonist">
         <t>A tool called Antagonist has been implemented
-        during the IETF 118 Hackathon, in order to validate the application of the 
+        during the IETF 119 Hackathon, in order to validate the application of the 
         YANG models defined in this draft.
         
         Antagonist provides visual support for two important use cases in the scope of
