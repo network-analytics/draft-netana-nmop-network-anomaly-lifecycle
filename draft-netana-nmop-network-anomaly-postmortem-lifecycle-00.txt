@@ -131,7 +131,7 @@ Internet-Draft          network-anomaly-lifecycle          February 2024
    annotation of network anomalies has been defined in order to support
    the exchange of related metadata between different actors,
    formalizing a semantically consistent representation of the behaviors
-   worth investigating.  In the same documents, symptoms are defined as
+   worth investigating.  In the same document, symptoms are defined as
    the essential piece of information to analyze network anomalies and
    incidents.
 
@@ -215,7 +215,7 @@ Internet-Draft          network-anomaly-lifecycle          February 2024
       are rarely connected to penalties as they usually are internal
       metrics for the service providers.
 
-   Service Level Indicators (SLIs)  o An SLI is an observable metric
+   Service Level Indicators (SLIs)  An SLI is an observable metric that
 
 
 
@@ -226,11 +226,11 @@ Riccobene, et al.        Expires 28 August 2024                 [Page 4]
 Internet-Draft          network-anomaly-lifecycle          February 2024
 
 
-      that describes the state of a monitored subsystem.  SLIs are a
-      tool to gain measurable visibility about the behavior of a
-      subsystem in the network.  SLIs are usually the basis for SLOs, as
-      the main difference between an SLI and SLO is that SLOs usually
-      are defined as thresholds applied to SLIs.
+      describes the state of a monitored subsystem.  SLIs are a tool to
+      gain measurable visibility about the behavior of a subsystem in
+      the network.  SLIs are usually the basis for SLOs, as the main
+      difference between an SLI and SLO is that SLOs usually are defined
+      as thresholds applied to SLIs.
 
    However, the definition of these KPIs turns out to be very
    challenging in some cases, as accurate KPIs could require
@@ -339,7 +339,7 @@ Internet-Draft          network-anomaly-lifecycle          February 2024
 
 
    The first category requires immediate intervention (a.k.a. the
-   incident is "detected"), the second one provides pointers towards
+   incident is "confirmed"), the second one provides pointers towards
    early signs of an incident potentially happening in the near future
    (a.k.a. the incident is "forecasted"), and the third one requires
    some analysis to confirm if the detected symptom requires any
@@ -682,7 +682,8 @@ Internet-Draft          network-anomaly-lifecycle          February 2024
 
 6.  Security Considerations
 
-   The security considerations.
+   The security considerations will have to be updated according to
+   "https://wiki.ietf.org/group/ops/yang-security-guidelines".
 
 7.  Acknowledgements
 
@@ -720,7 +721,6 @@ Internet-Draft          network-anomaly-lifecycle          February 2024
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
-
 
 
 
