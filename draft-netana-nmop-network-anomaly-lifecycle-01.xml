@@ -10,12 +10,11 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="exp"
-     docName="draft-netana-nmop-network-anomaly-postmortem-lifecycle-01"
+<rfc category="exp" docName="draft-netana-nmop-network-anomaly-lifecycle-01"
      ipr="trust200902">
   <front>
     <title abbrev="network-anomaly-lifecycle">Experiment: Network Anomaly
-    Postmortem Lifecycle</title>
+    Lifecycle</title>
 
     <author fullname="Vincenzo Riccobene" initials="V." surname="Riccobene">
       <organization>Huawei</organization>
@@ -131,7 +130,7 @@
       </address>
     </author>
 
-    <date day="06" month="March" year="2024"/>
+    <date day="15" month="March" year="2024"/>
 
     <area>Operations and Management</area>
 
@@ -707,9 +706,29 @@ module ietf-network-anomaly-metadata {
       </section>
     </section>
 
+    <section anchor="Implementation" title="Implementation status">
+      <t>This section provides pointers to existing open source
+      implementations of this draft. Note to the RFC-editor: Please remove
+      this before publishing.</t>
+
+      <section anchor="Implementation-Antagonist" title="Antagonist">
+        <t>A tool called Antagonist has been implemented during the IETF 119
+        Hackathon, in order to validate the application of the YANG models
+        defined in this draft. Antagonist provides visual support for two
+        important use cases in the scope of this document: <ul>
+            <li>the generation of a ground truth in relation to symptoms and
+            incidents in timeseries data</li>
+
+            <li>the visual validation of results produced by automated network
+            anomaly detection tools.</li>
+          </ul> The open source code can be found here: <xref
+        target="Antagonist"/></t>
+      </section>
+    </section>
+
     <section anchor="Security" title="Security Considerations">
       <t>The security considerations will have to be updated according to
-         "https://wiki.ietf.org/group/ops/yang-security-guidelines".</t>
+      "https://wiki.ietf.org/group/ops/yang-security-guidelines".</t>
     </section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
@@ -764,6 +783,25 @@ module ietf-network-anomaly-metadata {
           </author>
 
           <date day="3" month="April" year="2023"/>
+        </front>
+      </reference>
+
+      <reference anchor="Antagonist"
+                 target="https://github.com/vriccobene/antagonist">
+        <front>
+          <title>Antagonist: Anomaly tagging on historical data</title>
+
+          <author fullname="Vincenzo Riccobene" initials="V."
+                  surname="Riccobene"/>
+
+          <author fullname="Antonio Roberto" initials="A." surname="Roberto"/>
+
+          <author fullname="Wanting Du" initials="W." surname="Du"/>
+
+          <author fullname="Thomas Graf" initials="T." surname="Graf"/>
+
+          <author fullname="Alex Huang Feng" initials="H."
+                  surname="Huang Feng"/>
         </front>
       </reference>
     </references>

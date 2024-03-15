@@ -5,16 +5,16 @@
 NMOP                                                        V. Riccobene
 Internet-Draft                                                A. Roberto
 Intended status: Experimental                                     Huawei
-Expires: 7 September 2024                                        T. Graf
+Expires: 16 September 2024                                       T. Graf
                                                                    W. Du
                                                                 Swisscom
                                                            A. Huang Feng
                                                                INSA-Lyon
-                                                            6 March 2024
+                                                           15 March 2024
 
 
-            Experiment: Network Anomaly Postmortem Lifecycle
-       draft-netana-nmop-network-anomaly-postmortem-lifecycle-01
+                 Experiment: Network Anomaly Lifecycle
+             draft-netana-nmop-network-anomaly-lifecycle-01
 
 Abstract
 
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Riccobene, et al.       Expires 7 September 2024                [Page 1]
+Riccobene, et al.       Expires 16 September 2024               [Page 1]
 
 Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
-   This Internet-Draft will expire on 7 September 2024.
+   This Internet-Draft will expire on 16 September 2024.
 
 Copyright Notice
 
@@ -86,10 +86,12 @@ Table of Contents
      5.3.  Network Anomaly Refinement  . . . . . . . . . . . . . . .   8
    6.  Network Anomaly State Machine . . . . . . . . . . . . . . . .   8
      6.1.  Overview of the Model for the Network Anomaly Metadata  .   9
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  14
-   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  14
-   9.  Normative References  . . . . . . . . . . . . . . . . . . . .  14
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  15
+   7.  Implementation status . . . . . . . . . . . . . . . . . . . .  14
+     7.1.  Antagonist  . . . . . . . . . . . . . . . . . . . . . . .  14
+   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  14
+   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  14
+   10. Normative References  . . . . . . . . . . . . . . . . . . . .  14
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  16
 
 1.  Status of this document
 
@@ -107,9 +109,7 @@ Table of Contents
 
 
 
-
-
-Riccobene, et al.       Expires 7 September 2024                [Page 2]
+Riccobene, et al.       Expires 16 September 2024               [Page 2]
 
 Internet-Draft          network-anomaly-lifecycle             March 2024
 
@@ -165,7 +165,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024                [Page 3]
+Riccobene, et al.       Expires 16 September 2024               [Page 3]
 
 Internet-Draft          network-anomaly-lifecycle             March 2024
 
@@ -221,7 +221,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024                [Page 4]
+Riccobene, et al.       Expires 16 September 2024               [Page 4]
 
 Internet-Draft          network-anomaly-lifecycle             March 2024
 
@@ -277,7 +277,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024                [Page 5]
+Riccobene, et al.       Expires 16 September 2024               [Page 5]
 
 Internet-Draft          network-anomaly-lifecycle             March 2024
 
@@ -333,7 +333,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024                [Page 6]
+Riccobene, et al.       Expires 16 September 2024               [Page 6]
 
 Internet-Draft          network-anomaly-lifecycle             March 2024
 
@@ -389,7 +389,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024                [Page 7]
+Riccobene, et al.       Expires 16 September 2024               [Page 7]
 
 Internet-Draft          network-anomaly-lifecycle             March 2024
 
@@ -445,7 +445,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024                [Page 8]
+Riccobene, et al.       Expires 16 September 2024               [Page 8]
 
 Internet-Draft          network-anomaly-lifecycle             March 2024
 
@@ -501,7 +501,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024                [Page 9]
+Riccobene, et al.       Expires 16 September 2024               [Page 9]
 
 Internet-Draft          network-anomaly-lifecycle             March 2024
 
@@ -557,7 +557,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024               [Page 10]
+Riccobene, et al.       Expires 16 September 2024              [Page 10]
 
 Internet-Draft          network-anomaly-lifecycle             March 2024
 
@@ -613,7 +613,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024               [Page 11]
+Riccobene, et al.       Expires 16 September 2024              [Page 11]
 
 Internet-Draft          network-anomaly-lifecycle             March 2024
 
@@ -669,7 +669,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024               [Page 12]
+Riccobene, et al.       Expires 16 September 2024              [Page 12]
 
 Internet-Draft          network-anomaly-lifecycle             March 2024
 
@@ -725,7 +725,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024               [Page 13]
+Riccobene, et al.       Expires 16 September 2024              [Page 13]
 
 Internet-Draft          network-anomaly-lifecycle             March 2024
 
@@ -736,23 +736,60 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
           Figure 4: YANG module for ietf-network-anomaly-metadata
 
-7.  Security Considerations
+7.  Implementation status
+
+   This section provides pointers to existing open source
+   implementations of this draft.  Note to the RFC-editor: Please remove
+   this before publishing.
+
+7.1.  Antagonist
+
+   A tool called Antagonist has been implemented during the IETF 119
+   Hackathon, in order to validate the application of the YANG models
+   defined in this draft.  Antagonist provides visual support for two
+   important use cases in the scope of this document:
+
+   *  the generation of a ground truth in relation to symptoms and
+      incidents in timeseries data
+
+   *  the visual validation of results produced by automated network
+      anomaly detection tools.
+
+   The open source code can be found here: [Antagonist]
+
+8.  Security Considerations
 
    The security considerations will have to be updated according to
    "https://wiki.ietf.org/group/ops/yang-security-guidelines".
 
-8.  Acknowledgements
+9.  Acknowledgements
 
    The authors would like to thank xxx for their review and valuable
    comments.
 
-9.  Normative References
+10.  Normative References
 
    [Ahf23]    Huang Feng, A., "Daisy: Practical Anomaly Detection in
               large BGP/MPLS and BGP/SRv6 VPN Networks", IETF 117,
               Applied Networking Research Workshop,
               DOI 10.1145/3606464.3606470, July 2023,
               <https://anrw23.hotcrp.com/doc/anrw23-paper8.pdf>.
+
+
+
+
+
+
+
+Riccobene, et al.       Expires 16 September 2024              [Page 14]
+
+Internet-Draft          network-anomaly-lifecycle             March 2024
+
+
+   [Antagonist]
+              Riccobene, V., Roberto, A., Du, W., Graf, T., and H. Huang
+              Feng, "Antagonist: Anomaly tagging on historical data",
+              <https://github.com/vriccobene/antagonist>.
 
    [I-D.davis-nmop-incident-terminology]
               Davis, N. and A. Farrel, "Some Key Terms for Incident
@@ -778,14 +815,6 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-
-
-
-Riccobene, et al.       Expires 7 September 2024               [Page 14]
-
-Internet-Draft          network-anomaly-lifecycle             March 2024
-
-
    [RFC8340]  Bjorklund, M. and L. Berger, Ed., "YANG Tree Diagrams",
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
               <https://www.rfc-editor.org/info/rfc8340>.
@@ -804,6 +833,14 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
               Arumugam, "A YANG Data Model for Service Assurance",
               RFC 9418, DOI 10.17487/RFC9418, July 2023,
               <https://www.rfc-editor.org/info/rfc9418>.
+
+
+
+
+Riccobene, et al.       Expires 16 September 2024              [Page 15]
+
+Internet-Draft          network-anomaly-lifecycle             March 2024
+
 
    [TMF724A]  TMF, "Incident Management API Profile v1.0.0", 3 April
               2023, <https://www.tmforum.org/resources/standard/tmf724a-
@@ -833,15 +870,6 @@ Authors' Addresses
    Email: thomas.graf@swisscom.com
 
 
-
-
-
-
-Riccobene, et al.       Expires 7 September 2024               [Page 15]
-
-Internet-Draft          network-anomaly-lifecycle             March 2024
-
-
    Wanting Du
    Swisscom
    Binzring 17
@@ -865,32 +893,4 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Riccobene, et al.       Expires 7 September 2024               [Page 16]
+Riccobene, et al.       Expires 16 September 2024              [Page 16]

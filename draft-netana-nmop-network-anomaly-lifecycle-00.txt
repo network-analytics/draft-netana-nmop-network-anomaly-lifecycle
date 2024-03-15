@@ -5,15 +5,15 @@
 NMOP                                                        V. Riccobene
 Internet-Draft                                                A. Roberto
 Intended status: Experimental                                     Huawei
-Expires: 7 September 2024                                        T. Graf
+Expires: 28 August 2024                                          T. Graf
                                                                    W. Du
                                                                 Swisscom
                                                            A. Huang Feng
                                                                INSA-Lyon
-                                                            6 March 2024
+                                                        25 February 2024
 
 
-                 Experiment: Network Anomaly Lifecycle
+            Experiment: Network Anomaly Postmortem Lifecycle
              draft-netana-nmop-network-anomaly-lifecycle-00
 
 Abstract
@@ -36,10 +36,27 @@ Abstract
    network anomaly detection covering the different stages of the
    lifecycle.
 
+Requirements Language
+
+   The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
 Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
    provisions of BCP 78 and BCP 79.
+
+
+
+
+
+Riccobene, et al.        Expires 28 August 2024                 [Page 1]
+
+Internet-Draft          network-anomaly-lifecycle          February 2024
+
 
    Internet-Drafts are working documents of the Internet Engineering
    Task Force (IETF).  Note that other groups may also distribute
@@ -51,14 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-
-
-Riccobene, et al.       Expires 7 September 2024                [Page 1]
-
-Internet-Draft          network-anomaly-lifecycle             March 2024
-
-
-   This Internet-Draft will expire on 7 September 2024.
+   This Internet-Draft will expire on 28 August 2024.
 
 Copyright Notice
 
@@ -78,20 +88,17 @@ Table of Contents
 
    1.  Status of this document . . . . . . . . . . . . . . . . . . .   2
    2.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
-   3.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   4
-   4.  Defining Desired States . . . . . . . . . . . . . . . . . . .   5
-   5.  Lifecycle of a Network Anomaly  . . . . . . . . . . . . . . .   6
-     5.1.  Network Anomaly Detection . . . . . . . . . . . . . . . .   7
-     5.2.  Network Anomaly Validation  . . . . . . . . . . . . . . .   8
-     5.3.  Network Anomaly Refinement  . . . . . . . . . . . . . . .   8
-   6.  Network Anomaly State Machine . . . . . . . . . . . . . . . .   8
-     6.1.  Overview of the Model for the Network Anomaly Metadata  .   9
-   7.  Implementation status . . . . . . . . . . . . . . . . . . . .  14
-     7.1.  Antagonist  . . . . . . . . . . . . . . . . . . . . . . .  14
-   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  14
-   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  14
-   10. Normative References  . . . . . . . . . . . . . . . . . . . .  14
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  16
+   3.  Defining Desired States . . . . . . . . . . . . . . . . . . .   4
+   4.  Lifecycle of a Network Anomaly  . . . . . . . . . . . . . . .   5
+     4.1.  Network Anomaly Detection . . . . . . . . . . . . . . . .   6
+     4.2.  Network Anomaly Validation  . . . . . . . . . . . . . . .   7
+     4.3.  Network Anomaly Refinement  . . . . . . . . . . . . . . .   7
+   5.  Network Anomaly State Machine . . . . . . . . . . . . . . . .   8
+     5.1.  Overview of the Model for the Network Anomaly Metadata  .   8
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  13
+   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  13
+   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  13
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  14
 
 1.  Status of this document
 
@@ -100,19 +107,18 @@ Table of Contents
    by proposing a data model for metadata to be addressed at different
    lifecycle stages.
 
+
+
+Riccobene, et al.        Expires 28 August 2024                 [Page 2]
+
+Internet-Draft          network-anomaly-lifecycle          February 2024
+
+
    The experiment consists of verifying whether the approach is usable
    in real use case scenarios to support proper refinement and
    adjustments of network anomaly detection algorithms.  The experiments
    can be deemed successful if validated at least with an open-source
    implementation sucessfully applied in real production networks.
-
-
-
-
-Riccobene, et al.       Expires 7 September 2024                [Page 2]
-
-Internet-Draft          network-anomaly-lifecycle             March 2024
-
 
 2.  Introduction
 
@@ -152,28 +158,18 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
    algorithmic) to jump in during the process and refine their
    understanding across the network anomaly lifecycle.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-Riccobene, et al.       Expires 7 September 2024                [Page 3]
-
-Internet-Draft          network-anomaly-lifecycle             March 2024
-
-
    Performing network anomaly detection is a process that requires a
    continuous learning and continuous improvement.  Network anomalies
    are detected by collecting and understanding symptoms, then validated
    by confirming that there actually were service impacting and
+
+
+
+Riccobene, et al.        Expires 28 August 2024                 [Page 3]
+
+Internet-Draft          network-anomaly-lifecycle          February 2024
+
+
    eventually need to be further analyzed by performing postmortem
    analysis to identify any potential adjustment to improve the
    detection capability.  Each of these stages is an opportunity to
@@ -182,54 +178,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
    contributes a formal structure to capture and exchange symptom
    information across the lifecycle.
 
-3.  Terminology
-
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in BCP
-   14 [RFC2119] [RFC8174] when, and only when, they appear in all
-   capitals, as shown here.
-
-   This document makes use of the terms defined in
-   [I-D.davis-nmop-incident-terminology].
-
-   *  State
-
-   *  Incident
-
-   *  Event
-
-   *  Alarm
-
-   The following terms are used as defined in [RFC9417].
-
-   *  Symptom
-
-   *  Metric
-
-   *  Intent
-
-   The following terms are defined in this document.
-
-   *  Author: Is a human or an algorithm which produces metadata by
-      describing anomalies with symptoms.
-
-   *  False Positive: Is a detected anomaly which has been identified
-      during the postmortem to be not anomalous.
-
-
-
-
-
-Riccobene, et al.       Expires 7 September 2024                [Page 4]
-
-Internet-Draft          network-anomaly-lifecycle             March 2024
-
-
-   *  False Negative: Is anomalous but has been not been identified by
-      the anomaly detection system.
-
-4.  Defining Desired States
+3.  Defining Desired States
 
    The above definitions of network incident provide the scope for what
    to be looking for when detecting network anomalies.  Concepts like
@@ -267,20 +216,21 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
       metrics for the service providers.
 
    Service Level Indicators (SLIs)  An SLI is an observable metric that
+
+
+
+
+
+Riccobene, et al.        Expires 28 August 2024                 [Page 4]
+
+Internet-Draft          network-anomaly-lifecycle          February 2024
+
+
       describes the state of a monitored subsystem.  SLIs are a tool to
       gain measurable visibility about the behavior of a subsystem in
       the network.  SLIs are usually the basis for SLOs, as the main
       difference between an SLI and SLO is that SLOs usually are defined
       as thresholds applied to SLIs.
-
-
-
-
-
-Riccobene, et al.       Expires 7 September 2024                [Page 5]
-
-Internet-Draft          network-anomaly-lifecycle             March 2024
-
 
    However, the definition of these KPIs turns out to be very
    challenging in some cases, as accurate KPIs could require
@@ -308,7 +258,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
    through the process into new symptom definitions or refinements of
    the algorithms.
 
-5.  Lifecycle of a Network Anomaly
+4.  Lifecycle of a Network Anomaly
 
    The lifecycle of a network anomaly can be articulated in three
    phases, structured as a loop: Detection, Validation, Refinement.
@@ -325,18 +275,15 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
               Figure 1: Anomaly Detection Refinement Lifecycle
 
+
+
+Riccobene, et al.        Expires 28 August 2024                 [Page 5]
+
+Internet-Draft          network-anomaly-lifecycle          February 2024
+
+
    Each of these phases can either be performed by a network expert or
    an algorithm or complementing each other.
-
-
-
-
-
-
-Riccobene, et al.       Expires 7 September 2024                [Page 6]
-
-Internet-Draft          network-anomaly-lifecycle             March 2024
-
 
    The network anomaly metadata is generated by an author, which can be
    either a human expert or an algorithm.  The author can produce the
@@ -346,7 +293,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
    part of the network anomaly taken into account.  The iterative
    process is about the identification of the right set of symptoms.
 
-5.1.  Network Anomaly Detection
+4.1.  Network Anomaly Detection
 
    The Network Anomaly Detection stage is about the continuous
    monitoring of the network through Network Telemetry [RFC9232] and the
@@ -370,6 +317,27 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
    sudden increase/decrease of timeseries metrics, anomalous amounts of
    log entries, etc.).
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Riccobene, et al.        Expires 28 August 2024                 [Page 6]
+
+Internet-Draft          network-anomaly-lifecycle          February 2024
+
+
    The first category requires immediate intervention (a.k.a. the
    incident is "confirmed"), the second one provides pointers towards
    early signs of an incident potentially happening in the near future
@@ -385,16 +353,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
    generating new symptom definitions, adjusting the weights of
    automated algorithms or other similar approaches.
 
-
-
-
-
-Riccobene, et al.       Expires 7 September 2024                [Page 7]
-
-Internet-Draft          network-anomaly-lifecycle             March 2024
-
-
-5.2.  Network Anomaly Validation
+4.2.  Network Anomaly Validation
 
    The key objective for the validation stage is clearly to decide if
    the detected symptoms are signaling a real incident (a.k.a. require
@@ -405,7 +364,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
    "forecasted" and "potential", further analysis and validation is
    required.
 
-5.3.  Network Anomaly Refinement
+4.3.  Network Anomaly Refinement
 
    After validation of an incident, the service provider has to perform
    troubleshooting and resolution of the incident.  Although the network
@@ -424,31 +383,23 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
    and checking if there is any measurable improvement in the ability to
    detect incidents by using the updated method.
 
-6.  Network Anomaly State Machine
+
+
+
+
+
+
+Riccobene, et al.        Expires 28 August 2024                 [Page 7]
+
+Internet-Draft          network-anomaly-lifecycle          February 2024
+
+
+5.  Network Anomaly State Machine
 
    From a network anomaly detection point of view a network incident is
    defined as a collection of interrelated symptoms.  From this
    perspective, an incident can be defined according to the following
    states (Figure 2).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Riccobene, et al.       Expires 7 September 2024                [Page 8]
-
-Internet-Draft          network-anomaly-lifecycle             March 2024
-
 
                                              +---------+
                                              | Initial |-----------------+
@@ -486,7 +437,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
                Figure 2: Network Anomaly State Machine
 
-6.1.  Overview of the Model for the Network Anomaly Metadata
+5.1.  Overview of the Model for the Network Anomaly Metadata
 
 
 
@@ -494,16 +445,9 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-
-
-
-
-
-
-
-Riccobene, et al.       Expires 7 September 2024                [Page 9]
+Riccobene, et al.        Expires 28 August 2024                 [Page 8]
 
-Internet-Draft          network-anomaly-lifecycle             March 2024
+Internet-Draft          network-anomaly-lifecycle          February 2024
 
 
         module: ietf-network-anomaly-metadata
@@ -511,8 +455,8 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
              +--rw network-anomaly* [id author-name version state]
                 +--rw id             yang:uuid
                 +--rw description?   string
+                +--rw author-name    string
                 +--rw author
-                |  +--rw author-name     string
                 |  +--rw author-type?    identityref
                 |  +--rw algo-version?   uint8
                 +--rw version        uint8
@@ -557,9 +501,9 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024               [Page 10]
+Riccobene, et al.        Expires 28 August 2024                 [Page 9]
 
-Internet-Draft          network-anomaly-lifecycle             March 2024
+Internet-Draft          network-anomaly-lifecycle          February 2024
 
 
          Copyright (c) 2024 IETF Trust and the persons identified as
@@ -613,9 +557,9 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024               [Page 11]
+Riccobene, et al.        Expires 28 August 2024                [Page 10]
 
-Internet-Draft          network-anomaly-lifecycle             March 2024
+Internet-Draft          network-anomaly-lifecycle          February 2024
 
 
      identity incident-potential {
@@ -669,21 +613,21 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024               [Page 12]
+Riccobene, et al.        Expires 28 August 2024                [Page 11]
 
-Internet-Draft          network-anomaly-lifecycle             March 2024
+Internet-Draft          network-anomaly-lifecycle          February 2024
 
 
              "Textual description of the network anomaly";
          }
+         leaf author-name {
+           type string;
+           description "Name of the user (person) or of the
+             algorithm that generated the network anomaly metadata";
+         }
          container author {
            description "Container defining the type of the author and the
              version of the algorithm if it is an algorithm who reported the anomaly.";
-           leaf author-name {
-             type string;
-             description "Name of the user (person) or of the
-               algorithm that generated the network anomaly metadata";
-           }
            leaf author-type {
              type identityref {
                  base author-type;
@@ -725,9 +669,9 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
 
 
-Riccobene, et al.       Expires 7 September 2024               [Page 13]
+Riccobene, et al.        Expires 28 August 2024                [Page 12]
 
-Internet-Draft          network-anomaly-lifecycle             March 2024
+Internet-Draft          network-anomaly-lifecycle          February 2024
 
 
      }
@@ -736,60 +680,23 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
 
           Figure 4: YANG module for ietf-network-anomaly-metadata
 
-7.  Implementation status
-
-   This section provides pointers to existing open source
-   implementations of this draft.  Note to the RFC-editor: Please remove
-   this before publishing.
-
-7.1.  Antagonist
-
-   A tool called Antagonist has been implemented during the IETF 118
-   Hackathon, in order to validate the application of the YANG models
-   defined in this draft.  Antagonist provides visual support for two
-   important use cases in the scope of this document:
-
-   *  the generation of a ground truth in relation to symptoms and
-      incidents in timeseries data
-
-   *  the visual validation of results produced by automated network
-      anomaly detection tools.
-
-   The open source code can be found here: [Antagonist]
-
-8.  Security Considerations
+6.  Security Considerations
 
    The security considerations will have to be updated according to
    "https://wiki.ietf.org/group/ops/yang-security-guidelines".
 
-9.  Acknowledgements
+7.  Acknowledgements
 
    The authors would like to thank xxx for their review and valuable
    comments.
 
-10.  Normative References
+8.  Normative References
 
    [Ahf23]    Huang Feng, A., "Daisy: Practical Anomaly Detection in
               large BGP/MPLS and BGP/SRv6 VPN Networks", IETF 117,
               Applied Networking Research Workshop,
               DOI 10.1145/3606464.3606470, July 2023,
               <https://anrw23.hotcrp.com/doc/anrw23-paper8.pdf>.
-
-
-
-
-
-
-
-Riccobene, et al.       Expires 7 September 2024               [Page 14]
-
-Internet-Draft          network-anomaly-lifecycle             March 2024
-
-
-   [Antagonist]
-              Riccobene, V., Roberto, A., Du, W., Graf, T., and H. Huang
-              Feng, "Antagonist: Anomaly tagging on historical data",
-              <https://github.com/vriccobene/antagonist>.
 
    [I-D.davis-nmop-incident-terminology]
               Davis, N. and A. Farrel, "Some Key Terms for Incident
@@ -815,6 +722,14 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
+
+
+
+Riccobene, et al.        Expires 28 August 2024                [Page 13]
+
+Internet-Draft          network-anomaly-lifecycle          February 2024
+
+
    [RFC8340]  Bjorklund, M. and L. Berger, Ed., "YANG Tree Diagrams",
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
               <https://www.rfc-editor.org/info/rfc8340>.
@@ -833,14 +748,6 @@ Internet-Draft          network-anomaly-lifecycle             March 2024
               Arumugam, "A YANG Data Model for Service Assurance",
               RFC 9418, DOI 10.17487/RFC9418, July 2023,
               <https://www.rfc-editor.org/info/rfc9418>.
-
-
-
-
-Riccobene, et al.       Expires 7 September 2024               [Page 15]
-
-Internet-Draft          network-anomaly-lifecycle             March 2024
-
 
    [TMF724A]  TMF, "Incident Management API Profile v1.0.0", 3 April
               2023, <https://www.tmforum.org/resources/standard/tmf724a-
@@ -870,6 +777,15 @@ Authors' Addresses
    Email: thomas.graf@swisscom.com
 
 
+
+
+
+
+Riccobene, et al.        Expires 28 August 2024                [Page 14]
+
+Internet-Draft          network-anomaly-lifecycle          February 2024
+
+
    Wanting Du
    Swisscom
    Binzring 17
@@ -893,4 +809,32 @@ Authors' Addresses
 
 
 
-Riccobene, et al.       Expires 7 September 2024               [Page 16]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Riccobene, et al.        Expires 28 August 2024                [Page 15]

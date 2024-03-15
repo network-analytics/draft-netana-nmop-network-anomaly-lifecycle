@@ -14,7 +14,8 @@
      docName="draft-netana-nmop-network-anomaly-lifecycle-00"
      ipr="trust200902">
   <front>
-    <title abbrev="network-anomaly-lifecycle">Experiment: Network Anomaly Lifecycle</title>
+    <title abbrev="network-anomaly-lifecycle">Experiment: Network Anomaly
+    Postmortem Lifecycle</title>
 
     <author fullname="Vincenzo Riccobene" initials="V." surname="Riccobene">
       <organization>Huawei</organization>
@@ -106,31 +107,22 @@
 
     <author fullname="Alex Huang Feng" initials="A." surname="Huang Feng">
       <organization>INSA-Lyon</organization>
-
       <address>
         <postal>
           <street/>
-
           <city>Lyon</city>
-
           <region/>
-
           <code/>
-
           <country>France</country>
         </postal>
-
         <phone/>
-
         <facsimile/>
-
         <email>alex.huang-feng@insa-lyon.fr</email>
-
         <uri/>
       </address>
     </author>
 
-    <date day="06" month="March" year="2024"/>
+    <date day="25" month="February" year="2024"/>
 
     <area>Operations and Management</area>
 
@@ -154,6 +146,14 @@
       along with a YANG model specifying the required metadata for the network
       anomaly detection covering the different stages of the lifecycle.</t>
     </abstract>
+
+    <note title="Requirements Language">
+      <t>The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+      "OPTIONAL" in this document are to be interpreted as described in BCP 14
+      <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when,
+      they appear in all capitals, as shown here.</t>
+    </note>
   </front>
 
   <middle>
@@ -218,51 +218,6 @@
       and since these stages might also be provided by different parties
       and/or products, this document contributes a formal structure to capture
       and exchange symptom information across the lifecycle.</t>
-    </section>
-
-    <section anchor="notation" title="Terminology">
-      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-      "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-      "OPTIONAL" in this document are to be interpreted as described in BCP 14
-      <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when,
-      they appear in all capitals, as shown here.</t>
-
-      <t>This document makes use of the terms defined in <xref
-      target="I-D.davis-nmop-incident-terminology"/>.</t>
-
-      <t><list style="symbols">
-          <t>State</t>
-
-          <t>Incident</t>
-
-          <t>Event</t>
-
-          <t>Alarm</t>
-        </list></t>
-
-      <t>The following terms are used as defined in <xref
-      target="RFC9417"/>.</t>
-
-      <t><list style="symbols">
-          <t>Symptom</t>
-
-          <t>Metric</t>
-
-          <t>Intent</t>
-        </list></t>
-
-      <t>The following terms are defined in this document.</t>
-
-      <t><list style="symbols">
-          <t>Author: Is a human or an algorithm which produces metadata by
-          describing anomalies with symptoms.</t>
-
-          <t>False Positive: Is a detected anomaly which has been identified
-          during the postmortem to be not anomalous.</t>
-
-          <t>False Negative: Is anomalous but has been not been identified by
-          the anomaly detection system.</t>
-        </list></t>
     </section>
 
     <section anchor="Defining_desired_states" title="Defining Desired States">
@@ -355,9 +310,8 @@
       <t>The lifecycle of a network anomaly can be articulated in three
       phases, structured as a loop: Detection, Validation, Refinement.</t>
 
-      <t><figure anchor="simplified_lifecyc"
-          title="Anomaly Detection Refinement Lifecycle">
-          <artwork align="center"><![CDATA[
+      <t><figure anchor="simplified_lifecyc" title="Anomaly Detection Refinement Lifecycle">
+      <artwork align="center"><![CDATA[
                         +-------------+
             +--------> |  Detection  | ---------+
 Adjustments |          +-------------+          | Symptoms
@@ -368,7 +322,7 @@ Adjustments |          +-------------+          | Symptoms
     +------------+        Incident       +------------+
                         Confirmation
       ]]></artwork>
-        </figure></t>
+      </figure></t>
 
       <t>Each of these phases can either be performed by a network expert or
       an algorithm or complementing each other.</t>
@@ -422,8 +376,8 @@ Adjustments |          +-------------+          | Symptoms
 
       <section anchor="network_anomaly_validation"
                title="Network Anomaly Validation">
-        <t>The key objective for the validation stage is clearly to decide if
-        the detected symptoms are signaling a real incident (a.k.a. require
+        <t>The key objective for the validation stage is clearly to decide
+        if the detected symptoms are signaling a real incident (a.k.a. require
         immediate action) or if they are to be treated as false positives
         (a.k.a. suppressing the alarm). For those symptoms surely having
         impact on services, 100% confidence on the fact that a network
@@ -458,11 +412,11 @@ Adjustments |          +-------------+          | Symptoms
              title="Network Anomaly State Machine">
       <t>From a network anomaly detection point of view a network incident is
       defined as a collection of interrelated symptoms. From this perspective,
-      an incident can be defined according to the following states (<xref
-      target="state_machine"/>).</t>
-
+      an incident can be defined according to the following states
+      (<xref target="state_machine"/>).</t>
+      
       <t><figure anchor="state_machine" title="Network Anomaly State Machine">
-          <artwork align="center"><![CDATA[
+      <artwork align="center"><![CDATA[
                                              +---------+
                                              | Initial |-----------------+
                                              +---------+                 |
@@ -497,7 +451,7 @@ Adjustments |          +-------------+          | Symptoms
 | +------------------+  |
 +-------Refinement------+
       ]]></artwork>
-        </figure></t>
+      </figure></t>
 
       <section anchor="network-anomaly-model-tree"
                title="Overview of the Model for the Network Anomaly Metadata">
@@ -509,8 +463,8 @@ module: ietf-network-anomaly-metadata
      +--rw network-anomaly* [id author-name version state]
         +--rw id             yang:uuid
         +--rw description?   string
+        +--rw author-name    string
         +--rw author
-        |  +--rw author-name     string
         |  +--rw author-type?    identityref
         |  +--rw algo-version?   uint8
         +--rw version        uint8
@@ -653,14 +607,14 @@ module ietf-network-anomaly-metadata {
         description
           "Textual description of the network anomaly";
       }
+      leaf author-name {
+        type string;
+        description "Name of the user (person) or of the
+          algorithm that generated the network anomaly metadata";
+      }
       container author {
         description "Container defining the type of the author and the
           version of the algorithm if it is an algorithm who reported the anomaly.";
-        leaf author-name {
-          type string;
-          description "Name of the user (person) or of the
-            algorithm that generated the network anomaly metadata";
-        }
         leaf author-type {
           type identityref {
               base author-type;
@@ -706,30 +660,8 @@ module ietf-network-anomaly-metadata {
       </section>
     </section>
 
-    <section anchor="Implementation" title="Implementation status">
-      <t>This section provides pointers to existing open source implementations of this draft.
-      Note to the RFC-editor: Please remove this before publishing.</t>
-      <section anchor="Implementation-Antagonist" title="Antagonist">
-        <t>A tool called Antagonist has been implemented
-        during the IETF 119 Hackathon, in order to validate the application of the 
-        YANG models defined in this draft.
-        
-        Antagonist provides visual support for two important use cases in the scope of
-         this document: 
-        <ul>
-          <li>the generation of a ground truth in relation to symptoms and incidents 
-          in timeseries data</li>
-          <li>the visual validation of results produced by automated network 
-          anomaly detection tools.</li>
-        </ul>
-        The open source code can be found here: <xref target="Antagonist"/>
-        </t>
-      </section>
-    </section>
-
     <section anchor="Security" title="Security Considerations">
-      <t>The security considerations will have to be updated according to
-         "https://wiki.ietf.org/group/ops/yang-security-guidelines".</t>
+      <t>The security considerations will have to be updated according to "https://wiki.ietf.org/group/ops/yang-security-guidelines".</t>
     </section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
@@ -741,19 +673,12 @@ module ietf-network-anomaly-metadata {
   <back>
     <references title="Normative References">
       <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
-
       <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml"?>
-
       <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.8340.xml"?>
-
       <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.9417.xml"?>
-
       <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.9418.xml"?>
-
       <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.9232.xml"?>
-
       <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.netana-nmop-network-anomaly-semantics.xml"?>
-
       <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.davis-nmop-incident-terminology.xml"?>
 
       <reference anchor="Ahf23"
@@ -784,17 +709,6 @@ module ietf-network-anomaly-metadata {
           </author>
 
           <date day="3" month="April" year="2023"/>
-        </front>
-      </reference>
-      <reference anchor="Antagonist"
-                 target="https://github.com/vriccobene/antagonist">
-        <front>
-          <title>Antagonist: Anomaly tagging on historical data</title>
-          <author fullname="Vincenzo Riccobene" initials="V." surname="Riccobene"/>
-          <author fullname="Antonio Roberto" initials="A." surname="Roberto"/>
-          <author fullname="Wanting Du" initials="W." surname="Du"/>
-          <author fullname="Thomas Graf" initials="T." surname="Graf"/>
-          <author fullname="Alex Huang Feng" initials="H." surname="Huang Feng"/>
         </front>
       </reference>
     </references>
