@@ -1,0 +1,177 @@
+module ietf-network-anomaly-metadata {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-network-anomaly-metadata";
+  prefix network_anomaly_metadata;
+
+  import ietf-yang-types {
+    prefix yang;
+    reference "RFC 6991: Common YANG Data Types";
+  }
+
+  organization
+    "IETF NMOP Working Group";
+  contact
+    "WG Web:   <https://datatracker.ietf.org/wg/nmop/>
+     WG List:  <mailto:nmop@ietf.org>
+
+     Authors:  Vincenzo Riccobene
+               <mailto:vincenzo.riccobene@huawei-partners.com>
+               Antonio Roberto
+               <mailto:antonio.roberto@huawei.com>
+               Thomas Graf
+               <mailto:thomas.graf@swisscom.com>
+               Wanting Du
+               <mailto:wanting.du@swisscom.com>
+               Alex Huang Feng
+               <mailto:alex.huang-feng@insa-lyon.fr>";
+  description
+    "This module defines objects for the description of network anomalies.
+      Network anomalies are a collection of symptoms observed on
+      the network nodes.
+
+      Copyright (c) 2024 IETF Trust and the persons identified as
+      authors of the code.  All rights reserved.
+
+      Redistribution and use in source and binary forms, with or
+      without modification, is permitted pursuant to, and subject
+      to the license terms contained in, the Revised BSD License
+      set forth in Section 4.c of the IETF Trust's Legal Provisions
+      Relating to IETF Documents
+      (https://trustee.ietf.org/license-info).
+      
+      This version of this YANG module is part of RFC XXXX; see the RFC
+      itself for full legal notices.";
+
+  revision 2024-04-14 {
+    description
+      "Initial version";
+    reference
+      "RFCXXXX: Experiment: Network Anomaly Postmortem Lifecycle";
+  }
+
+  identity author-type {
+    description
+      "Type of the author of the network anomaly metadata";
+  }
+
+  identity user {
+    base author-type;
+    description
+      "A real user (person) generated the network anomaly metadata";
+  }
+
+  identity algorithm {
+    base author-type;
+    description
+      "An algorithm generated the network anomaly metadata";
+  }
+
+  identity network-anomaly-state {
+    description
+      "Base identity for representing the state of the network anomaly";
+  }
+  identity incident-forecasted {
+    base network-anomaly-state;
+    description
+      "An incident has been forecasted, as it is expected that
+      the indicated list of symptoms will impact a service
+      in the near future";
+  }
+  identity incident-potential {
+    base network-anomaly-state;
+    description
+      "An incident has been detected with a confidence
+      lower than 100%. In order to confirm that this set of
+      symptoms are generating service impact, it requires further
+      validation";
+  }
+  identity incident-confirmed {
+    base network-anomaly-state;
+    description
+      "After validation, the incident has been confirmed";
+  }
+  identity discarded {
+    base network-anomaly-state;
+    description
+      "After validation, the network anomaly has been
+      discarded, as there is no evindence that it is causing an
+      incident";
+  }
+  identity analysed {
+    base network-anomaly-state;
+    description
+      "The anomaly detection went through analysis to identify
+      potential ways to further improve the detection process in
+      for future anomalies";
+  }
+  identity adjusted {
+    base network-anomaly-state;
+    description
+      "The network anomaly has been solved and analysed.
+      No further action is required.";
+  }
+
+  container network-anomalies {
+    description "Container having the network anomalies";
+    list network-anomaly {
+      key "id author-name version state";
+      description "A network anomaly identified by an id, author-name, version 
+        and state.";
+      leaf id {
+        type yang:uuid;
+        description
+            "Unique ID of the network network anomaly";
+      }
+      leaf description {
+        type string;
+        description
+          "Textual description of the network anomaly";
+      }
+      leaf author-name {
+        type string;
+        description "Name of the user (person) or of the
+          algorithm that generated the network anomaly metadata";
+      }
+      container annotator {
+        description "Container defining the type of the annotator and the
+          version of the algorithm if it is an algorithm who reported the anomaly.";
+        leaf author-type {
+          type identityref {
+              base author-type;
+          }
+          description "The type of author who reported the anomaly.";
+        }
+        leaf algo-version {
+          type uint8;
+          description "Version of the algorithm used to
+          produce the netowrk anomaly metadata.  This is
+          used only if the author type is an algorithm";
+        }
+      }
+      leaf version {
+        type uint8;
+        description
+          "Version of the incident metadata object.
+          It allows multiple versions of the metadata to be
+          generated in order to support the definition of
+          multiple incindent objects from the same source to
+          facilitate improvements overtime";
+      }
+      leaf state {
+        type identityref {
+          base network-anomaly-state;
+        }
+        mandatory true;
+        description "State of the anomaly.";
+      }
+      list symptoms {
+        key "symptom_id";
+        description "List of symptoms identified by the symptom_id.";
+        leaf symptom_id {
+          type yang:uuid;
+          description "UUID of the symptom that is part of this incident";
+        }
+      }
+    }
+  }
+}
