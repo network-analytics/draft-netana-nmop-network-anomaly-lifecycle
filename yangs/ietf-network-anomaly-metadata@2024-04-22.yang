@@ -42,7 +42,7 @@ module ietf-network-anomaly-metadata {
       This version of this YANG module is part of RFC XXXX; see the RFC
       itself for full legal notices.";
 
-  revision 2024-04-14 {
+  revision 2024-04-22 {
     description
       "Initial version";
     reference
@@ -114,8 +114,8 @@ module ietf-network-anomaly-metadata {
   container network-anomalies {
     description "Container having the network anomalies";
     list network-anomaly {
-      key "id author-name version state";
-      description "A network anomaly identified by an id, author-name, version 
+      key "id version state";
+      description "A network anomaly identified by an id, version 
         and state.";
       leaf id {
         type yang:uuid;
@@ -127,14 +127,14 @@ module ietf-network-anomaly-metadata {
         description
           "Textual description of the network anomaly";
       }
-      leaf author-name {
-        type string;
-        description "Name of the user (person) or of the
-          algorithm that generated the network anomaly metadata";
-      }
       container annotator {
         description "Container defining the type of the annotator and the
           version of the algorithm if it is an algorithm who reported the anomaly.";
+        leaf author-name {
+          type string;
+          description "Name of the user (person) or of the
+            algorithm that generated the network anomaly metadata";
+        }
         leaf author-type {
           type identityref {
               base author-type;

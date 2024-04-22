@@ -506,13 +506,13 @@ Adjustments |          +-------------+          | Symptoms
           <artwork align="center"><![CDATA[
 module: ietf-network-anomaly-metadata
   +--rw network-anomalies
-     +--rw network-anomaly* [id author-name version state]
+     +--rw network-anomaly* [id version state]
         +--rw id             yang:uuid
         +--rw description?   string
-        +--rw anotator
-        |  +--rw annotator-name   string
-        |  +--rw annotator-type?  identityref
-        |  +--rw algo-version?    uint8
+        +--rw annotator
+        |  +--rw author-name?    string
+        |  +--rw author-type?    identityref
+        |  +--rw algo-version?   uint8
         +--rw version        uint8
         +--rw state          identityref
         +--rw symptoms* [symptom_id]
@@ -523,7 +523,7 @@ module: ietf-network-anomaly-metadata
         <figure anchor="ietf-network-anomaly-metadata-module"
                 title="YANG module for ietf-network-anomaly-metadata">
           <artwork><![CDATA[
-<CODE BEGINS> file "ietf-network-anomaly-metadata@2024-02-26.yang"
+<CODE BEGINS> file "ietf-network-anomaly-metadata@2024-04-22.yang"
 module ietf-network-anomaly-metadata {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-network-anomaly-metadata";
@@ -568,7 +568,7 @@ module ietf-network-anomaly-metadata {
       This version of this YANG module is part of RFC XXXX; see the RFC
       itself for full legal notices.";
 
-  revision 2024-02-26 {
+  revision 2024-04-22 {
     description
       "Initial version";
     reference
@@ -640,7 +640,7 @@ module ietf-network-anomaly-metadata {
   container network-anomalies {
     description "Container having the network anomalies";
     list network-anomaly {
-      key "id author-name version state";
+      key "id version state";
       description "A network anomaly identified by an id, author-name, version 
         and state.";
       leaf id {

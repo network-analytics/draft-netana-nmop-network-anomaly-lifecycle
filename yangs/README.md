@@ -1,0 +1,1 @@
+pyang ietf-network-anomaly-metadata@2024-04-22.yang -f tree -p . --tree-line-length=70
