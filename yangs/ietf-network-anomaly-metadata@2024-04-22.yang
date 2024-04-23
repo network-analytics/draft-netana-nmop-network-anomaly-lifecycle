@@ -49,19 +49,19 @@ module ietf-network-anomaly-metadata {
       "RFCXXXX: Experiment: Network Anomaly Postmortem Lifecycle";
   }
 
-  identity author-type {
+  identity annotator-type {
     description
       "Type of the author of the network anomaly metadata";
   }
 
   identity user {
-    base author-type;
+    base annotator-type;
     description
       "A real user (person) generated the network anomaly metadata";
   }
 
   identity algorithm {
-    base author-type;
+    base annotator-type;
     description
       "An algorithm generated the network anomaly metadata";
   }
@@ -114,7 +114,7 @@ module ietf-network-anomaly-metadata {
   container network-anomalies {
     description "Container having the network anomalies";
     list network-anomaly {
-      key "id version state";
+      key "id version annotator-name state";
       description "A network anomaly identified by an id, version 
         and state.";
       leaf id {
@@ -127,24 +127,25 @@ module ietf-network-anomaly-metadata {
         description
           "Textual description of the network anomaly";
       }
+      leaf annotator-name {
+        type string;
+        description "Name of the user (person) or of the
+          algorithm that generated the network anomaly metadata";
+      }
       container annotator {
         description "Container defining the type of the annotator and the
           version of the algorithm if it is an algorithm who reported the anomaly.";
-        leaf author-name {
-          type string;
-          description "Name of the user (person) or of the
-            algorithm that generated the network anomaly metadata";
-        }
-        leaf author-type {
+        leaf annotator-type {
           type identityref {
-              base author-type;
+            base annotator-type;
           }
-          description "The type of author who reported the anomaly.";
+          description "The type of annotator who reported the anomaly.";
         }
         leaf algo-version {
+          when "../annotator-type = 'algorithm'";
           type uint8;
           description "Version of the algorithm used to
-          produce the netowrk anomaly metadata.  This is
+          produce the network anomaly metadata.  This is
           used only if the author type is an algorithm";
         }
       }

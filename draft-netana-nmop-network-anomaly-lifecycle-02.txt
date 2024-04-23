@@ -506,19 +506,19 @@ Riccobene, et al.        Expires 16 October 2024                [Page 9]
 Internet-Draft          network-anomaly-lifecycle             April 2024
 
 
-              module: ietf-network-anomaly-metadata
-                +--rw network-anomalies
-                   +--rw network-anomaly* [id version state]
-                      +--rw id             yang:uuid
-                      +--rw description?   string
-                      +--rw annotator
-                      |  +--rw author-name?    string
-                      |  +--rw author-type?    identityref
-                      |  +--rw algo-version?   uint8
-                      +--rw version        uint8
-                      +--rw state          identityref
-                      +--rw symptoms* [symptom_id]
-                         +--rw symptom_id    yang:uuid
+       module: ietf-network-anomaly-metadata
+         +--rw network-anomalies
+            +--rw network-anomaly* [id version annotator-name state]
+               +--rw id                yang:uuid
+               +--rw description?      string
+               +--rw annotator-name    string
+               +--rw annotator
+               |  +--rw annotator-type?   identityref
+               |  +--rw algo-version?     uint8
+               +--rw version           uint8
+               +--rw state             identityref
+               +--rw symptoms* [symptom_id]
+                  +--rw symptom_id    yang:uuid
 
        Figure 3: YANG tree diagram for ietf-network-anomaly-metadata
 
@@ -582,19 +582,19 @@ Internet-Draft          network-anomaly-lifecycle             April 2024
          "RFCXXXX: Experiment: Network Anomaly Postmortem Lifecycle";
      }
 
-     identity author-type {
+     identity annotator-type {
        description
          "Type of the author of the network anomaly metadata";
      }
 
      identity user {
-       base author-type;
+       base annotator-type;
        description
          "A real user (person) generated the network anomaly metadata";
      }
 
      identity algorithm {
-       base author-type;
+       base annotator-type;
        description
          "An algorithm generated the network anomaly metadata";
      }
@@ -655,8 +655,8 @@ Internet-Draft          network-anomaly-lifecycle             April 2024
      container network-anomalies {
        description "Container having the network anomalies";
        list network-anomaly {
-         key "id version state";
-         description "A network anomaly identified by an id, author-name, version
+         key "id version annotator-name state";
+         description "A network anomaly identified by an id, version
            and state.";
          leaf id {
            type yang:uuid;
@@ -676,24 +676,25 @@ Internet-Draft          network-anomaly-lifecycle             April 2024
 
              "Textual description of the network anomaly";
          }
+         leaf annotator-name {
+           type string;
+           description "Name of the user (person) or of the
+             algorithm that generated the network anomaly metadata";
+         }
          container annotator {
            description "Container defining the type of the annotator and the
              version of the algorithm if it is an algorithm who reported the anomaly.";
-           leaf author-name {
-             type string;
-             description "Name of the user (person) or of the
-               algorithm that generated the network anomaly metadata";
-           }
-           leaf author-type {
+           leaf annotator-type {
              type identityref {
-                 base author-type;
+               base annotator-type;
              }
-             description "The type of author who reported the anomaly.";
+             description "The type of annotator who reported the anomaly.";
            }
            leaf algo-version {
+             when "../annotator-type = 'algorithm'";
              type uint8;
              description "Version of the algorithm used to
-             produce the netowrk anomaly metadata.  This is
+             produce the network anomaly metadata.  This is
              used only if the author type is an algorithm";
            }
          }
@@ -721,7 +722,6 @@ Internet-Draft          network-anomaly-lifecycle             April 2024
              description "UUID of the symptom that is part of this incident";
            }
          }
-       }
 
 
 
@@ -730,6 +730,7 @@ Riccobene, et al.        Expires 16 October 2024               [Page 13]
 Internet-Draft          network-anomaly-lifecycle             April 2024
 
 
+       }
      }
    }
    <CODE ENDS>
@@ -774,7 +775,6 @@ Internet-Draft          network-anomaly-lifecycle             April 2024
               Applied Networking Research Workshop,
               DOI 10.1145/3606464.3606470, July 2023,
               <https://anrw23.hotcrp.com/doc/anrw23-paper8.pdf>.
-
 
 
 
