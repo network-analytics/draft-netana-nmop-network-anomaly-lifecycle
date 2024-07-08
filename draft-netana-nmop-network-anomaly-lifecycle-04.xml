@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="exp" docName="draft-netana-nmop-network-anomaly-lifecycle-02"
+<rfc category="exp" docName="draft-netana-nmop-network-anomaly-lifecycle-04"
      ipr="trust200902">
   <front>
     <title abbrev="network-anomaly-lifecycle">Experiment: Network Anomaly
@@ -130,7 +130,7 @@
       </address>
     </author>
 
-    <date day="07" month="July" year="2024"/>
+    <date day="08" month="July" year="2024"/>
 
     <area>Operations and Management</area>
 
