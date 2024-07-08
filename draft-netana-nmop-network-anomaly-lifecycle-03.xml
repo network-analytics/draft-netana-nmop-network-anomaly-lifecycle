@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="exp" docName="draft-netana-nmop-network-anomaly-lifecycle-02"
+<rfc category="exp" docName="draft-netana-nmop-network-anomaly-lifecycle-03"
      ipr="trust200902">
   <front>
     <title abbrev="network-anomaly-lifecycle">Experiment: Network Anomaly
@@ -130,25 +130,26 @@
       </address>
     </author>
 
-    <date day="01" month="July" year="2024"/>
+    <date day="08" month="July" year="2024"/>
 
     <area>Operations and Management</area>
 
     <workgroup>NMOP</workgroup>
 
     <abstract>
-      <t>Network Anomaly Detection is the act of detecting problems in the network.
-      Accurately detect problems is very challenging for network
+      <t>Network Anomaly Detection is the act of detecting problems in the
+      network. Accurately detect problems is very challenging for network
       operators in production networks. Good results require a lot of
       expertise and knowledge around both the implied network technologies and
       the specific service provided to consumers, apart from a proper
-      monitoring infrastructure. In order to facilitate network anomaly detection, 
-      novel techniques are being introduced, including programmatical, rule-based and
-      AI-based, with the promise of improving scalability and the hope to
-      keep a high detection accuracy. To guarantee acceptable results, the
-      process needs to be properly designed, adopting well-defined stages to
-      accurately collect evidence of anomalies, validate their relevancy and
-      improve the detection systems over time, iteratively.</t>
+      monitoring infrastructure. In order to facilitate network anomaly
+      detection, novel techniques are being introduced, including
+      programmatical, rule-based and AI-based, with the promise of improving
+      scalability and the hope to keep a high detection accuracy. To guarantee
+      acceptable results, the process needs to be properly designed, adopting
+      well-defined stages to accurately collect evidence of anomalies,
+      validate their relevancy and improve the detection systems over time,
+      iteratively.</t>
 
       <t>This document describes the lifecycle process to iteratively improve
       network anomaly detection accurately. Three key stages are proposed,
@@ -162,16 +163,16 @@
     <section anchor="discussion_venues" title="Discussion Venues">
       <t>This note is to be removed before publishing as an RFC.</t>
 
-      <t>Discussion of this document takes place on the Operations and 
-      Management Area Working Group Working Group mailing list 
-      (nmop@ietf.org), which is archived at 
+      <t>Discussion of this document takes place on the Operations and
+      Management Area Working Group Working Group mailing list
+      (nmop@ietf.org), which is archived at
       https://mailarchive.ietf.org/arch/browse/nmop/.</t>
 
-      <t>Source for this draft and an issue tracker can be found at 
+      <t>Source for this draft and an issue tracker can be found at
       https://github.com/network-analytics/draft-netana-nmop-network-
       anomaly-lifecycle.</t>
     </section>
-    
+
     <section anchor="status" title="Status of this document">
       <t>This document is experimental. The main goal of this document is to
       propose an iterative lifecycle process to network anomaly detection by
@@ -186,10 +187,10 @@
     </section>
 
     <section anchor="Introduction" title="Introduction">
-      <t>In <xref target="Ahf23"/> network anomalies are defined as "Whatever
-      would let an operator frown and investigate when looking at the
-      collected forwarding plane, control plane and management plane network
-      data relative to a customer".</t>
+      <t>In <xref target="I-D.netana-nmop-network-anomaly-architecture"/>
+      network anomalies are defined as "Whatever would let an operator frown
+      and investigate when looking at the collected forwarding plane, control
+      plane and management plane network data relative to a customer" .</t>
 
       <t>In <xref target="I-D.netana-nmop-network-anomaly-semantics"/> a
       semantic for the annotation of network anomalies has been defined in
@@ -199,27 +200,26 @@
       defined as the essential piece of information to analyze network
       anomalies and problems.</t>
 
-      <t>The intention is to enable operators detecting problems in the network
-      timely. A network problem is defined as "A state regarded as undesirable 
-      and may require remedial action" 
-      (see <xref target="I-D.ietf-nmop-terminology"/>).</t>
+      <t>The intention is to enable operators detecting problems in the
+      network timely. A network problem is defined as "A state regarded as
+      undesirable and may require remedial action" (see <xref
+      target="I-D.ietf-nmop-terminology"/>).</t>
 
       <t>With all this in mind, this document starts from the assumption that
       it is still remarkably difficult to gain a full understanding and a
       complete perspective of "if" and "how" the network is deviating from the
       desired state: on the one side, symptoms are not necessarily a guarantee
-      of a problem happening (e.g. there might be false positives), on the other 
-      side, the lack of symptom is not a guarantee of the absence of an problem 
-      (e.g. there might be false negatives). 
-      The concept of network anomaly in this document plays the
-      role of a bridge between symptoms and problem: a network anomaly is
-      defined as a collection of symptoms, but without the guarantee that the
-      observed symptoms are impacting existing services. This opens up to the
-      necessity of further validating the network anomalies to understand if
-      the detected symptoms are actually impacting services and it requires
-      different actors (both human and algorithmic) to jump in during the
-      process and refine their understanding across the network anomaly
-      lifecycle.</t>
+      of a problem happening (e.g. there might be false positives), on the
+      other side, the lack of symptom is not a guarantee of the absence of an
+      problem (e.g. there might be false negatives). The concept of network
+      anomaly in this document plays the role of a bridge between symptoms and
+      problem: a network anomaly is defined as a collection of symptoms, but
+      without the guarantee that the observed symptoms are impacting existing
+      services. This opens up to the necessity of further validating the
+      network anomalies to understand if the detected symptoms are actually
+      impacting services and it requires different actors (both human and
+      algorithmic) to jump in during the process and refine their
+      understanding across the network anomaly lifecycle.</t>
 
       <t>Performing network anomaly detection is a process that requires a
       continuous learning and continuous improvement. Network anomalies are
@@ -228,10 +228,10 @@
       need to be further analyzed by performing postmortem analysis to
       identify any potential adjustment to improve the detection capability.
       Each of these stages is an opportunity to learn and refine the process,
-      and since implementations of these stages might also be provided 
-      by different parties and/or products, this document also contributes 
-      a formal structure to capture and exchange symptom information across 
-      the lifecycle.</t>
+      and since implementations of these stages might also be provided by
+      different parties and/or products, this document also contributes a
+      formal structure to capture and exchange symptom information across the
+      lifecycle.</t>
     </section>
 
     <section anchor="notation" title="Terminology">
@@ -252,14 +252,14 @@
           <t>Event</t>
 
           <t>Alarm</t>
+
+          <t>Symptom</t>
         </list></t>
 
       <t>The following terms are used as defined in <xref
       target="RFC9417"/>.</t>
 
       <t><list style="symbols">
-          <t>Symptom</t>
-
           <t>Metric</t>
 
           <t>Intent</t>
@@ -293,11 +293,11 @@
       Level Agreements) which approaches the problem top-down; on the other
       side, the definition of symptoms, by mean of solutions like <xref
       target="RFC9417">SAIN</xref>, <xref target="RFC9418"/> and <xref
-      target="Ahf23">Daisy</xref>, which approaches the problem bottom-up. At
-      the center of these approaches, there are the so-called symptoms,
-      defined as reasons explaining what is not working as expected in the
-      network, sometimes also providing hints towards issues and their
-      causes.</t>
+      target="I-D.netana-nmop-network-anomaly-architecture"/>, which
+      approaches the problem bottom-up. At the center of these approaches,
+      there are the so-called symptoms, defined as reasons explaining what is
+      not working as expected in the network, sometimes also providing hints
+      towards issues and their causes.</t>
 
       <t>One of the more deterministic approaches is to rely on symptoms based
       on measurable service-based KPIs, for example, by using Service Level
@@ -324,9 +324,9 @@
 
         <dd>An SLI is an observable metric that describes the state of a
         monitored subsystem. SLIs are a tool to gain measurable visibility
-        about the behavior of a subsystem in the network. SLIs usually 
-        differ from SLOs as SLOs are usually expressed as thresholds, 
-        while SLIs would often be expressed e.g. as percentages.</dd>
+        about the behavior of a subsystem in the network. SLIs usually differ
+        from SLOs as SLOs are usually expressed as thresholds, while SLIs
+        would often be expressed e.g. as percentages.</dd>
       </dl>
 
       <t>However, the definition of these KPIs turns out to be very
@@ -360,16 +360,17 @@
       an accurate fashion requires continuous iterations and improvements
       coming from all the stages of the network anomaly detection lifecycle,
       by which network engineers can transfer what they learn through the
-      process into new symptom definitions and, ultimately, into refinements of 
-      the detection algorithms.</t>
+      process into new symptom definitions and, ultimately, into refinements
+      of the detection algorithms.</t>
     </section>
 
-    <section anchor="lifecycle_network_anomaly" title="Lifecycle of a Network Anomaly">
+    <section anchor="lifecycle_network_anomaly"
+             title="Lifecycle of a Network Anomaly">
       <t>The lifecycle of a network anomaly can be articulated in three
       phases, structured as a loop: Detection, Validation, Refinement.</t>
 
       <figure anchor="simplified_lifecycle"
-        title="Anomaly Detection Refinement Lifecycle">
+              title="Anomaly Detection Refinement Lifecycle">
         <artwork align="center"><![CDATA[
                        +-------------+
             +--------> |  Detection  | ---------+
@@ -380,15 +381,15 @@ Adjustments |          +-------------+          | Symptoms
     | Refinement |<--------------------- | Validation |
     +------------+        Problem        +------------+
                         Confirmation
-          ]]>
-        </artwork>
+          
+        ]]></artwork>
       </figure>
 
       <t>Each of these phases can either be performed by a network expert or
       an algorithm or complementing each other.</t>
 
-      <t>The network anomaly metadata is generated by an annotator, which can be
-      either a human expert or an algorithm. The annotator can produce the
+      <t>The network anomaly metadata is generated by an annotator, which can
+      be either a human expert or an algorithm. The annotator can produce the
       metadata for a network anomaly, for each stage of the cycle and even
       multiple versions for the same stage. In each version of the network
       anomaly metadata, the annotator indicates the list of symptoms that are
@@ -424,8 +425,8 @@ Adjustments |          +-------------+          | Symptoms
         early signs of an problem potentially happening in the near future
         (a.k.a. the problem is "forecasted"), and the third one requires some
         analysis to confirm if the detected symptom requires any attention or
-        immediate intervention (a.k.a. the problem is "potential"). As part
-        of the iterative improvement required in this stage, one that is very
+        immediate intervention (a.k.a. the problem is "potential"). As part of
+        the iterative improvement required in this stage, one that is very
         relevant is the gradual conversion of the third category into one of
         the first two, which would make the network anomaly detection system
         more deterministic. The main objective is to reduce uncertainty around
@@ -437,28 +438,27 @@ Adjustments |          +-------------+          | Symptoms
       <section anchor="network_anomaly_validation"
                title="Network Anomaly Validation">
         <t>The key objective for the validation stage is clearly to decide if
-        the detected symptoms are signaling a real problem (a.k.a. requires 
-        action) or if they are to be treated as false positives
-        (a.k.a. suppressing the alarm). For those symptoms surely having
-        impact on services, 100% confidence on the fact that a network
-        problem is happening can be assumed. For the other two categories,
-        "forecasted" and "potential", further analysis and validation is
-        required.</t>
+        the detected symptoms are signaling a real problem (a.k.a. requires
+        action) or if they are to be treated as false positives (a.k.a.
+        suppressing the alarm). For those symptoms surely having impact on
+        services, 100% confidence on the fact that a network problem is
+        happening can be assumed. For the other two categories, "forecasted"
+        and "potential", further analysis and validation is required.</t>
       </section>
 
       <section anchor="network_anomaly_refinement"
                title="Network Anomaly Refinement">
-        <t>After validation of a problem, the service provider 
-        performs troubleshooting and resolution of the problem. Although the
-        network might be back in a desired state at this point, network
-        operators can perform detailed postmortem analysis of network
-        problems with the objective to identify useful adjustments to the
-        prevention and detection mechanisms (for instance improving or
-        extending the definition of SLIs and SLOs, refining concern/impact
-        scores, etc.), and improving the accuracy of the validation stage
-        (e.g. automating parts of the validation, implementing automated root
-        cause analysis and automation for remediation actions). In this stage
-        of the lifecycle it is assumed that the problem is under analysis.</t>
+        <t>After validation of a problem, the service provider performs
+        troubleshooting and resolution of the problem. Although the network
+        might be back in a desired state at this point, network operators can
+        perform detailed postmortem analysis of network problems with the
+        objective to identify useful adjustments to the prevention and
+        detection mechanisms (for instance improving or extending the
+        definition of SLIs and SLOs, refining concern/impact scores, etc.),
+        and improving the accuracy of the validation stage (e.g. automating
+        parts of the validation, implementing automated root cause analysis
+        and automation for remediation actions). In this stage of the
+        lifecycle it is assumed that the problem is under analysis.</t>
 
         <t>After the adjustments are performed to the network anomaly
         detection methods, the cycle starts again, by "replaying" the network
@@ -467,24 +467,23 @@ Adjustments |          +-------------+          | Symptoms
       </section>
     </section>
 
-    <section anchor="network_anomaly_state_machine" title="Network Anomaly State Machine">
-      
-      <t>In the context of this document, from a network anomaly detection 
-      point of view a network problem is defined as a collection of 
-      interrelated symptoms, as specified in 
-      <xref target="I-D.netana-nmop-network-anomaly-semantics"/>.</t>
-      
-      <t>The understanding of a network problem can change over time. Moreover, 
-      multiple actors are involved in the process of refining this understanding
-      in the different phases.</t>
+    <section anchor="network_anomaly_state_machine"
+             title="Network Anomaly State Machine">
+      <t>In the context of this document, from a network anomaly detection
+      point of view a network problem is defined as a collection of
+      interrelated symptoms, as specified in <xref
+      target="I-D.netana-nmop-network-anomaly-semantics"/>.</t>
 
-      <t>From this perspective, a problem can be refined according to 
-      the following states (<xref target="state_machine"/>).</t>
+      <t>The understanding of a network problem can change over time.
+      Moreover, multiple actors are involved in the process of refining this
+      understanding in the different phases.</t>
 
-      <t>
-        <figure anchor="state_machine" title="Network Anomaly State Machine">
-          <artwork align="center">
-            <![CDATA[
+      <t>From this perspective, a problem can be refined according to the
+      following states (<xref target="state_machine"/>).</t>
+
+      <t><figure anchor="state_machine" title="Network Anomaly State Machine">
+          <artwork align="center"><![CDATA[
+            
                                              +---------+
                                              | Initial |-----------------+
                                              +---------+                 |
@@ -518,10 +517,9 @@ Adjustments |          +-------------+          | Symptoms
 | |     Analyzed     |<-|-----------------------------------+
 | +------------------+  |
 +-------Refinement------+
-            ]]>
-          </artwork>
-        </figure>
-      </t>
+            
+          ]]></artwork>
+        </figure></t>
 
       <section anchor="network-anomaly-model-tree"
                title="Overview of the Model for the Network Anomaly Metadata">
@@ -544,8 +542,8 @@ module: ietf-network-anomaly-metadata
         +--rw state          identityref
         +--rw symptoms* [symptom_id]
            +--rw symptom_id    yang:uuid
-            ]]>
-          </artwork>
+            
+          ]]></artwork>
         </figure>
 
         <figure anchor="ietf-network-anomaly-metadata-module"
@@ -720,10 +718,6 @@ module ietf-network-anomaly-metadata {
 <CODE ENDS>]]></artwork>
         </figure>
       </section>
-
-
-
-      
     </section>
 
     <section anchor="Implementation" title="Implementation status">
@@ -732,10 +726,10 @@ module ietf-network-anomaly-metadata {
       this before publishing.</t>
 
       <section anchor="Implementation-Antagonist" title="Antagonist">
-        <t>An open source implementation for this draft is called AnTagOnIst 
-        (Anomaly Tagging On hIstorical data), and it has been implemented 
-        in order to validate the application of the YANG model defined in this 
-        draft. Antagonist provides visual support for two important use cases 
+        <t>An open source implementation for this draft is called AnTagOnIst
+        (Anomaly Tagging On hIstorical data), and it has been implemented in
+        order to validate the application of the YANG model defined in this
+        draft. Antagonist provides visual support for two important use cases
         in the scope of this document: <ul>
             <li>the generation of a ground truth in relation to symptoms and
             problems in timeseries data</li>
@@ -776,23 +770,7 @@ module ietf-network-anomaly-metadata {
 
       <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-nmop-terminology.xml"?>
 
-      <reference anchor="Ahf23"
-                 target="https://anrw23.hotcrp.com/doc/anrw23-paper8.pdf">
-        <front>
-          <title>Daisy: Practical Anomaly Detection in large BGP/MPLS and
-          BGP/SRv6 VPN Networks</title>
-
-          <author fullname="Alex Huang Feng" initials="A."
-                  surname="Huang Feng"/>
-
-          <date month="July" year="2023"/>
-        </front>
-
-        <seriesInfo name="DOI" value="10.1145/3606464.3606470"/>
-
-        <refcontent>IETF 117, Applied Networking Research
-        Workshop</refcontent>
-      </reference>
+      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.netana-nmop-network-anomaly-architecture.xml"?>
 
       <reference anchor="Antagonist"
                  target="https://github.com/vriccobene/antagonist">

@@ -5,16 +5,16 @@
 NMOP                                                        V. Riccobene
 Internet-Draft                                                A. Roberto
 Intended status: Experimental                                     Huawei
-Expires: 2 January 2025                                          T. Graf
+Expires: 9 January 2025                                          T. Graf
                                                                    W. Du
                                                                 Swisscom
                                                            A. Huang Feng
                                                                INSA-Lyon
-                                                             1 July 2024
+                                                             8 July 2024
 
 
                  Experiment: Network Anomaly Lifecycle
-             draft-netana-nmop-network-anomaly-lifecycle-02
+             draft-netana-nmop-network-anomaly-lifecycle-03
 
 Abstract
 
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Riccobene, et al.        Expires 2 January 2025                 [Page 1]
+Riccobene, et al.        Expires 9 January 2025                 [Page 1]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -63,7 +63,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 January 2025.
+   This Internet-Draft will expire on 9 January 2025.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Riccobene, et al.        Expires 2 January 2025                 [Page 2]
+Riccobene, et al.        Expires 9 January 2025                 [Page 2]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -138,10 +138,10 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 3.  Introduction
 
-   In [Ahf23] network anomalies are defined as "Whatever would let an
-   operator frown and investigate when looking at the collected
-   forwarding plane, control plane and management plane network data
-   relative to a customer".
+   In [I-D.netana-nmop-network-anomaly-architecture] network anomalies
+   are defined as "Whatever would let an operator frown and investigate
+   when looking at the collected forwarding plane, control plane and
+   management plane network data relative to a customer" .
 
    In [I-D.netana-nmop-network-anomaly-semantics] a semantic for the
    annotation of network anomalies has been defined in order to support
@@ -165,7 +165,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 2 January 2025                 [Page 3]
+Riccobene, et al.        Expires 9 January 2025                 [Page 3]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -212,16 +212,16 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
    *  Alarm
 
-   The following terms are used as defined in [RFC9417].
-
    *  Symptom
+
+   The following terms are used as defined in [RFC9417].
 
    *  Metric
 
 
 
 
-Riccobene, et al.        Expires 2 January 2025                 [Page 4]
+Riccobene, et al.        Expires 9 January 2025                 [Page 4]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -253,11 +253,12 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
    side, the definition of intents (including Service Level Objectives
    and Service Level Agreements) which approaches the problem top-down;
    on the other side, the definition of symptoms, by mean of solutions
-   like SAIN [RFC9417], [RFC9418] and Daisy [Ahf23], which approaches
-   the problem bottom-up.  At the center of these approaches, there are
-   the so-called symptoms, defined as reasons explaining what is not
-   working as expected in the network, sometimes also providing hints
-   towards issues and their causes.
+   like SAIN [RFC9417], [RFC9418] and
+   [I-D.netana-nmop-network-anomaly-architecture], which approaches the
+   problem bottom-up.  At the center of these approaches, there are the
+   so-called symptoms, defined as reasons explaining what is not working
+   as expected in the network, sometimes also providing hints towards
+   issues and their causes.
 
    One of the more deterministic approaches is to rely on symptoms based
    on measurable service-based KPIs, for example, by using Service Level
@@ -276,8 +277,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-
-Riccobene, et al.        Expires 2 January 2025                 [Page 5]
+Riccobene, et al.        Expires 9 January 2025                 [Page 5]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -333,7 +333,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 2 January 2025                 [Page 6]
+Riccobene, et al.        Expires 9 January 2025                 [Page 6]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -389,7 +389,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 2 January 2025                 [Page 7]
+Riccobene, et al.        Expires 9 January 2025                 [Page 7]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -445,7 +445,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 2 January 2025                 [Page 8]
+Riccobene, et al.        Expires 9 January 2025                 [Page 8]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -501,7 +501,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 2 January 2025                 [Page 9]
+Riccobene, et al.        Expires 9 January 2025                 [Page 9]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -557,7 +557,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 2 January 2025                [Page 10]
+Riccobene, et al.        Expires 9 January 2025                [Page 10]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -613,7 +613,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 2 January 2025                [Page 11]
+Riccobene, et al.        Expires 9 January 2025                [Page 11]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -669,7 +669,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 2 January 2025                [Page 12]
+Riccobene, et al.        Expires 9 January 2025                [Page 12]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -725,7 +725,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 2 January 2025                [Page 13]
+Riccobene, et al.        Expires 9 January 2025                [Page 13]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -781,7 +781,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 2 January 2025                [Page 14]
+Riccobene, et al.        Expires 9 January 2025                [Page 14]
 
 Internet-Draft          network-anomaly-lifecycle              July 2024
 
@@ -820,12 +820,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 11.  Normative References
 
-   [Ahf23]    Huang Feng, A., "Daisy: Practical Anomaly Detection in
-              large BGP/MPLS and BGP/SRv6 VPN Networks", IETF 117,
-              Applied Networking Research Workshop,
-              DOI 10.1145/3606464.3606470, July 2023,
-              <https://anrw23.hotcrp.com/doc/anrw23-paper8.pdf>.
-
    [Antagonist]
               Riccobene, V., Roberto, A., Du, W., Graf, T., and H. Huang
               Feng, "Antagonist: Anomaly tagging on historical data",
@@ -834,18 +828,27 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
               Key Terms for Network Incident and Problem Management",
-
-
-
-Riccobene, et al.        Expires 2 January 2025                [Page 15]
-
-Internet-Draft          network-anomaly-lifecycle              July 2024
-
-
               Work in Progress, Internet-Draft, draft-ietf-nmop-
               terminology-01, 10 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
               terminology-01>.
+
+
+
+
+
+Riccobene, et al.        Expires 9 January 2025                [Page 15]
+
+Internet-Draft          network-anomaly-lifecycle              July 2024
+
+
+   [I-D.netana-nmop-network-anomaly-architecture]
+              Graf, T., Du, W., and P. Francois, "An Architecture for a
+              Network Anomaly Detection Framework", Work in Progress,
+              Internet-Draft, draft-netana-nmop-network-anomaly-
+              architecture-00, 8 July 2024,
+              <https://datatracker.ietf.org/api/v1/doc/document/draft-
+              netana-nmop-network-anomaly-architecture/>.
 
    [I-D.netana-nmop-network-anomaly-semantics]
               Graf, T., Du, W., Feng, A. H., Riccobene, V., and A.
@@ -885,17 +888,21 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 Authors' Addresses
 
+
+
+
+
+
+Riccobene, et al.        Expires 9 January 2025                [Page 16]
+
+Internet-Draft          network-anomaly-lifecycle              July 2024
+
+
    Vincenzo Riccobene
    Huawei
    Dublin
    Ireland
    Email: vincenzo.riccobene@huawei-partners.com
-
-
-
-Riccobene, et al.        Expires 2 January 2025                [Page 16]
-
-Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
    Antonio Roberto
@@ -942,11 +949,4 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-
-
-
-
-
-
-
-Riccobene, et al.        Expires 2 January 2025                [Page 17]
+Riccobene, et al.        Expires 9 January 2025                [Page 17]
