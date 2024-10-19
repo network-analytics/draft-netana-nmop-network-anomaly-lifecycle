@@ -5,16 +5,16 @@
 NMOP                                                        V. Riccobene
 Internet-Draft                                                A. Roberto
 Intended status: Experimental                                     Huawei
-Expires: 9 January 2025                                          T. Graf
+Expires: 22 April 2025                                           T. Graf
                                                                    W. Du
                                                                 Swisscom
                                                            A. Huang Feng
                                                                INSA-Lyon
-                                                             8 July 2024
+                                                         19 October 2024
 
 
                  Experiment: Network Anomaly Lifecycle
-             draft-netana-nmop-network-anomaly-lifecycle-03
+             draft-netana-nmop-network-anomaly-lifecycle-04
 
 Abstract
 
@@ -22,9 +22,9 @@ Abstract
    network.  Accurately detect problems is very challenging for network
    operators in production networks.  Good results require a lot of
    expertise and knowledge around both the implied network technologies
-   and the specific service provided to consumers, apart from a proper
-   monitoring infrastructure.  In order to facilitate network anomaly
-   detection, novel techniques are being introduced, including
+   and the connectivity services provided to customers, apart from a
+   proper monitoring infrastructure.  In order to facilitate network
+   anomaly detection, novel techniques are being introduced, including
    programmatical, rule-based and AI-based, with the promise of
    improving scalability and the hope to keep a high detection accuracy.
    To guarantee acceptable results, the process needs to be properly
@@ -41,7 +41,7 @@ Abstract
    this document are: the definition of three key stages of the
    lifecycle process, the definition of a state machine for each anomaly
    annotation on the system and the definition of YANG data models
-   describing a comprehensive format for the anoamaly labels, allowing a
+   describing a comprehensive format for the anomaly labels, allowing a
    well structured exchange of those between all the interested actors.
 
 Status of This Memo
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Riccobene, et al.        Expires 9 January 2025                 [Page 1]
+Riccobene, et al.         Expires 22 April 2025                 [Page 1]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
    Internet-Drafts are working documents of the Internet Engineering
@@ -68,7 +68,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 January 2025.
+   This Internet-Draft will expire on 22 April 2025.
 
 Copyright Notice
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Riccobene, et al.        Expires 9 January 2025                 [Page 2]
+Riccobene, et al.         Expires 22 April 2025                 [Page 2]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
 1.  Discussion Venues
@@ -165,21 +165,21 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 9 January 2025                 [Page 3]
+Riccobene, et al.         Expires 22 April 2025                 [Page 3]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
-   network naturally changes over time, when more services are deployed,
-   more customers on-boarded, devices are upgraded or replaced, and
-   therefore it is almost impossible to build an anomaly detection
-   system that remains accurate over time.
+   network naturally changes over time, when more connectivity services
+   are deployed, more customers on-boarded, devices are upgraded or
+   replaced, and therefore it is almost impossible to build an anomaly
+   detection system that remains accurate over time.
 
    This opens up to the necessity of further validating notified
-   relevant states to check if the detected symptoms are actually
-   impacting services: this might require different actors (both human
-   and algorithmic) to jump in during the process and refine their
-   understanding across the network anomaly lifecycle.
+   relevant states to check if the detected Symptoms are actually
+   impacting connectivity services: this might require different actors
+   (both human and algorithmic) to act during the process and refine
+   their understanding across the network anomaly lifecycle.
 
    Finally, once validation has happened, this might lead to refinements
    to the logic that is used by the detection, so that this process can
@@ -187,15 +187,16 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
    Performing network anomaly detection is a process that requires a
    continuous learning and continuous improvement.  Relevant states are
-   detected by aggregating and understanding symptoms, then validated,
-   confirming that symptoms actually impacted network services impacting
-   and eventually need to be further analyzed by performing postmortem
-   analysis to identify any potential adjustment to improve the
-   detection capability.  Each of these steps represents an opportunity
-   to learn and refine the process, and since implementations of these
-   steps might also be provided by different parties and/or products,
-   this document also contributes a formal data model to capture and
-   exchange symptom information across the lifecycle.
+   detected by aggregating and understanding Symptoms, then validated,
+   confirming that Symptoms actually impacted connectivity services
+   impacting and eventually need to be further analyzed by performing
+   postmortem analysis to identify any potential adjustment to improve
+   the detection capability.  Each of these steps represents an
+   opportunity to learn and refine the process, and since
+   implementations of these steps might also be provided by different
+   parties and/or products, this document also contributes a formal data
+   model to capture and exchange Symptom information across the
+   lifecycle.
 
 4.  Terminology
 
@@ -220,10 +221,9 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-
-Riccobene, et al.        Expires 9 January 2025                 [Page 4]
+Riccobene, et al.         Expires 22 April 2025                 [Page 4]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
    The following terms are used as defined in [RFC9417].
@@ -235,7 +235,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
    The following terms are defined in this document.
 
    *  Annotator: Is a human or an algorithm which produces metadata by
-      describing anomalies with symptoms.
+      describing anomalies with Symptoms.
 
    *  False Positive: Is a detected anomaly which has been identified
       during the postmortem to be not anomalous.
@@ -256,15 +256,15 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
    more or less deterministic and more or less sensitive: on the one
    side, the definition of intents (including Service Level Objectives
    and Service Level Agreements) which approaches the problem top-down;
-   on the other side, the definition of symptoms, by mean of solutions
+   on the other side, the definition of Symptoms, by mean of solutions
    like SAIN [RFC9417], [RFC9418] and
    [I-D.netana-nmop-network-anomaly-architecture], which approaches the
    problem bottom-up.  At the center of these approaches, there are the
-   so-called symptoms, explaining what is not working as expected in the
+   so-called Symptoms, explaining what is not working as expected in the
    network, sometimes also providing hints towards issues and their
    causes.
 
-   One of the more deterministic approaches is to rely on symptoms based
+   One of the more deterministic approaches is to rely on Symptoms based
    on measurable service-based KPIs, for example, by using Service Level
    Indicators, Objectives and Agreements:
 
@@ -277,9 +277,9 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 9 January 2025                 [Page 5]
+Riccobene, et al.         Expires 22 April 2025                 [Page 5]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
    Service Level Objectives (SLOs)  An SLO is a threshold above which
@@ -301,25 +301,25 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
    computationally expensive techniques to be collected or substantial
    modifications to existing network protocols.
 
-   Alternative methodologies rely on symptoms as the way to generate
+   Alternative methodologies rely on Symptoms as the way to generate
    analytical data out of operational data.  For instance:
 
-   SAIN  introduces the definition and exposure of symptoms as a
+   SAIN  introduces the definition and exposure of Symptoms as a
       mechanism for detecting those concerning behaviors in more
       deterministic ways.  Moreover, the concept of "impact score" has
       been introduced by SAIN, to indicate what is the expected degree
-      of impact that a given symptom will have on the services relying
-      on the related subservice to which the symptom is attached.
+      of impact that a given Symptom will have on the services relying
+      on the related subservice to which the Symptom is attached.
 
    Daisy  introduces the concept of concern score to indicate what is
-      the degree of concern that a given symptom could cause a
-      degradation for a service.
+      the degree of concern that a given Symptom could cause a
+      degradation for a connectivity service.
 
    In general, defining boundaries between desirable vs. undesirable in
    an accurate fashion requires continuous iterations and improvements
    coming from all the stages of the network anomaly detection
    lifecycle, by which network engineers can transfer what they learn
-   through the process into new symptom definitions and, ultimately,
+   through the process into new Symptom definitions and, ultimately,
    into refinements of the detection algorithms.
 
 6.  Lifecycle of a Network Anomaly
@@ -333,9 +333,9 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 9 January 2025                 [Page 6]
+Riccobene, et al.         Expires 22 April 2025                 [Page 6]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
                                +-------------+
@@ -359,65 +359,70 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
    the metadata for a network anomaly, for each stage of the cycle and
    even multiple versions for the same stage.  In each version of the
    network anomaly metadata, the annotator indicates the list of
-   symptoms that are part of the network anomaly taken into account.
+   Symptoms that are part of the network anomaly taken into account.
    The iterative process is about the identification of the right set of
-   symptoms.
+   Symptoms.
 
 6.1.  Network Anomaly Detection
 
    The Network Anomaly Detection stage is about the continuous
    monitoring of the network through Network Telemetry [RFC9232] and the
-   identification of symptoms.  One of the main requirements that
+   identification of Symptoms.  One of the main requirements that
    operator have on network anomaly detection systems is the high
    accuracy.  This means having a small number of false negatives,
-   symptoms causing service impact are not missed, and false positives,
-   symptoms that are actually innocuous are not picked up.
+   Symptoms causing connectivity service impact are not missed, and
+   false positives, Symptoms that are actually innocuous are not picked
+   up.
 
    As the detection stage is becoming more and more automated for
-   production networks, the identified symptoms might point towards
+   production networks, the identified Symptoms might point towards
    three potential kinds of behaviors:
 
-   i. those that are surely corresponding to an impact on services,
-   (e.g. the breach of an SLO),
+   i. those that are surely corresponding to an impact on connectivity
+   services, (e.g. the breach of an SLO),
 
    ii. those that will cause problems in the future (e.g. rising trends
    on a timeseries metric hitting towards saturation),
 
-   iii. those or which the impact to services cannot be confirmed (e.g.
-   sudden increase/decrease of timeseries metrics, anomalous amounts of
-   log entries, etc.).
 
 
 
-Riccobene, et al.        Expires 9 January 2025                 [Page 7]
+
+
+Riccobene, et al.         Expires 22 April 2025                 [Page 7]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
+
+   iii. those or which the impact to connectivuty services cannot be
+   confirmed (e.g. sudden increase/decrease of timeseries metrics,
+   anomalous amounts of log entries, etc.).
 
    The first category requires immediate intervention (a.k.a. the
    problem is "confirmed"), the second one provides pointers towards
    early signs of an problem potentially happening in the near future
    (a.k.a. the problem is "forecasted"), and the third one requires some
-   analysis to confirm if the detected symptom requires any attention or
+   analysis to confirm if the detected Symptom requires any attention or
    immediate intervention (a.k.a. the problem is "potential").  As part
    of the iterative improvement required in this stage, one that is very
    relevant is the gradual conversion of the third category into one of
    the first two, which would make the network anomaly detection system
    more deterministic.  The main objective is to reduce uncertainty
    around the raised alarms by refining the detection algorithms.  This
-   can be achieved by either generating new symptom definitions,
+   can be achieved by either generating new Symptom definitions,
    adjusting the weights of automated algorithms or other similar
    approaches.
 
 6.2.  Network Anomaly Validation
 
    The key objective for the validation stage is clearly to decide if
-   the detected symptoms are signaling a real problem (a.k.a. requires
+   the detected Symptoms are signaling a real problem (a.k.a. requires
    action) or if they are to be treated as false positives (a.k.a.
-   suppressing the alarm).  For those symptoms surely having impact on
-   services, 100% confidence on the fact that a network problem is
-   happening can be assumed.  For the other two categories, "forecasted"
-   and "potential", further analysis and validation is required.
+   suppressing the alarm).  For those Symptoms surely having impact on
+   connectivity services, 100% confidence on the fact that a network
+   problem is happening can be assumed.  For the other two categories,
+   "forecasted" and "potential", further analysis and validation is
+   required.
 
 6.3.  Network Anomaly Refinement
 
@@ -440,21 +445,16 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-
-
-
-
-
-Riccobene, et al.        Expires 9 January 2025                 [Page 8]
+Riccobene, et al.         Expires 22 April 2025                 [Page 8]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
 7.  Network Anomaly State Machine
 
    In the context of this document, from a network anomaly detection
    point of view a network problem is defined as a collection of
-   interrelated symptoms, as specified in
+   interrelated Symptoms, as specified in
    [I-D.netana-nmop-network-anomaly-semantics].
 
    The understanding of a network problem can change over time.
@@ -501,9 +501,9 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 9 January 2025                 [Page 9]
+Riccobene, et al.         Expires 22 April 2025                 [Page 9]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
                                              +---------+
@@ -557,9 +557,9 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 9 January 2025                [Page 10]
+Riccobene, et al.         Expires 22 April 2025                [Page 10]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
             module: ietf-relevant-state
@@ -613,9 +613,9 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 9 January 2025                [Page 11]
+Riccobene, et al.         Expires 22 April 2025                [Page 11]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
                     +--ro version                 yang:counter32
@@ -669,9 +669,9 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 9 January 2025                [Page 12]
+Riccobene, et al.         Expires 22 April 2025                [Page 12]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
        contact
@@ -689,11 +689,12 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
                    Alex Huang Feng
                    <mailto:alex.huang-feng@insa-lyon.fr>";
        description
-         "This module defines the symptom conatiner to be used by a network
-            anomaly detection system. The defined objects can be used to
-            augment operational network collected observability data and
-            analytical problem data equally. Describing the relevant-state
-                        of observed symptoms.
+           "This module defines the relevant-state container and
+               notifications to be used by a network anomaly detection
+               system. The defined objects can be used to augment
+               operational network collected observability data and
+           analytical problem data equally. Describing the relevant-state
+                   of observed symptoms.
 
            Copyright (c) 2024 IETF Trust and the persons identified as
            authors of the code.  All rights reserved.
@@ -721,15 +722,15 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
            }
        }
        identity network-anomaly-state {
-         description
 
 
 
-Riccobene, et al.        Expires 9 January 2025                [Page 13]
+Riccobene, et al.         Expires 22 April 2025                [Page 13]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
+         description
            "Base identity for representing the state of the network anomaly";
        }
        identity network-anomaly-detection {
@@ -751,16 +752,16 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
          base network-anomaly-detection;
          description
          "A problem has been forecasted, as it is expected that
-         the indicated list of symptoms will impact a service
-         in the near future";
+         the indicated list of symptoms will impact a
+             connectivity service in the near future";
        }
        identity problem-potential {
          base network-anomaly-detection;
          description
          "A problem has been detected with a confidence
          lower than 100%. In order to confirm that this set of
-         symptoms are generating service impact, it requires further
-         validation";
+         symptoms are generating connectivity service impact, it
+             requires further validation";
        }
        identity problem-confirmed {
          base network-anomaly-validation;
@@ -777,15 +778,15 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
        identity analyzed {
          base network-anomaly-refinement;
          description
-         "The anomaly detection went through analysis to identify
 
 
 
-Riccobene, et al.        Expires 9 January 2025                [Page 14]
+Riccobene, et al.         Expires 22 April 2025                [Page 14]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
+         "The anomaly detection went through analysis to identify
          potential ways to further improve the detection process in
          for future anomalies";
        }
@@ -833,15 +834,15 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
                    }
                }
                case algorithm {
-                   leaf algorithm {
 
 
 
-Riccobene, et al.        Expires 9 January 2025                [Page 15]
+Riccobene, et al.         Expires 22 April 2025                [Page 15]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
+                   leaf algorithm {
                        type empty;
                    }
                }
@@ -866,7 +867,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
                type yang:uuid;
                mandatory true;
                description
-                   "Unique ID of the service (or monitored entity)";
+                   "Unique ID of the connectivity service (or monitored entity)";
            }
        }
 
@@ -889,15 +890,15 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
                }
                leaf state {
                    type identityref {
-                       base network-anomaly-state;
 
 
 
-Riccobene, et al.        Expires 9 January 2025                [Page 16]
+Riccobene, et al.         Expires 22 April 2025                [Page 16]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
+                       base network-anomaly-state;
                    }
                    mandatory true;
                    description "State of the anomaly.";
@@ -945,15 +946,15 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
                            type empty;
                        }
                    }
-                   case trend {
 
 
 
-Riccobene, et al.        Expires 9 January 2025                [Page 17]
+Riccobene, et al.         Expires 22 April 2025                [Page 17]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
+                   case trend {
                        leaf trend {
                            type empty;
                        }
@@ -974,7 +975,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
                    uses symptom-grouping;
                }
                container service {
-                   presence "It specifies the service (or the monitored entity) affected by the anomaly";
+                   presence "It specifies the connectivity service (or the monitored entity) affected by the anomaly";
                    uses service-grouping;
                }
            }
@@ -1004,10 +1005,9 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-
-Riccobene, et al.        Expires 9 January 2025                [Page 18]
+Riccobene, et al.         Expires 22 April 2025                [Page 18]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
       must allow different detection, validation and refinement
@@ -1032,15 +1032,15 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
    Each anomaly also include the symptom and the service container.
    These containers are placeholders to represent the information about
    the symptom (what is exaclty happening as anomalous behaviour) and
-   the service (what entity is affected by the anomaly).  In particular,
-   for what concerns the symptom, a concern score is defined, which has
-   the meaning of expressing how much the anomaly is impacting services.
-   Based on the intentions of the authors of this data model, the
-   correct use of the symptom and service containers is to augment the
-   model by providing a more accurate implementation of both of them.
-   An example of this is provided in
-   [I-D.netana-nmop-network-anomaly-semantics], where an augmentation of
-   symptom and service for L3VPN is proposed.
+   the connectivity service (what entity is affected by the anomaly).
+   In particular, for what concerns the symptom, a concern score is
+   defined, which has the meaning of expressing how much the anomaly is
+   impacting connectivity services.  Based on the intentions of the
+   authors of this data model, the correct use of the symptom and
+   service containers is to augment the model by providing a more
+   accurate implementation of both of them.  An example of this is
+   provided in [I-D.netana-nmop-network-anomaly-semantics], where an
+   augmentation of Symptom for connectivity services is proposed.
 
    Also a list of various actors that can be involved in the process is
    presented as following:
@@ -1061,15 +1061,15 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 9 January 2025                [Page 19]
+Riccobene, et al.         Expires 22 April 2025                [Page 19]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
    The data model that has been defined is used in two YANG modules: the
    relevant-state-notification and the ietf-relevant-state: the
    notification is primarily used by the Network Anomaly Detector, to
-   notify the "Alert and Problem Management System" and the "Post-mortem
+   notify the "Alarm and Problem Management System" and the "Post-mortem
    System" (see [I-D.netana-nmop-network-anomaly-architecture]); the
    container instead is used inside the Post-mortem system to exhance
    anomaly detection lables between the anomaly detection stages defined
@@ -1117,9 +1117,9 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 9 January 2025                [Page 20]
+Riccobene, et al.         Expires 22 April 2025                [Page 20]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
 11.  Acknowledgements
@@ -1173,9 +1173,9 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 9 January 2025                [Page 21]
+Riccobene, et al.         Expires 22 April 2025                [Page 21]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
    [RFC9232]  Song, H., Qin, F., Martinez-Julia, P., Ciavaglia, L., and
@@ -1229,9 +1229,9 @@ Authors' Addresses
 
 
 
-Riccobene, et al.        Expires 9 January 2025                [Page 22]
+Riccobene, et al.         Expires 22 April 2025                [Page 22]
 
-Internet-Draft          network-anomaly-lifecycle              July 2024
+Internet-Draft          network-anomaly-lifecycle           October 2024
 
 
    Alex Huang Feng
@@ -1285,4 +1285,4 @@ Internet-Draft          network-anomaly-lifecycle              July 2024
 
 
 
-Riccobene, et al.        Expires 9 January 2025                [Page 23]
+Riccobene, et al.         Expires 22 April 2025                [Page 23]
