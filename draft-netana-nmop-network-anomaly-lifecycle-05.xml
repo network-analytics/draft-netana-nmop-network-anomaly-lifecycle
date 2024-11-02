@@ -10,8 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<?rfc category="exp" docName="draft-netana-nmop-network-anomaly-lifecycle-04"
-     ipr="trust200902">
+<rfc category="exp" docName="draft-netana-nmop-network-anomaly-lifecycle-04" ipr="trust200902">
   <front>
     <title abbrev="network-anomaly-lifecycle">An Experiment: Network Anomaly
     Lifecycle</title>
@@ -488,7 +487,7 @@ Adjustments |          +-------------+          | Symptoms
       The lifecycle begins with the detector notifying anomalies 
       to the "Alarm and Problem Management System" and to 
       the "Post-mortem System" according to 
-      (see <xref target="I-D.netana-nmop-network-anomaly-architecture"/>).
+      (see <xref target="I-D.ietf-nmop-network-anomaly-architecture"/>).
       In this case the Post-mortem system is identified as the 
       Label Store. Once the notification arrives to the Label Store,
       the anomaly label is persisted.
@@ -508,22 +507,30 @@ Adjustments |          +-------------+          | Symptoms
       * a YANG data model to the define the interrogation (and retrieval) 
       of the labels from the label store.
       </t>
+    </section>
 
     <section anchor="network_anomaly_state_machine"
              title="Network Anomaly State Machine">
-      <t>In the context of this document, from a network anomaly detection
-      point of view a network problem is defined as a collection of
-      interrelated Symptoms, as specified in <xref
-      target="I-D.netana-nmop-network-anomaly-semantics"/>.</t>
+      <t>
+        In the context of this document, from a network anomaly detection
+        point of view a network problem is defined as a collection of
+        interrelated Symptoms, as specified in <xref
+        target="I-D.netana-nmop-network-anomaly-semantics"/>.
+      </t>
 
-      <t>The understanding of a network problem can change over time.
-      Moreover, multiple actors are involved in the process of refining this
-      understanding in the different phases.</t>
+      <t>
+        The understanding of a network problem can change over time.
+        Moreover, multiple actors are involved in the process of refining this
+        understanding in the different phases.
+      </t>
 
-      <t>From this perspective, a problem can be refined according to the
-      following states (<xref target="state_machine"/>).</t>
+      <t>
+        From this perspective, a problem can be refined according to the
+        following states (<xref target="state_machine"/>).
+      </t>
 
-      <t><figure anchor="state_machine" title="Network Anomaly State Machine">
+      <t>
+        <figure anchor="state_machine" title="Network Anomaly State Machine">
           <artwork align="center"><![CDATA[
             
                                              +---------+
@@ -561,23 +568,25 @@ Adjustments |          +-------------+          | Symptoms
 +-------Refinement------+
             
           ]]></artwork>
-        </figure></t>
+        </figure>
+      </t>
 
-        <t>
+      <t>
         The knowledge gained at each stage is codified as a list of
         anomaly labels that can be stored on a Label Store (
           see <xref target="Implementation-Antagonist"/> for a reference). 
-        </t>
-      </section>
+      </t>
+    </section>
 
-      <section anchor="network_anomaly_data model"
-               title="Network Anomaly Data Model">
-        <section anchor="network-anomaly-model-tree"
-                title="Overview of the Data Model for the Relevant 
+    <section anchor="network_anomaly_data model" 
+        title="Network Anomaly Data Model">
+      <section anchor="network-anomaly-model-tree" 
+          title="Overview of the Data Model for the Relevant 
                 State and all the related entities">
-          <figure anchor="ietf-relevant-state-tree"
-                  title="YANG tree diagram for ietf-relevant-state">
-            <artwork align="center"><![CDATA[
+        <figure anchor="ietf-relevant-state-tree"
+            title="YANG tree diagram for ietf-relevant-state">
+          <artwork align="center">
+            <![CDATA[
             module: ietf-relevant-state
               +--rw relevant-state
                 +--ro id             yang:uuid
@@ -656,12 +665,14 @@ Adjustments |          +-------------+          | Symptoms
                       |  +--ro concern-score    score
                       +--ro service!
                         +--ro id    yang:uuid            
-            ]]></artwork>
-          </figure>
+            ]]>
+          </artwork>
+        </figure>
 
-          <figure anchor="ietf-relevant-state-module"
+        <figure anchor="ietf-relevant-state-module"
                   title="YANG module for ietf-relevant-state">
-            <artwork><![CDATA[
+          <artwork>
+            <![CDATA[
   <CODE BEGINS> file "ietf-relevant-state@2024-10-18.yang"
   module ietf-relevant-state {
     yang-version 1.1;
@@ -961,8 +972,9 @@ Adjustments |          +-------------+          | Symptoms
         uses anomaly-grouping;
       }
     }
-  <CODE ENDS>]]></artwork>
-          </figure>
+  <CODE ENDS>]]>
+          </artwork>
+        </figure>
 
         <t>
           The data model provides support for "human-in-the-loop", allowing 
@@ -1049,13 +1061,15 @@ Adjustments |          +-------------+          | Symptoms
         detection stages defined above (validation, refinement, detection).
         </t>
 
-        </section>
       </section>
+    </section>
 
     <section anchor="Implementation" title="Implementation status">
-      <t>This section provides pointers to existing open source
-      implementations of this draft. Note to the RFC-editor: Please remove
-      this before publishing.</t>
+      <t>
+        This section provides pointers to existing open source
+        implementations of this draft. Note to the RFC-editor: Please remove
+        this before publishing.
+      </t>
 
       <section anchor="Implementation-Antagonist" title="Antagonist">
         <t>An open-source implementation for this draft is called AnTagOnIst
@@ -1119,11 +1133,13 @@ Adjustments |          +-------------+          | Symptoms
 
       <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.9232.xml"?>
 
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.9543.xml"?>
+
       <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.netana-nmop-network-anomaly-semantics.xml"?>
 
       <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-nmop-terminology.xml"?>
 
-      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.netana-nmop-network-anomaly-architecture.xml"?>
+      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-nmop-network-anomaly-architecture.xml"?>
 
       <reference anchor="Antagonist"
                  target="https://github.com/vriccobene/antagonist">
@@ -1145,4 +1161,5 @@ Adjustments |          +-------------+          | Symptoms
       </reference>
     </references>
   </back>
+  
 </rfc>
