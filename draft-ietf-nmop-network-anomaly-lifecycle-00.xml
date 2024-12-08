@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="exp" docName="draft-ietf-nmop-network-anomaly-lifecycle-04" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-nmop-network-anomaly-lifecycle-00" ipr="trust200902">
   <front>
     <title abbrev="network-anomaly-lifecycle">An Experiment: Network Anomaly
     Lifecycle</title>

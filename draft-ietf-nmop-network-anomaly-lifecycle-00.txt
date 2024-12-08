@@ -14,7 +14,7 @@ Expires: 11 June 2025                                            T. Graf
 
 
                 An Experiment: Network Anomaly Lifecycle
-              draft-ietf-nmop-network-anomaly-lifecycle-04
+              draft-ietf-nmop-network-anomaly-lifecycle-00
 
 Abstract
 
