@@ -1,0 +1,1165 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?rfc toc="yes"?>
+<?rfc tocompact="yes"?>
+<?rfc tocdepth="2"?>
+<?rfc tocindent="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+<rfc category="exp" docName="draft-ietf-nmop-network-anomaly-lifecycle-04" ipr="trust200902">
+  <front>
+    <title abbrev="network-anomaly-lifecycle">An Experiment: Network Anomaly
+    Lifecycle</title>
+
+    <author fullname="Vincenzo Riccobene" initials="V." surname="Riccobene">
+      <organization>Huawei</organization>
+      <address>
+        <postal>
+          <street/>
+          <city>Dublin</city>
+
+          <region/>
+
+          <code/>
+
+          <country>Ireland</country>
+        </postal>
+
+        <phone/>
+
+        <facsimile/>
+
+        <email>vincenzo.riccobene@huawei-partners.com</email>
+
+        <uri/>
+      </address>
+    </author>
+
+    <author fullname="Antonio Roberto" initials="A." surname="Roberto">
+      <organization>Huawei</organization>
+
+      <address>
+        <postal>
+          <street/>
+
+          <city>Dublin</city>
+
+          <region/>
+
+          <code/>
+
+          <country>Ireland</country>
+        </postal>
+
+        <phone/>
+
+        <facsimile/>
+
+        <email>antonio.roberto@huawei.com</email>
+
+        <uri/>
+      </address>
+    </author>
+
+    <author fullname="Thomas Graf" initials="T" surname="Graf">
+      <organization>Swisscom</organization>
+
+      <address>
+        <postal>
+          <street>Binzring 17</street>
+
+          <city>Zurich</city>
+
+          <code>8045</code>
+
+          <country>Switzerland</country>
+        </postal>
+
+        <email>thomas.graf@swisscom.com</email>
+      </address>
+    </author>
+
+    <author fullname="Wanting Du" initials="W" surname="Du">
+      <organization>Swisscom</organization>
+
+      <address>
+        <postal>
+          <street>Binzring 17</street>
+
+          <city>Zurich</city>
+
+          <code>8045</code>
+
+          <country>Switzerland</country>
+        </postal>
+
+        <email>wanting.du@swisscom.com</email>
+      </address>
+    </author>
+
+    <author fullname="Alex Huang Feng" initials="A." surname="Huang Feng">
+      <organization>INSA-Lyon</organization>
+
+      <address>
+        <postal>
+          <street/>
+
+          <city>Lyon</city>
+
+          <region/>
+
+          <code/>
+
+          <country>France</country>
+        </postal>
+
+        <phone/>
+
+        <facsimile/>
+
+        <email>alex.huang-feng@insa-lyon.fr</email>
+
+        <uri/>
+      </address>
+    </author>
+
+    <date day="08" month="December" year="2024"/>
+
+    <area>Operations and Management</area>
+
+    <workgroup>NMOP</workgroup>
+
+    <abstract>
+      <t>Network Anomaly Detection is the act of detecting 
+      problems in the network. Accurately detect problems is 
+      very challenging for network operators in production networks. 
+      Good results require a lot of expertise and knowledge around both 
+      the implied network technologies and the connectivity services provided 
+      to customers, apart from a proper monitoring infrastructure. 
+      In order to facilitate network anomaly detection, novel techniques 
+      are being introduced, including programmatical, rule-based 
+      and AI-based, with the promise of improving scalability and the 
+      hope to keep a high detection accuracy. To guarantee acceptable 
+      results, the process needs to be properly designed, adopting 
+      well-defined stages to accurately collect evidence of anomalies,
+      validate their relevancy and improve the detection systems 
+      over time, iteratively.</t>
+
+      <t>This document describes a well-defined approach on managing 
+      the lifecycle process of a network anomaly detection system, 
+      spanning across the recording of its output and its iterative 
+      refinement, in order to facilitate network engineers
+      to interact with the network anomaly detection system, 
+      enable the "human-in-the-loop" 
+      paradigm and refine the detection abilities over time.       
+      The major contributions of this document are: the definition 
+      of three key stages of the lifecycle process, the definition 
+      of a state machine for each anomaly annotation on the system 
+      and the definition of YANG data models describing a 
+      comprehensive format for the anomaly labels, allowing a 
+      well-structured exchange of those between all the interested 
+      actors.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section anchor="discussion_venues" title="Discussion Venues">
+      <t>This note is to be removed before publishing as an RFC.</t>
+
+      <t>Discussion of this document takes place on the Network 
+      Management and Operations Area Working Group Working Group mailing list
+      (nmop@ietf.org), which is archived at
+      https://mailarchive.ietf.org/arch/browse/nmop/.</t>
+
+      <t>Source for this draft and an issue tracker can be found at
+      https://github.com/network-analytics/draft-netana-nmop-network-
+      anomaly-lifecycle.</t>
+    </section>
+
+    <section anchor="status" title="Status of this document">
+      <t>This document is experimental. The main goal of this document is to
+      propose an iterative lifecycle process to network anomaly detection by
+      proposing a data model for metadata to be addressed at different
+      lifecycle stages.</t>
+
+      <t>The experiment consists of verifying whether the approach is usable
+      in real use case scenarios to support proper refinement and adjustments
+      of network anomaly detection algorithms. The experiment can be deemed
+      successful if validated at least with an open-source implementation
+      successfully applied with real networks.</t>
+    </section>
+
+    <section anchor="Introduction" title="Introduction">
+      <t>
+      In <xref target="I-D.ietf-nmop-terminology"/> a network anomaly 
+      is defined as "an unusual or unexpected event or 
+      pattern in network data in the forwarding plane, control plane, 
+      or management plane that deviates from the normal, expected behavior".
+      </t>
+
+      <t>
+	    A network problem is defined as "a state regarded as undesirable 
+      and may require remedial action" (see <xref 
+      target="I-D.ietf-nmop-terminology"/>).
+      </t>
+
+      <t>
+	    The main objective of a network anomaly detection system 
+      is to identify Relevant States of the network  
+      (defined as states that have relevancy for network operators, 
+      according to 
+      <xref target="I-D.ietf-nmop-terminology"/> ), as those are states 
+      that could lead to problems or might be clear indications of problem 
+      already happening.
+      </t>
+
+      <t>
+      It is still remarkably difficult to gain 
+      a full understanding and a complete perspective of "if" and "how" 
+      a relevant state is actually an indication of a problem or it is just 
+      unexpected, but has no impact on services and end users. 
+      
+      Providers of solutions for network anomaly detection should aim 
+      at increasing accuracy, by minimizing false positives and 
+      false negatives.
+      Moreover, the behaviour of the network naturally changes over time, 
+      when more connectivity services are deployed, more customers on-boarded, 
+      devices are upgraded or replaced, and therefore it is almost 
+      impossible to identify anomaly detection techniquest that can 
+      keep working accurately over time, without changing the detection 
+      criterias (or methodologies) over time.
+      </t>
+
+      <t>
+      This opens up to the necessity of further validating notified relevant 
+      states to check if a detected symptom is actually
+      impacting connectivity services: this might require different actors 
+      (both human and algorithmic) to act during the process and refine 
+      their understanding across the network anomaly lifecycle.
+      </t>
+
+      <t>
+      Finally, once validation has happened, this might lead to refinements 
+      to the logic that is used by the detection, so that this process can 
+      improve the detection accuracy over time.
+      </t>
+
+      <t>
+      Performing network anomaly detection is a process that requires a
+      continuous learning and continuous improvement. Relevant states are
+      detected by aggregating and understanding Symptoms, then validated,
+      confirming that Symptoms actually impacted connectivity services 
+      impacting and eventually need to be further analyzed by performing 
+      postmortem analysis to identify any potential adjustment to improve the 
+      detection capability.
+      Each of these steps represents an opportunity to learn and refine the 
+      process, and since implementations of these steps might also be 
+      provided by different parties and/or products, this document also 
+      contributes a formal data model to capture and exchange Symptom 
+      information across the lifecycle.
+      </t>
+    </section>
+
+    <section anchor="notation" title="Terminology">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+      "OPTIONAL" in this document are to be interpreted as described in BCP 14
+      <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when,
+      they appear in all capitals, as shown here.</t>
+
+      <t>This document makes use of the terms defined in <xref
+      target="I-D.ietf-nmop-terminology"/>.</t>
+
+      <t><list style="symbols">
+          <t>State</t>
+
+          <t>Problem</t>
+
+          <t>Event</t>
+
+          <t>Alarm</t>
+
+          <t>Symptom</t>
+        </list></t>
+
+      <t>The following terms are used as defined in <xref
+      target="RFC9417"/>.</t>
+
+      <t><list style="symbols">
+          <t>Metric</t>
+
+          <t>Intent</t>
+        </list></t>
+
+      <t>The following terms are defined in this document.</t>
+
+      <t><list style="symbols">
+          <t>Annotator: Is a human or an algorithm which produces metadata by
+          describing anomalies with Symptoms.</t>
+
+          <t>False Positive: Is a detected anomaly which has been identified
+          during the postmortem to be not anomalous.</t>
+
+          <t>False Negative: Is anomalous but has not been identified by
+          the anomaly detection system.</t>
+        </list></t>
+    </section>
+
+    <section anchor="Defining_desired_states" title="Defining Desired States">
+      <t>The above definitions of network problem provide the scope for what
+      to be looking for when detecting network anomalies. Concepts like
+      "desirable state" and "required state" are introduced. This poses the
+      attention on a significant problem that network operators have to face:
+      the definition of what is to be considered "desirable" or "undesirable".
+      It is not always easy to detect if a network is operating in an
+      undesired state at a given point in time. To approach this, network
+      operators can rely on different methodologies, more or less
+      deterministic and more or less sensitive: on the one side, the
+      definition of intents (including Service Level Objectives and Service
+      Level Agreements) which approaches the problem top-down; on the other
+      side, the definition of Symptoms, by mean of solutions like <xref
+      target="RFC9417">SAIN</xref>, <xref target="RFC9418"/> and <xref
+      target="I-D.ietf-nmop-network-anomaly-architecture"/>, which
+      approaches the problem bottom-up. At the center of these approaches,
+      there are the so-called Symptoms, explaining what is
+      not working as expected in the network, sometimes also providing hints
+      towards issues and their causes.</t>
+
+      <t>One of the more deterministic approaches is to rely on Symptoms based
+      on measurable service-based KPIs, for example, by using Service Level
+      Indicators, Objectives and Agreements (<xref target="RFC9543"/>).
+      This is the case when rules on SLOs and SLIs are manually defined 
+      once and the used afterwards for detection at runtime.</t>
+
+      <t>However, defining SLOs in a "static way" can bring some 
+      challenges as well, related to the dynamic nature of networks 
+      and services.</t>
+
+      <t>Alternative methodologies rely on a more "relaxed" approach 
+      to detect symptoms and their impact to services as a way to 
+      generate analytical data out of operational data. 
+      For instance:</t>
+
+      <dl>
+        <dt>SAIN</dt>
+
+        <dd>introduces the definition and exposure of Symptoms as a mechanism
+        for detecting those concerning behaviors in more deterministic ways.
+        Moreover, the concept of "impact score" has been introduced by SAIN,
+        to indicate what is the expected degree of impact that a given Symptom
+        will have on the services relying on the related subservice to which
+        the Symptom is attached.</dd>
+      </dl>
+
+      <dl>
+        <dt>Daisy</dt>
+
+        <dd>introduces the concept of concern score to indicate what is the
+        degree of concern that a given Symptom could cause a degradation for a
+        connectivity service.</dd>
+      </dl>
+
+      <t>In general, defining boundaries between desirable vs. undesirable in
+      an accurate fashion requires continuous iterations and improvements
+      coming from all the stages of the network anomaly detection lifecycle,
+      by which network engineers can transfer what they learn through the
+      process into new Symptom definitions and, ultimately, into refinements
+      of the detection algorithms.</t>
+    </section>
+
+    <section anchor="lifecycle_network_anomaly"
+             title="Lifecycle of a Network Anomaly">
+      <t>The lifecycle of a network anomaly can be articulated in three
+      phases, structured as a loop: Detection, Validation, Refinement.</t>
+
+      <figure anchor="simplified_lifecycle"
+              title="Anomaly Detection Refinement Lifecycle">
+        <artwork align="center"><![CDATA[
+                       +-------------+
+            +--------> |  Detection  | ---------+
+Adjustments |          +-------------+          | Symptoms
+            |                                   |
+            |                                   v
+    +------------+                       +------------+
+    | Refinement |<--------------------- | Validation |
+    +------------+        Problem        +------------+
+                        Confirmation
+          
+        ]]></artwork>
+      </figure>
+
+      <t>Each of these phases can either be performed by a network expert or
+      an algorithm or complementing each other.</t>
+
+      <t>The network anomaly metadata is generated by an annotator, which can
+      be either a human expert or an algorithm. The annotator can produce the
+      metadata for a network anomaly, for each stage of the cycle and even
+      multiple versions for the same stage. In each version of the network
+      anomaly metadata, the annotator indicates the list of Symptoms that are
+      part of the network anomaly taken into account. The iterative process is
+      about the identification of the right set of Symptoms.</t>
+
+      <section anchor="network_anomaly_detection"
+               title="Network Anomaly Detection">
+        <t>The Network Anomaly Detection stage is about the continuous
+        monitoring of the network through Network Telemetry <xref
+        target="RFC9232"/> and the identification of Symptoms. One of the main
+        requirements that operator have on network anomaly detection systems
+        is the high accuracy. This means having a small number of false
+        negatives, Symptoms causing connectivity service impact are not missed,
+		and false positives, Symptoms that are actually innocuous are not
+		picked up.</t>
+
+        <t>As the detection stage is becoming more and more automated for
+        production networks, the identified Symptoms might point towards three
+        potential kinds of behaviors:</t>
+
+        <t>i. those that are surely corresponding to an impact on connectivity
+		services, (e.g. the breach of an SLO),</t>
+
+        <t>ii. those that will cause problems in the future (e.g. rising
+        trends on a timeseries metric hitting towards saturation),</t>
+
+        <t>iii. those or which the impact to connectivity services cannot be
+		confirmed (e.g. sudden increase/decrease of timeseries metrics,
+		anomalous amounts of log entries, etc.).</t>
+
+        <t>The first category requires immediate intervention (a.k.a. the
+        problem is "confirmed"), the second one provides pointers towards
+        early signs of an problem potentially happening in the near future
+        (a.k.a. the problem is "forecasted"), and the third one requires some
+        analysis to confirm if the detected Symptom requires any attention or
+        immediate intervention (a.k.a. the problem is "potential"). As part of
+        the iterative improvement required in this stage, one that is very
+        relevant is the gradual conversion of the third category into one of
+        the first two, which would make the network anomaly detection system
+        more deterministic. The main objective is to reduce uncertainty around
+        the raised alarms by refining the detection algorithms. This can be
+        achieved by either generating new Symptom definitions, adjusting the
+        weights of automated algorithms or other similar approaches.</t>
+      </section>
+
+      <section anchor="network_anomaly_validation"
+               title="Network Anomaly Validation">
+        <t>The key objective for the validation stage is clearly to decide if
+        the detected Symptoms are signaling a real problem (a.k.a. requires
+        action) or if they are to be treated as false positives (a.k.a.
+        suppressing the alarm). For those Symptoms surely having impact on
+        connectivity services, 100% confidence on the fact that a network
+		problem is happening can be assumed. For the other two categories,
+		"forecasted" and "potential", further analysis and validation is
+		required.</t>
+      </section>
+
+      <section anchor="network_anomaly_refinement"
+               title="Network Anomaly Refinement">
+        <t>After validation of a problem, the service provider performs
+        troubleshooting and resolution of the problem. Although the network
+        might be back in a desired state at this point, network operators can
+        perform detailed postmortem analysis of network problems with the
+        objective to identify useful adjustments to the prevention and
+        detection mechanisms (for instance improving or extending the
+        definition of SLIs and SLOs, refining concern/impact scores, etc.),
+        and improving the accuracy of the validation stage (e.g. automating
+        parts of the validation, implementing automated root cause analysis
+        and automation for remediation actions). In this stage of the
+        lifecycle it is assumed that the problem is under analysis.</t>
+
+        <t>After the adjustments are performed to the network anomaly
+        detection methods, the cycle starts again, by "replaying" the network
+        anomaly and checking if there is any measurable improvement in the
+        ability to detect problems by using the updated method.</t>
+      </section>
+    </section>
+
+    <section anchor="label_store" 
+      title="Introducing a Label Store for Network Anomaly labels">
+      <t>
+      The information that is produced at each stage needs to be 
+      persisted and retrieved to perform the network anomaly 
+      lifecycle.
+
+      The lifecycle begins with the detector notifying anomalies 
+      to the "Alarm and Problem Management System" and to 
+      the "Post-mortem System" according to 
+      (see <xref target="I-D.ietf-nmop-network-anomaly-architecture"/>).
+      In this case the Post-mortem system is identified as the 
+      Label Store. Once the notification arrives to the Label Store,
+      the anomaly label is persisted.
+      In the following stages (i.e. validation and refinement), the 
+      information about the labels are retrieved, reviewd, modified 
+      and persisted again, generating every time a new version of the 
+      same annotation, or tagging the annotation as irrelevant, if 
+      it would be necessary to remove it.
+      </t>
+
+      <t>
+      In the following sections, the following are defined:
+
+      * a state machine for a label
+      * a YANG data model for the notification sent by the Detector 
+      to the Label Store
+      * a YANG data model to the define the interrogation (and retrieval) 
+      of the labels from the label store.
+      </t>
+    </section>
+
+    <section anchor="network_anomaly_state_machine"
+             title="Network Anomaly State Machine">
+      <t>
+        In the context of this document, from a network anomaly detection
+        point of view a network problem is defined as a collection of
+        interrelated Symptoms, as specified in <xref
+        target="I-D.netana-nmop-network-anomaly-semantics"/>.
+      </t>
+
+      <t>
+        The understanding of a network problem can change over time.
+        Moreover, multiple actors are involved in the process of refining this
+        understanding in the different phases.
+      </t>
+
+      <t>
+        From this perspective, a problem can be refined according to the
+        following states (<xref target="state_machine"/>).
+      </t>
+
+      <t>
+        <figure anchor="state_machine" title="Network Anomaly State Machine">
+          <artwork align="center"><![CDATA[
+            
+                                             +---------+
+                                             | Initial |-----------------+
+                                             +---------+                 |
+                                                  |                      |
+                                            +-----+---------+            |
+                                   +--------|---------------|------+     |
+                                   | +------v-----+  +------v----+ |     |
+                                   | |  Problem   |  |  Problem  | |     |
+                             +---->| | Forecasted |  | Potential | |     |
+                             |     | +------------+  +-----------+ |     |
+                             |     +--------|--Detection---|-------+     |
+                             |              |              |             |
+        +-------+            |              +------- ----- +             |
+        | Final |            |                      |                    |
+        +---^---+            |                      |                    |
+            |                |                      |                    |
+            |                |                      v                    |
+            |                |     +-----------Validation------------+   |
++-----------------------+    |     |  +-----------+                  |   |
+|           |           |    |     |  |  Problem  |   |  Problem  |  |   |
+|  +-----------------+  |    |     |  | Discarded |   | Confirmed |<-|---+
+|  |    Detection    |  |    |     |  +-----|-----+   +-----------+  |
+|  |     Adjusted    |-------+     +---------------------------------+
+|  +--------^--------+  |                   |               |
+|           |           |                   |               |
+|           |           |               +---v---+           |
+|           |           |               | Final |           |
+|           |           |               +-------+           |
+| +---------|--------+  |                                   |
+| |     Problem      |  |                                   |
+| |     Analyzed     |<-|-----------------------------------+
+| +------------------+  |
++-------Refinement------+
+            
+          ]]></artwork>
+        </figure>
+      </t>
+
+      <t>
+        The knowledge gained at each stage is codified as a list of
+        anomaly labels that can be stored on a Label Store (
+          see <xref target="Implementation-Antagonist"/> for a reference). 
+      </t>
+    </section>
+
+    <section anchor="network_anomaly_data model" 
+        title="Network Anomaly Data Model">
+      <section anchor="network-anomaly-model-tree" 
+          title="Overview of the Data Model for the Relevant 
+                State and all the related entities">
+        <figure anchor="ietf-relevant-state-tree"
+            title="YANG tree diagram for ietf-relevant-state">
+          <artwork align="center">
+            <![CDATA[
+            module: ietf-relevant-state
+              +--rw relevant-state
+                +--ro id             yang:uuid
+                +--rw description?   string
+                +--rw start-time     yang:date-and-time
+                +--rw end-time?      yang:date-and-time
+                +--rw anomalies* [id version]
+                    +--rw id                         yang:uuid
+                    +--rw version                    yang:counter32
+                    +--rw state                      identityref
+                    +--rw description?               string
+                    +--rw start-time                 yang:date-and-time
+                    +--rw end-time?                  yang:date-and-time
+                    +--rw confidence-score           score
+                    +--rw (pattern)?
+                    |  +--:(drop)
+                    |  |  +--rw drop?                empty
+                    |  +--:(spike)
+                    |  |  +--rw spike?               empty
+                    |  +--:(mean-shift)
+                    |  |  +--rw mean-shift?          empty
+                    |  +--:(seasonality-shift)
+                    |  |  +--rw seasonality-shift?   empty
+                    |  +--:(trend)
+                    |  |  +--rw trend?               empty
+                    |  +--:(other)
+                    |     +--rw other?               string
+                    +--rw annotator!
+                    |  +--rw name               string
+                    |  +--rw (annotator-type)?
+                    |     +--:(human)
+                    |     |  +--rw human?       empty
+                    |     +--:(algorithm)
+                    |        +--rw algorithm?   empty
+                    +--rw symptom!
+                    |  +--rw id               yang:uuid
+                    |  +--rw concern-score    score
+                    +--rw service!
+                      +--rw id    yang:uuid
+
+              notifications:
+                +---n relevant-state-notification
+                  +--ro description?   string
+                  +--ro start-time     yang:date-and-time
+                  +--ro end-time?      yang:date-and-time
+                  +--ro anomalies* [id version]
+                      +--ro id                         yang:uuid
+                      +--ro version                    yang:counter32
+                      +--ro state                      identityref
+                      +--ro description?               string
+                      +--ro start-time                 yang:date-and-time
+                      +--ro end-time?                  yang:date-and-time
+                      +--ro confidence-score           score
+                      +--ro (pattern)?
+                      |  +--:(drop)
+                      |  |  +--ro drop?                empty
+                      |  +--:(spike)
+                      |  |  +--ro spike?               empty
+                      |  +--:(mean-shift)
+                      |  |  +--ro mean-shift?          empty
+                      |  +--:(seasonality-shift)
+                      |  |  +--ro seasonality-shift?   empty
+                      |  +--:(trend)
+                      |  |  +--ro trend?               empty
+                      |  +--:(other)
+                      |     +--ro other?               string
+                      +--ro annotator!
+                      |  +--ro name               string
+                      |  +--ro (annotator-type)?
+                      |     +--:(human)
+                      |     |  +--ro human?       empty
+                      |     +--:(algorithm)
+                      |        +--ro algorithm?   empty
+                      +--ro symptom!
+                      |  +--ro id               yang:uuid
+                      |  +--ro concern-score    score
+                      +--ro service!
+                        +--ro id    yang:uuid            
+            ]]>
+          </artwork>
+        </figure>
+
+        <figure anchor="ietf-relevant-state-module"
+                  title="YANG module for ietf-relevant-state">
+          <artwork>
+            <![CDATA[
+  <CODE BEGINS> file "ietf-relevant-state@2024-10-18.yang"
+  module ietf-relevant-state {
+    yang-version 1.1;
+    namespace "urn:ietf:params:xml:ns:yang:ietf-relevant-state";
+    prefix rsn;
+
+    import ietf-yang-types {
+      prefix yang;
+      reference "RFC 6991: Common YANG Data Types";
+    }
+
+    organization
+      "IETF NMOP Working Group";
+    contact
+      "WG Web:   <https://datatracker.ietf.org/wg/nmop/>
+      WG List:  <mailto:nmop@ietf.org>
+
+      Authors:  Vincenzo Riccobene
+                <mailto:vincenzo.riccobene@huawei-partners.com>
+                Antonio Roberto
+                <mailto:antonio.roberto@huawei.com>
+                Thomas Graf
+                <mailto:thomas.graf@swisscom.com>
+                Wanting Du
+                <mailto:wanting.du@swisscom.com>
+                Alex Huang Feng
+                <mailto:alex.huang-feng@insa-lyon.fr>";
+    description
+        "This module defines the relevant-state container and
+	    notifications to be used by a network anomaly detection
+	    system. The defined objects can be used to augment
+	    operational network collected observability data and 
+        analytical problem data equally. Describing the relevant-state
+		of observed symptoms.
+
+        Copyright (c) 2024 IETF Trust and the persons identified as
+        authors of the code.  All rights reserved.
+
+        Redistribution and use in source and binary forms, with or
+        without modification, is permitted pursuant to, and subject
+        to the license terms contained in, the Revised BSD License
+        set forth in Section 4.c of the IETF Trust's Legal Provisions
+        Relating to IETF Documents
+        (https://trustee.ietf.org/license-info).
+        
+        This version of this YANG module is part of RFC XXXX; see the RFC
+        itself for full legal notices.";
+
+    revision 2024-11-02 {
+        description
+          "Initial version";
+        reference
+          "RFC XXX: Semantic Metadata Annotation for Network Anomaly Detection";
+    }
+
+    typedef score {
+        type uint8 {
+            range "0 .. 100";
+        }
+    }
+    identity network-anomaly-state {
+		  description
+		    "Base identity for representing the state of the network anomaly";
+    }
+    identity detection {
+      base network-anomaly-state;
+      description
+        "A problem reached detection state";
+    }
+    identity validation {
+      base network-anomaly-state;
+      description
+        "A problem reached validation state";
+    }
+    identity refinement {
+      base network-anomaly-state;
+      description
+        "A problem reached refinement state";
+    }
+      identity problem-forecasted {
+      base detection;
+      description
+        "A problem has been forecasted, as it is expected that
+        the indicated list of symptoms will impact a service
+        in the near future";
+    }
+    identity problem-potential {
+      base detection;
+      description
+        "A problem has been detected with a confidence
+        lower than 100%. In order to confirm that this set of
+        symptoms are generating service impact, it requires further
+        validation";
+    }
+    identity problem-confirmed {
+      base validation;
+      description
+        "After validation, the problem has been confirmed";
+    }
+    identity discarded {
+      base validation;
+      description
+        "After validation, the network anomaly has been
+        discarded, as there is no evindence that it is causing an
+        problem";
+    }
+    identity analyzed {
+      base refinement;
+      description
+        "The anomaly detection went through analysis to identify
+        potential ways to further improve the detection process in
+        for future anomalies";
+    }
+    identity adjusted {
+      base refinement;
+      description
+        "The network anomaly has been solved and analysed.
+        No further action is required.";
+    }
+
+    identity pattern {
+      description 
+        "Pattern identified by the Detector.";
+    }
+    identity drop {
+        description
+          "Drop of the value";
+    }
+    identity spike {
+        description
+          "Spike of the value";
+    }
+    identity mean-shift {
+        description
+            "Shift of the mean of the value";
+    }
+    identity seasonality-shift {
+        description 
+          "Shift of the seasonality of the value";
+    }
+    identity trend {
+        description
+            "Trend exhibited by the value";
+    }
+    identity other {
+        description
+          "Any other type of pattern";
+    }
+
+    grouping relevant-state-grouping {
+        leaf description {
+            type string;
+            description
+                "Textual description of the fault";
+        }
+        leaf start-time {
+            type yang:date-and-time;
+            mandatory true;
+            description
+                "Date and time indicating the beginning of the fault";
+        }
+        leaf end-time {
+            type yang:date-and-time;
+            description
+                "Date and time indicating the end of the fault";
+        }
+    }
+
+    grouping annotator-grouping {
+        leaf name {
+            mandatory true;
+            type string;
+            description 
+                "Name of the annotator (either user or algorithm)
+                If it is an algorithm, the name can also include 
+                the version.";
+        }
+        choice annotator-type {
+            case human {
+                leaf human {
+                    description 
+                        "This option is used if a human provided the label";
+                    type empty;
+                }
+            }
+            case algorithm {
+                leaf algorithm {
+                    description 
+                        "This option is used if a software provided the label";
+                    type empty;
+                }
+            }
+        }
+    }
+
+    grouping anomaly-grouping {
+        list anomalies {
+            key "id version";
+            leaf id {
+                type yang:uuid;
+                description
+                    "Unique ID of the anomaly";
+            }
+            leaf version {
+                type yang:counter32;
+                description
+                        "Version of the problem metadata object.
+                        It allows multiple versions of the metadata to be
+                        generated in order to support the definition of
+                        multiple problem objects from the same source to
+                        facilitate improvements overtime";
+            }
+            leaf state {
+                type identityref {
+                    base network-anomaly-state;
+                }
+                mandatory true;
+                description "State of the anomaly";
+            }		   
+            leaf description {
+                type string;
+                description
+                    "Textual description of the anomaly";
+            }
+            leaf start-time {
+                type yang:date-and-time;
+                mandatory true;
+                description
+                    "Date and time indicating the beginning of the anomaly
+                    A detection system will alwasys set a start time, 
+                    as it represents the moment in time from which the 
+                    behaviour of the monitored system is considered 
+                    to be anomalous with respect its expected behaviour";
+            }
+            leaf end-time {
+                type yang:date-and-time;
+                description
+                    "Date and time indicating the end of the anomaly.
+                    This field is indicated as non mandatory, as it could 
+                    be the case that the anomaly is still happening at the 
+                    time of generation of the label";
+            }
+            leaf confidence-score {
+                type score;
+                mandatory true;
+            }
+            leaf identityref {
+                base pattern;
+            }
+            container annotator {
+                presence "It specifies an annotator for the anomaly";
+                uses annotator-grouping;
+            }
+            container symptom {
+                presence "It specifies the symptom for the anomaly";
+                leaf id {
+                    type yang:uuid;
+                    mandatory true;
+                    description
+                        "Unique ID of the symptom type";
+                }
+                leaf concern-score {
+                    type score;
+                    mandatory true;
+                }
+            }
+            container service {
+                presence "It specifies the service (or the monitored entity) affected by the anomaly";
+                leaf id {
+                    type yang:uuid;
+                    mandatory true;
+                    description
+                        "Unique ID of the service (or monitored entity)
+                        This is supposed to be augmented by other modules
+                        that want to define the service affected by the 
+                        anomaly";
+                }
+            }
+        }
+    }
+
+    notification relevant-state-notification {
+        uses relevant-state-grouping;
+        uses anomaly-grouping;
+    }
+    
+    container relevant-state {
+        leaf id {
+            mandatory true;
+            type yang:uuid;
+            config false;
+            description
+                "Unique ID of the relevant state
+                It is unique in the scope of the Label Store";
+        }
+        uses relevant-state-grouping;
+        uses anomaly-grouping;
+      }
+    }
+  <CODE ENDS>]]>
+          </artwork>
+        </figure>
+
+        <t>
+          The data model provides support for "human-in-the-loop", allowing 
+          for network experts to validate and adjust network anomaly 
+          labels and detection systems. An example of human-in-the-loop 
+          has been demonstrated with Antagonist <xref
+          target="Antagonist"/>, by building a User Interface that 
+          interacts with an API based on this data model.
+        </t>
+        <t>
+          The base for the modules is the relevant-state data model.
+          Relevant state is at the root of the data model, with its parameters 
+          (ID, description, start-time, end-time) and a collection of anomalies.
+          This allows the relevant state to be considered as a container of 
+          anomalies.
+        </t>
+        <t>
+          Each anomaly is characterized by some intrinsic fields (such as 
+          id, version, state, description, start-time, end-time, 
+          confidence score and pattern)
+          Particularly the confidence score is a measure of how confident 
+          was the detector in considering the given anomaly as an anomalous 
+          behaviour.
+        </t>
+        <t>
+          Each anomaly also include the symptom and the service container. 
+          These containers are placeholders to represent the information 
+          about the symptom (what is exaclty happening as anomalous behaviour)
+          and the connectivity service (what entity is affected by the anomaly).
+          In particular, for what concerns the symptom, a concern score is 
+          defined as necessary field, which has the meaning of expressing how 
+          much the anomaly is impacting connectivity services.
+
+          In case additional information related to the symptom and to 
+          the service need to be provided, augmentation would be the 
+          appropriate intended mechanism to do so.
+
+          An example of this is provided in 
+          <xref target="I-D.netana-nmop-network-anomaly-semantics"/>, 
+          where an augmentation of both symptom and service is provided 
+          for the specific case of anoamly labels related to 
+          connectivity services.
+        </t>
+        
+        <t>
+        Also a list of various actors that can be involved in the process 
+        is presented as following:
+          <dl>
+            <dt>In the detection stage:</dt>
+              <dd>
+                the detectors can be Network Engineers 
+                and/or Automatic detectors 
+                (including Rule-based detectors and ML-based detectors)
+              </dd>
+          </dl>
+
+          <dl>
+            <dt>In the validation stage:</dt>
+            <dd>
+              the validators can be Network Engineers 
+              manually validating the labels
+            </dd>
+          </dl>
+
+          <dl>
+            <dt>In the refinement stage:</dt>
+            <dd>
+              the refiners can be Data Scientists and/or Automatic 
+              Refiners (including systems that automatically refine 
+              the detection systems, based on the validated labels).
+            </dd>
+          </dl>
+        </t>
+        
+        <t>
+        The data model that has been defined is used in two YANG modules:
+        the relevant-state-notification and the ietf-relevant-state: 
+        the notification is primarily used by the Network Anomaly Detector, 
+        to notify the "Alarm and Problem Management System" 
+        and the "Post-mortem System" 
+        (see <xref target="I-D.ietf-nmop-network-anomaly-architecture"/>); 
+        the container instead is used inside the Post-mortem system 
+        to exhance anomaly  detection lables between the anomaly 
+        detection stages defined above (validation, refinement, detection).
+        </t>
+
+      </section>
+    </section>
+
+    <section anchor="Implementation" title="Implementation status">
+      <t>
+        This section provides pointers to existing open source
+        implementations of this draft. Note to the RFC-editor: Please remove
+        this before publishing.
+      </t>
+
+      <section anchor="Implementation-Antagonist" title="Antagonist">
+        <t>An open-source implementation for this draft is called AnTagOnIst
+        (Anomaly Tagging On hIstorical data), and it has been implemented in
+        order to validate the application of the YANG model defined in this
+        draft. Antagonist provides visual support for two important use cases
+        in the scope of this document: <ul>
+            <li>the generation of a ground truth in relation to symptoms and
+            problems in timeseries data</li>
+
+            <li>the visual validation of results produced by automated network
+            anomaly detection tools.</li>
+          </ul> The open-source code can be found here: <xref
+        target="Antagonist"/></t>
+
+        <t>
+        As part of the experiment that was conducted with AnTagOnIst, 
+        Some main Use Case scenarios have been validated so far:
+        
+        <list>
+          <t>
+            Exposure of a GUI for human validation of the labels.
+          </t>
+          <t>
+            Integration with Rule Based anomaly detection systems. 
+            In particular the integration with SAIN and 
+            Cosmos Bright Lights is ongoing.
+          </t>
+          <t>
+            Integration with ML-based detection systems.
+          </t>
+        </list>
+        </t>
+      </section>
+    </section>
+
+    <section anchor="Security" title="Security Considerations">
+      <t>The security considerations will have to be updated according to
+      "https://wiki.ietf.org/group/ops/yang-security-guidelines".</t>
+    </section>
+
+    <section anchor="Acknowledgements" title="Acknowledgements">
+      <t>
+        The authors would like to thank xxx for their review and valuable
+        comments.
+      </t>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
+
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml"?>
+
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.8340.xml"?>
+
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.9417.xml"?>
+
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.9418.xml"?>
+
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.9232.xml"?>
+
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.9543.xml"?>
+
+      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.netana-nmop-network-anomaly-semantics.xml"?>
+
+      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-nmop-terminology.xml"?>
+
+      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-nmop-network-anomaly-architecture.xml"?>
+
+      <reference anchor="Antagonist"
+                 target="https://github.com/vriccobene/antagonist">
+        <front>
+          <title>Antagonist: Anomaly tagging on historical data</title>
+
+          <author fullname="Vincenzo Riccobene" initials="V."
+                  surname="Riccobene"/>
+
+          <author fullname="Antonio Roberto" initials="A." surname="Roberto"/>
+
+          <author fullname="Wanting Du" initials="W." surname="Du"/>
+
+          <author fullname="Thomas Graf" initials="T." surname="Graf"/>
+
+          <author fullname="Alex Huang Feng" initials="H."
+                  surname="Huang Feng"/>
+        </front>
+      </reference>
+    </references>
+  </back>
+  
+</rfc>
