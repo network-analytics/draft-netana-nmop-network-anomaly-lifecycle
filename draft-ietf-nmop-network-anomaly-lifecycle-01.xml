@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="exp" docName="draft-ietf-nmop-network-anomaly-lifecycle-00" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-nmop-network-anomaly-lifecycle-01" ipr="trust200902">
   <front>
     <title abbrev="network-anomaly-lifecycle">An Experiment: Network Anomaly
     Lifecycle</title>
@@ -127,7 +127,7 @@
       </address>
     </author>
 
-    <date day="08" month="December" year="2024"/>
+    <date day="28" month="February" year="2025"/>
 
     <area>Operations and Management</area>
 
@@ -608,84 +608,62 @@ Adjustments |          +-------------+          | Symptoms
             title="YANG tree diagram for ietf-relevant-state">
           <artwork align="center">
             <![CDATA[
-            module: ietf-relevant-state
-              +--rw relevant-state
-                +--ro id             yang:uuid
-                +--rw description?   string
-                +--rw start-time     yang:date-and-time
-                +--rw end-time?      yang:date-and-time
-                +--rw anomalies* [id version]
-                    +--rw id                         yang:uuid
-                    +--rw version                    yang:counter32
-                    +--rw state                      identityref
-                    +--rw description?               string
-                    +--rw start-time                 yang:date-and-time
-                    +--rw end-time?                  yang:date-and-time
-                    +--rw confidence-score           score
-                    +--rw (pattern)?
-                    |  +--:(drop)
-                    |  |  +--rw drop?                empty
-                    |  +--:(spike)
-                    |  |  +--rw spike?               empty
-                    |  +--:(mean-shift)
-                    |  |  +--rw mean-shift?          empty
-                    |  +--:(seasonality-shift)
-                    |  |  +--rw seasonality-shift?   empty
-                    |  +--:(trend)
-                    |  |  +--rw trend?               empty
-                    |  +--:(other)
-                    |     +--rw other?               string
-                    +--rw annotator!
-                    |  +--rw name               string
-                    |  +--rw (annotator-type)?
-                    |     +--:(human)
-                    |     |  +--rw human?       empty
-                    |     +--:(algorithm)
-                    |        +--rw algorithm?   empty
-                    +--rw symptom!
-                    |  +--rw id               yang:uuid
-                    |  +--rw concern-score    score
-                    +--rw service!
-                      +--rw id    yang:uuid
+module: ietf-relevant-state
+  +--rw relevant-state
+     +--ro id             yang:uuid
+     +--rw description?   string
+     +--rw start-time     yang:date-and-time
+     +--rw end-time?      yang:date-and-time
+     +--rw anomalies* [id version]
+        +--rw id                  yang:uuid
+        +--rw uri?                inet:uri
+        +--rw version             yang:counter32
+        +--rw state               identityref
+        +--rw description?        string
+        +--rw start-time          yang:date-and-time
+        +--rw end-time?           yang:date-and-time
+        +--rw confidence-score    score
+        +--rw pattern?            identityref
+        +--rw annotator!
+        |  +--rw name               string
+        |  +--rw (annotator-type)?
+        |     +--:(human)
+        |     |  +--rw human?       empty
+        |     +--:(algorithm)
+        |        +--rw algorithm?   empty
+        +--rw symptom!
+        |  +--rw id               yang:uuid
+        |  +--rw concern-score    score
+        +--rw service!
+           +--rw id    yang:uuid
 
-              notifications:
-                +---n relevant-state-notification
-                  +--ro description?   string
-                  +--ro start-time     yang:date-and-time
-                  +--ro end-time?      yang:date-and-time
-                  +--ro anomalies* [id version]
-                      +--ro id                         yang:uuid
-                      +--ro version                    yang:counter32
-                      +--ro state                      identityref
-                      +--ro description?               string
-                      +--ro start-time                 yang:date-and-time
-                      +--ro end-time?                  yang:date-and-time
-                      +--ro confidence-score           score
-                      +--ro (pattern)?
-                      |  +--:(drop)
-                      |  |  +--ro drop?                empty
-                      |  +--:(spike)
-                      |  |  +--ro spike?               empty
-                      |  +--:(mean-shift)
-                      |  |  +--ro mean-shift?          empty
-                      |  +--:(seasonality-shift)
-                      |  |  +--ro seasonality-shift?   empty
-                      |  +--:(trend)
-                      |  |  +--ro trend?               empty
-                      |  +--:(other)
-                      |     +--ro other?               string
-                      +--ro annotator!
-                      |  +--ro name               string
-                      |  +--ro (annotator-type)?
-                      |     +--:(human)
-                      |     |  +--ro human?       empty
-                      |     +--:(algorithm)
-                      |        +--ro algorithm?   empty
-                      +--ro symptom!
-                      |  +--ro id               yang:uuid
-                      |  +--ro concern-score    score
-                      +--ro service!
-                        +--ro id    yang:uuid            
+  notifications:
+    +---n relevant-state-notification
+       +--ro description?   string
+       +--ro start-time     yang:date-and-time
+       +--ro end-time?      yang:date-and-time
+       +--ro anomalies* [id version]
+          +--ro id                  yang:uuid
+          +--ro uri?                inet:uri
+          +--ro version             yang:counter32
+          +--ro state               identityref
+          +--ro description?        string
+          +--ro start-time          yang:date-and-time
+          +--ro end-time?           yang:date-and-time
+          +--ro confidence-score    score
+          +--ro pattern?            identityref
+          +--ro annotator!
+          |  +--ro name               string
+          |  +--ro (annotator-type)?
+          |     +--:(human)
+          |     |  +--ro human?       empty
+          |     +--:(algorithm)
+          |        +--ro algorithm?   empty
+          +--ro symptom!
+          |  +--ro id               yang:uuid
+          |  +--ro concern-score    score
+          +--ro service!
+             +--ro id    yang:uuid  
             ]]>
           </artwork>
         </figure>
@@ -694,7 +672,7 @@ Adjustments |          +-------------+          | Symptoms
                   title="YANG module for ietf-relevant-state">
           <artwork>
             <![CDATA[
-  <CODE BEGINS> file "ietf-relevant-state@2024-10-18.yang"
+  <CODE BEGINS> file "ietf-relevant-state@2025-02-26.yang"
   module ietf-relevant-state {
     yang-version 1.1;
     namespace "urn:ietf:params:xml:ns:yang:ietf-relevant-state";
@@ -702,6 +680,11 @@ Adjustments |          +-------------+          | Symptoms
 
     import ietf-yang-types {
       prefix yang;
+      reference "RFC 6021: Common YANG Data Types";
+    }
+
+    import ietf-inet-types {
+      prefix inet;
       reference "RFC 6991: Common YANG Data Types";
     }
 
@@ -904,6 +887,11 @@ Adjustments |          +-------------+          | Symptoms
                 type yang:uuid;
                 description
                     "Unique ID of the anomaly";
+            }
+            leaf uri {
+                type inet:uri;
+                description
+                    "URI to viusalize the analytical metrics of the anomaly.";
             }
             leaf version {
                 type yang:counter32;
