@@ -5,12 +5,12 @@
 NMOP                                                        V. Riccobene
 Internet-Draft                                                A. Roberto
 Intended status: Experimental                                     Huawei
-Expires: 1 September 2025                                        T. Graf
+Expires: 4 September 2025                                        T. Graf
                                                                    W. Du
                                                                 Swisscom
                                                            A. Huang Feng
                                                                INSA-Lyon
-                                                        28 February 2025
+                                                            3 March 2025
 
 
                 An Experiment: Network Anomaly Lifecycle
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Riccobene, et al.       Expires 1 September 2025                [Page 1]
+Riccobene, et al.       Expires 4 September 2025                [Page 1]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
    Internet-Drafts are working documents of the Internet Engineering
@@ -68,7 +68,7 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 September 2025.
+   This Internet-Draft will expire on 4 September 2025.
 
 Copyright Notice
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Riccobene, et al.       Expires 1 September 2025                [Page 2]
+Riccobene, et al.       Expires 4 September 2025                [Page 2]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
 1.  Discussion Venues
@@ -165,9 +165,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025                [Page 3]
+Riccobene, et al.       Expires 4 September 2025                [Page 3]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
    Symptom:  An observable Characteristic, State, Event, or Condition
@@ -221,9 +221,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025                [Page 4]
+Riccobene, et al.       Expires 4 September 2025                [Page 4]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
    This document makes use of the terms defined in
@@ -277,9 +277,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025                [Page 5]
+Riccobene, et al.       Expires 4 September 2025                [Page 5]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
    network, sometimes also providing hints towards issues and their
@@ -333,9 +333,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025                [Page 6]
+Riccobene, et al.       Expires 4 September 2025                [Page 6]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
                                +-------------+
@@ -389,9 +389,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025                [Page 7]
+Riccobene, et al.       Expires 4 September 2025                [Page 7]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
    iii. those or which the impact to connectivity services cannot be
@@ -445,9 +445,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025                [Page 8]
+Riccobene, et al.       Expires 4 September 2025                [Page 8]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
 7.  Introducing a Label Store for Network Anomaly labels
@@ -501,9 +501,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025                [Page 9]
+Riccobene, et al.       Expires 4 September 2025                [Page 9]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
                                              +---------+
@@ -557,14 +557,14 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 10]
+Riccobene, et al.       Expires 4 September 2025               [Page 10]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
           module: ietf-relevant-state
             +--rw relevant-state
-               +--ro id             yang:uuid
+               +--rw id             yang:uuid
                +--rw description?   string
                +--rw start-time     yang:date-and-time
                +--rw end-time?      yang:date-and-time
@@ -613,9 +613,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 11]
+Riccobene, et al.       Expires 4 September 2025               [Page 11]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
                     |     |  +--ro human?       empty
@@ -669,9 +669,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 12]
+Riccobene, et al.       Expires 4 September 2025               [Page 12]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
                    of observed symptoms.
@@ -725,9 +725,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 13]
+Riccobene, et al.       Expires 4 September 2025               [Page 13]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
          base detection;
@@ -781,9 +781,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 14]
+Riccobene, et al.       Expires 4 September 2025               [Page 14]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
        identity spike {
@@ -837,9 +837,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 15]
+Riccobene, et al.       Expires 4 September 2025               [Page 15]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
                description
@@ -893,9 +893,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 16]
+Riccobene, et al.       Expires 4 September 2025               [Page 16]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
                            facilitate improvements overtime";
@@ -949,9 +949,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 17]
+Riccobene, et al.       Expires 4 September 2025               [Page 17]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
                container annotator {
@@ -1005,9 +1005,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 18]
+Riccobene, et al.       Expires 4 September 2025               [Page 18]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
        }
@@ -1028,7 +1028,6 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
                happening";
            leaf id {
                type yang:uuid;
-               config false;
                mandatory true;
                description
                    "Unique ID of the relevant state
@@ -1061,9 +1060,10 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 19]
+
+Riccobene, et al.       Expires 4 September 2025               [Page 19]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
    Each anomaly is characterized by some intrinsic fields (such as id,
@@ -1117,9 +1117,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 20]
+Riccobene, et al.       Expires 4 September 2025               [Page 20]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
 10.1.  Antagonist
@@ -1173,9 +1173,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 21]
+Riccobene, et al.       Expires 4 September 2025               [Page 21]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
               Internet-Draft, draft-ietf-nmop-network-anomaly-
@@ -1229,9 +1229,9 @@ Internet-Draft          network-anomaly-lifecycle          February 2025
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 22]
+Riccobene, et al.       Expires 4 September 2025               [Page 22]
 
-Internet-Draft          network-anomaly-lifecycle          February 2025
+Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
    [RFC9543]  Farrel, A., Ed., Drake, J., Ed., Rokui, R., Homma, S.,
@@ -1285,4 +1285,4 @@ Authors' Addresses
 
 
 
-Riccobene, et al.       Expires 1 September 2025               [Page 23]
+Riccobene, et al.       Expires 4 September 2025               [Page 23]
