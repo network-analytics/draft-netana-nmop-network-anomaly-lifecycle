@@ -5,15 +5,15 @@
 NMOP                                                        V. Riccobene
 Internet-Draft                                                    Huawei
 Intended status: Experimental                                    T. Graf
-Expires: 4 September 2025                                          W. Du
+Expires: 28 September 2025                                         W. Du
                                                                 Swisscom
                                                            A. Huang Feng
                                                                INSA-Lyon
-                                                            3 March 2025
+                                                           27 March 2025
 
 
                 An Experiment: Network Anomaly Lifecycle
-              draft-ietf-nmop-network-anomaly-lifecycle-02
+              draft-ietf-nmop-network-anomaly-lifecycle-03
 
 Abstract
 
@@ -53,7 +53,7 @@ Discussion Venues
 
 
 
-Riccobene, et al.       Expires 4 September 2025                [Page 1]
+Riccobene, et al.       Expires 28 September 2025               [Page 1]
 
 Internet-Draft          network-anomaly-lifecycle             March 2025
 
@@ -82,7 +82,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2025.
+   This Internet-Draft will expire on 28 September 2025.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Riccobene, et al.       Expires 4 September 2025                [Page 2]
+Riccobene, et al.       Expires 28 September 2025               [Page 2]
 
 Internet-Draft          network-anomaly-lifecycle             March 2025
 
@@ -123,7 +123,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
            the related entities  . . . . . . . . . . . . . . . . . .  12
      8.2.  YANG Module . . . . . . . . . . . . . . . . . . . . . . .  13
    9.  Implementation status . . . . . . . . . . . . . . . . . . . .  21
-     9.1.  Antagonist  . . . . . . . . . . . . . . . . . . . . . . .  21
+     9.1.  Antagonist  . . . . . . . . . . . . . . . . . . . . . . .  22
    10. Security Considerations . . . . . . . . . . . . . . . . . . .  22
    11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  22
    12. Normative References  . . . . . . . . . . . . . . . . . . . .  22
@@ -165,7 +165,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
 
-Riccobene, et al.       Expires 4 September 2025                [Page 3]
+Riccobene, et al.       Expires 28 September 2025               [Page 3]
 
 Internet-Draft          network-anomaly-lifecycle             March 2025
 
@@ -221,7 +221,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
 
-Riccobene, et al.       Expires 4 September 2025                [Page 4]
+Riccobene, et al.       Expires 28 September 2025               [Page 4]
 
 Internet-Draft          network-anomaly-lifecycle             March 2025
 
@@ -277,7 +277,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
 
-Riccobene, et al.       Expires 4 September 2025                [Page 5]
+Riccobene, et al.       Expires 28 September 2025               [Page 5]
 
 Internet-Draft          network-anomaly-lifecycle             March 2025
 
@@ -333,7 +333,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
 
-Riccobene, et al.       Expires 4 September 2025                [Page 6]
+Riccobene, et al.       Expires 28 September 2025               [Page 6]
 
 Internet-Draft          network-anomaly-lifecycle             March 2025
 
@@ -389,7 +389,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
 
-Riccobene, et al.       Expires 4 September 2025                [Page 7]
+Riccobene, et al.       Expires 28 September 2025               [Page 7]
 
 Internet-Draft          network-anomaly-lifecycle             March 2025
 
@@ -445,7 +445,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
 
-Riccobene, et al.       Expires 4 September 2025                [Page 8]
+Riccobene, et al.       Expires 28 September 2025               [Page 8]
 
 Internet-Draft          network-anomaly-lifecycle             March 2025
 
@@ -501,7 +501,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
 
-Riccobene, et al.       Expires 4 September 2025                [Page 9]
+Riccobene, et al.       Expires 28 September 2025               [Page 9]
 
 Internet-Draft          network-anomaly-lifecycle             March 2025
 
@@ -557,7 +557,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
 
-Riccobene, et al.       Expires 4 September 2025               [Page 10]
+Riccobene, et al.       Expires 28 September 2025              [Page 10]
 
 Internet-Draft          network-anomaly-lifecycle             March 2025
 
@@ -613,7 +613,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
 
 
 
-Riccobene, et al.       Expires 4 September 2025               [Page 11]
+Riccobene, et al.       Expires 28 September 2025              [Page 11]
 
 Internet-Draft          network-anomaly-lifecycle             March 2025
 
@@ -629,6 +629,11 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
 
 8.1.  Overview of the Data Model for the Relevant State and all the
       related entities
+
+   The "ietf-relevant-state" module defines a relevant state container
+   to report associated anomalies and a "relevant-state-notification"
+   used for exchanging the relevant state information.  The following
+   YANG tree diagram [RFC8340] shows the "ietf-relevant-state" model.
 
    module: ietf-relevant-state
      +--rw relevant-state
@@ -661,19 +666,19 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
           +--ro publisher           string
           +--ro id                  yang:uuid
           +--ro uri?                inet:uri
+
+
+
+Riccobene, et al.       Expires 28 September 2025              [Page 12]
+
+Internet-Draft          network-anomaly-lifecycle             March 2025
+
+
           +--ro description?        string
           +--ro start-time          yang:date-and-time
           +--ro end-time?           yang:date-and-time
           +--ro confidence-score?   score
           +--ro concern-score       score
-
-
-
-Riccobene, et al.       Expires 4 September 2025               [Page 12]
-
-Internet-Draft          network-anomaly-lifecycle             March 2025
-
-
           +--ro anomalies* [id revision]
              +--ro id                  yang:uuid
              +--ro revision            yang:counter32
@@ -717,19 +722,19 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
         WG List:  <mailto:nmop@ietf.org>
 
         Editor:   Vincenzo Riccobene
+
+
+
+Riccobene, et al.       Expires 28 September 2025              [Page 13]
+
+Internet-Draft          network-anomaly-lifecycle             March 2025
+
+
                  <mailto:vincenzo.riccobene@huawei-partners.com>
                  Thomas Graf
                  <mailto:thomas.graf@swisscom.com>
                  Wanting Du
                  <mailto:wanting.du@swisscom.com>
-
-
-
-Riccobene, et al.       Expires 4 September 2025               [Page 13]
-
-Internet-Draft          network-anomaly-lifecycle             March 2025
-
-
                  Alex Huang Feng
                  <mailto:alex.huang-feng@insa-lyon.fr>";
      description
@@ -773,18 +778,19 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
          "Number that indicates a score between 0 and 100.";
      }
 
+
+
+
+Riccobene, et al.       Expires 28 September 2025              [Page 14]
+
+Internet-Draft          network-anomaly-lifecycle             March 2025
+
+
      identity network-anomaly-state {
        description
          "Base identity for representing the state of the network
           anomaly.";
      }
-
-
-
-Riccobene, et al.       Expires 4 September 2025               [Page 14]
-
-Internet-Draft          network-anomaly-lifecycle             March 2025
-
 
      identity detection {
        base network-anomaly-state;
@@ -828,19 +834,20 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
      }
 
      identity discarded {
+
+
+
+Riccobene, et al.       Expires 28 September 2025              [Page 15]
+
+Internet-Draft          network-anomaly-lifecycle             March 2025
+
+
        base validation;
        description
          "After validation, the network anomaly has been
           discarded, as there is no evindence that it is causing a
           problem.";
      }
-
-
-
-Riccobene, et al.       Expires 4 September 2025               [Page 15]
-
-Internet-Draft          network-anomaly-lifecycle             March 2025
-
 
      identity analyzed {
        base refinement;
@@ -883,6 +890,14 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
      identity seasonality-shift {
        base pattern;
        description
+
+
+
+Riccobene, et al.       Expires 28 September 2025              [Page 16]
+
+Internet-Draft          network-anomaly-lifecycle             March 2025
+
+
          "Shift of the seasonality of the value.";
      }
 
@@ -890,14 +905,6 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
        base pattern;
        description
          "Trend exhibited by the value.";
-
-
-
-Riccobene, et al.       Expires 4 September 2025               [Page 16]
-
-Internet-Draft          network-anomaly-lifecycle             March 2025
-
-
      }
 
      identity other {
@@ -939,6 +946,14 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
        leaf end-time {
          type yang:date-and-time;
          description
+
+
+
+Riccobene, et al.       Expires 28 September 2025              [Page 17]
+
+Internet-Draft          network-anomaly-lifecycle             March 2025
+
+
            "Date and time indicating the end of the
             problem.";
        }
@@ -946,14 +961,6 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
          type score;
          description
            "Score indicating how confident were the detectors
-
-
-
-Riccobene, et al.       Expires 4 September 2025               [Page 17]
-
-Internet-Draft          network-anomaly-lifecycle             March 2025
-
-
             in relation to the overall relevant state.";
        }
        leaf concern-score {
@@ -995,6 +1002,14 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
        }
      }
 
+
+
+
+Riccobene, et al.       Expires 28 September 2025              [Page 18]
+
+Internet-Draft          network-anomaly-lifecycle             March 2025
+
+
      grouping anomaly-grouping {
        description
          "List of anomalies that are part of the relevant state";
@@ -1002,14 +1017,6 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
          key "id revision";
          description
            "List of Anomaly instances.";
-
-
-
-Riccobene, et al.       Expires 4 September 2025               [Page 18]
-
-Internet-Draft          network-anomaly-lifecycle             March 2025
-
-
          leaf id {
            type yang:uuid;
            description
@@ -1051,6 +1058,14 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
                A detection system will alwasys set a start time,
                as it represents the moment in time from which the
                behaviour of the monitored system is considered
+
+
+
+Riccobene, et al.       Expires 28 September 2025              [Page 19]
+
+Internet-Draft          network-anomaly-lifecycle             March 2025
+
+
                to be anomalous with respect its expected behaviour.";
          }
          leaf end-time {
@@ -1058,14 +1073,6 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
            description
              "Date and time indicating the end of the anomaly.
                This field is indicated as non mandatory, as it could
-
-
-
-Riccobene, et al.       Expires 4 September 2025               [Page 19]
-
-Internet-Draft          network-anomaly-lifecycle             March 2025
-
-
                be the case that the anomaly is still happening at the
                time of generation of the label.";
          }
@@ -1107,6 +1114,14 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
              type score;
              mandatory true;
              description
+
+
+
+Riccobene, et al.       Expires 28 September 2025              [Page 20]
+
+Internet-Draft          network-anomaly-lifecycle             March 2025
+
+
                "Score indicating the degree of concern in
                  relation to the specific symptom. Each
                  symptom will carry a certain degree of
@@ -1114,14 +1129,6 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
            }
          }
        }
-
-
-
-Riccobene, et al.       Expires 4 September 2025               [Page 20]
-
-Internet-Draft          network-anomaly-lifecycle             March 2025
-
-
      }
 
      notification relevant-state-notification {
@@ -1158,6 +1165,19 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
    implementations of this draft.  Note to the RFC-editor: Please remove
    this before publishing.
 
+
+
+
+
+
+
+
+
+Riccobene, et al.       Expires 28 September 2025              [Page 21]
+
+Internet-Draft          network-anomaly-lifecycle             March 2025
+
+
 9.1.  Antagonist
 
    An open-source implementation for this draft is called AnTagOnIst
@@ -1168,15 +1188,6 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
 
    *  the generation of a ground truth in relation to symptoms and
       problems in timeseries data
-
-
-
-
-
-Riccobene, et al.       Expires 4 September 2025               [Page 21]
-
-Internet-Draft          network-anomaly-lifecycle             March 2025
-
 
    *  the visual validation of results produced by automated network
       anomaly detection tools.
@@ -1213,6 +1224,16 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
               "Antagonist: Anomaly tagging on historical data",
               <https://github.com/vriccobene/antagonist>.
 
+
+
+
+
+
+Riccobene, et al.       Expires 28 September 2025              [Page 22]
+
+Internet-Draft          network-anomaly-lifecycle             March 2025
+
+
    [I-D.ietf-nmop-network-anomaly-architecture]
               Graf, T., Du, W., and P. Francois, "An Architecture for a
               Network Anomaly Detection Framework", Work in Progress,
@@ -1220,19 +1241,6 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
               architecture-01, 20 October 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
               network-anomaly-architecture-01>.
-
-
-
-
-
-
-
-
-
-Riccobene, et al.       Expires 4 September 2025               [Page 22]
-
-Internet-Draft          network-anomaly-lifecycle             March 2025
-
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
@@ -1273,22 +1281,19 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
               Architecture", RFC 9417, DOI 10.17487/RFC9417, July 2023,
               <https://www.rfc-editor.org/info/rfc9417>.
 
+
+
+
+
+Riccobene, et al.       Expires 28 September 2025              [Page 23]
+
+Internet-Draft          network-anomaly-lifecycle             March 2025
+
+
    [RFC9418]  Claise, B., Quilbeuf, J., Lucente, P., Fasano, P., and T.
               Arumugam, "A YANG Data Model for Service Assurance",
               RFC 9418, DOI 10.17487/RFC9418, July 2023,
               <https://www.rfc-editor.org/info/rfc9418>.
-
-
-
-
-
-
-
-
-Riccobene, et al.       Expires 4 September 2025               [Page 23]
-
-Internet-Draft          network-anomaly-lifecycle             March 2025
-
 
    [RFC9543]  Farrel, A., Ed., Drake, J., Ed., Rokui, R., Homma, S.,
               Makhijani, K., Contreras, L., and J. Tantsura, "A
@@ -1336,9 +1341,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-Riccobene, et al.       Expires 4 September 2025               [Page 24]
+Riccobene, et al.       Expires 28 September 2025              [Page 24]
