@@ -644,7 +644,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
         +--rw end-time?           yang:date-and-time
         +--rw confidence-score?   score
         +--rw concern-score       score
-        +--rw anomalies* [id revision]
+        +--rw anomaly* [id revision]
            +--rw id                  yang:uuid
            +--rw revision            yang:counter32
            +--rw uri?                inet:uri
@@ -679,7 +679,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
           +--ro end-time?           yang:date-and-time
           +--ro confidence-score?   score
           +--ro concern-score       score
-          +--ro anomalies* [id revision]
+          +--ro anomaly* [id revision]
              +--ro id                  yang:uuid
              +--ro revision            yang:counter32
              +--ro uri?                inet:uri
@@ -698,7 +698,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
 
 8.2.  YANG Module
 
-   <CODE BEGINS> file "ietf-relevant-state@2025-03-19.yang"
+   <CODE BEGINS> file "ietf-relevant-state@2025-03-23.yang"
    module ietf-relevant-state {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-relevant-state";
@@ -762,7 +762,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
         This version of this YANG module is part of RFC XXXX; see
         the RFC itself for full legal notices.";
 
-     revision 2025-03-19 {
+     revision 2025-03-23 {
        description
          "Initial version";
        reference
@@ -1013,7 +1013,7 @@ Internet-Draft          network-anomaly-lifecycle             March 2025
      grouping anomaly-grouping {
        description
          "List of anomalies that are part of the relevant state";
-       list anomalies {
+       list anomaly {
          key "id revision";
          description
            "List of Anomaly instances.";

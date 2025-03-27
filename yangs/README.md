@@ -1,7 +1,7 @@
 ## YANG
 
 ```shell
-$ pyang ietf-relevant-state@2025-02-26.yang -f tree --tree-line-length 69 -p .
+$ pyang ietf-relevant-state@2025-03-23.yang -f tree --tree-line-length 69 -p dependencies
 ```
 
 Full tree
