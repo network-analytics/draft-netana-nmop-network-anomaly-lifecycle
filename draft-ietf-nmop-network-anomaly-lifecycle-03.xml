@@ -606,6 +606,28 @@ Adjustments |          +-------------+          | Symptoms
         much the anomaly is impacting connectivity services.
       </t>
 
+      <t>
+        Concern and Confidence scores are used to express two very 
+        different concepts, and it is important to make a clear 
+        distinction between them:
+        <list style="symbols">
+          <t>the Confidence score tends to be higher when symptoms 
+          are more abnormal, for instance if some given values are 
+          very rare in the data or if they substantially deviate 
+          from expected behaviours. In those cases, detectors are 
+          more sure about the anomaly and this is reflected into 
+          higher confidence scores.</t>
+
+          <t>the Concern score tends to be higher when the symptom 
+          is likely having a higher impact on connectivity services.
+          </t>
+        </list>
+        Although the two concepts can be somehow intertwined, 
+        in the scope of this document a clear way on how to use 
+        them it is not provided, as this has been shown to be 
+        dependent on the use case and on the user of the system.
+      </t>
+
       <t>In case additional information related to the symptom and to 
         the service need to be provided, augmentation would be the 
         appropriate intended mechanism to do so.
