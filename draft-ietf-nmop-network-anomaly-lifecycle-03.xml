@@ -678,6 +678,8 @@ module: ietf-relevant-state
      +--rw end-time?           yang:date-and-time
      +--rw confidence-score?   score
      +--rw concern-score       score
+     +--rw service
+     |  +--rw id    yang:uuid
      +--rw anomaly* [id revision]
         +--rw id                  yang:uuid
         +--rw revision            yang:counter32
@@ -705,6 +707,8 @@ module: ietf-relevant-state
        +--ro end-time?           yang:date-and-time
        +--ro confidence-score?   score
        +--ro concern-score       score
+       +--ro service
+       |  +--ro id    yang:uuid
        +--ro anomaly* [id revision]
           +--ro id                  yang:uuid
           +--ro revision            yang:counter32
@@ -780,7 +784,7 @@ module ietf-relevant-state {
      This version of this YANG module is part of RFC XXXX; see
      the RFC itself for full legal notices.";
 
-  revision 2025-03-23 {
+  revision 2025-04-08 {
     description
       "Initial version";
     reference
@@ -955,6 +959,19 @@ module ietf-relevant-state {
       description
         "Score indicating the degree of concern in
          relation to the overall relevant state.";
+    }
+    container service {
+      description
+        "Indication of the service that is affected 
+        (or potentially affected) by the relevant state";
+      leaf id {
+        type yang:uuid;
+        mandatory true;
+        description
+          "Unique ID of the connectivity service. 
+          It is unique in the scope of the service 
+          inventory.";
+      }
     }
   }
 
