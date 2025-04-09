@@ -174,52 +174,18 @@
     <section anchor="Introduction" title="Introduction">
       <t>
       The main objective of a network anomaly detection system 
-      is to identify Relevant States of the network as those are states 
-      that could lead to problems or might be clear indications of problem 
+      is to identify Relevant States of the network as those are States 
+      that could lead to problems or might be clear indications of Problem 
       already happening.
-      In order to formally define the statement above, some definitions 
-      from <xref target="I-D.ietf-nmop-terminology"/> are reported 
-      in the following:
       </t>
-      
-      <dl newline="false" spacing="normal">
-           <dt>Network Anomaly:</dt>
-           <dd>
-             <t>An unusual or unexpected event or pattern in network data 
-             in the forwarding plane, control plane, or management plane 
-             that deviates from the normal, expected behavior.</t>
-           </dd>
 
-           <dt>Network problem:</dt>
-           <dd>
-             <t>A state regarded as undesirable 
-             and which may require remedial action.</t>
-           </dd>
+      <t>An architecture for network anomaly detection is defined in 
+      <xref target="I-D.ietf-nmop-network-anomaly-architecture"/>.</t>
 
-           <dt>State:</dt>
-           <dd>
-             <t>A particular Condition that something (e.g., a Resource) 
-             has (i.e., it is in a State) at a specific time.</t>
-           </dd>
-
-           <dt>Relevant State:</dt>
-           <dd>
-             <t>A state that have relevancy for network operators, 
-             as those are states that could lead to problems or might be clear 
-             indications of problem already happening.</t>
-           </dd>
-
-           <dt>Symptom:</dt>
-             <dd>
-              <t>An observable Characteristic, State, Event, or Condition 
-              considered as an indication of a
-              Problem or potential Problem.</t>
-             </dd>
-      </dl>
 
       <t>It is still remarkably difficult to gain 
       a full understanding and a complete perspective of "if" and "how" 
-      a relevant state is actually an indication of a problem or it is just 
+      a Relevant State is actually an indication of a Problem or it is just 
       unexpected, but has no impact on services and end users. 
       Providers of solutions for network anomaly detection should aim 
       at increasing accuracy, by minimizing false positives and 
@@ -233,8 +199,8 @@
       </t>
 
       <t>
-      This opens up to the necessity of further validating notified relevant 
-      states to check if a detected symptom is actually
+      This opens up to the necessity of further validating notified Relevant 
+      States to check if a detected symptom is actually
       impacting connectivity services: this might require different actors 
       (both human and algorithmic) to act together during the process and refine 
       their understanding across the network anomaly lifecycle.
@@ -248,7 +214,7 @@
 
       <t>
       Performing network anomaly detection is a process that requires a
-      continuous learning and continuous improvement. Relevant states are
+      continuous learning and continuous improvement. Relevant States are
       detected by aggregating and understanding Symptoms, then validated,
       confirming that Symptoms actually impacted connectivity services 
       impacting and eventually need to be further analyzed by performing 
@@ -260,6 +226,13 @@
       contributes a formal data model to capture and exchange Symptom 
       information across the lifecycle.
       </t>
+
+      <t>The adjustment of the detection process can happen after problems 
+      are solved and well understood, so the learning can be transferred 
+      into the detection system for future faster detections.
+      For this reason, the network anomaly Detection lifecycle mainly
+      relates to the post-mortem stage of the network anomaly detection process, 
+      as described in <xref target="I-D.ietf-nmop-network-anomaly-architecture"/>.
     </section>
 
     <section anchor="notation" title="Terminology">
@@ -282,6 +255,11 @@
           <t>Alarm</t>
 
           <t>Symptom</t>
+          
+          <t>Relevance</t>
+
+          <t>Network Anomaly</t>
+
         </list></t>
 
       <t>The following terms are used as defined in <xref
@@ -304,25 +282,30 @@
 
           <t>False Negative: Is anomalous but has not been identified by
           the anomaly detection system.</t>
+
+          <t>Relevant State: Is a State that has Relevance for network 
+          operators, as, for instance, those are States that could lead 
+          to Problems or might be clear indications of Problem already 
+          happening.</t>
         </list></t>
     </section>
 
     <section anchor="Defining_desired_states" title="Defining Desired States">
-      <t>The network problem, as defined in <xref target="notation"/>, provide the scope for what
+      <t>The Problem, as defined in <xref target="notation"/>, provide the scope for what
       to be looking for when detecting network anomalies. Concepts like
-      "desirable state" and "required state" are introduced in this document. This poses the
-      attention on a significant problem that network operators have to face:
+      "desirable State" and "required State" are introduced in this document. This poses the
+      attention on a significant Problem that network operators have to face:
       the definition of what is to be considered "desirable" or "undesirable".
       It is not always easy to detect if a network is operating in an
-      undesired state at a given point in time. To approach this, network
+      undesired State at a given point in time. To approach this, network
       operators can rely on different methodologies, more or less
       deterministic and more or less sensitive: on the one side, the
       definition of intents (including Service Level Objectives and Service
-      Level Agreements) which approaches the problem top-down; on the other
+      Level Agreements) which approaches the Problem top-down; on the other
       side, the definition of Symptoms, by mean of solutions like <xref
       target="RFC9417">SAIN</xref>, <xref target="RFC9418"/> and <xref
       target="I-D.ietf-nmop-network-anomaly-architecture"/>, which
-      approaches the problem bottom-up. At the center of these approaches,
+      approaches the Problem bottom-up. At the center of these approaches,
       there are the so-called Symptoms, explaining what is
       not working as expected in the network, sometimes also providing hints
       towards issues and their causes.</t>
@@ -418,7 +401,7 @@ Adjustments |          +-------------+          | Symptoms
         <t>i. those that are surely corresponding to an impact on connectivity
         services, (e.g. the breach of an SLO),</t>
 
-        <t>ii. those that will cause problems in the future (e.g. rising
+        <t>ii. those that will cause Problems in the future (e.g. rising
         trends on a timeseries metric hitting towards saturation),</t>
 
         <t>iii. those or which the impact to connectivity services cannot be
@@ -456,8 +439,8 @@ Adjustments |          +-------------+          | Symptoms
                title="Network Anomaly Refinement">
         <t>After validation of a problem, the service provider performs
         troubleshooting and resolution of the problem. Although the network
-        might be back in a desired state at this point, network operators can
-        perform detailed postmortem analysis of network problems with the
+        might be back in a desired State at this point, network operators can
+        perform detailed postmortem analysis of Problems with the
         objective to identify useful adjustments to the prevention and
         detection mechanisms (for instance improving or extending the
         definition of SLIs and SLOs, refining concern/impact scores, etc.),
@@ -469,7 +452,7 @@ Adjustments |          +-------------+          | Symptoms
         <t>After the adjustments are performed to the network anomaly
         detection methods, the cycle starts again, by "replaying" the network
         anomaly and checking if there is any measurable improvement in the
-        ability to detect problems by using the updated method.</t>
+        ability to detect Problems by using the updated method.</t>
       </section>
     </section>
 
@@ -511,20 +494,20 @@ Adjustments |          +-------------+          | Symptoms
     <section anchor="network_anomaly_state_machine"
              title="Network Anomaly State Machine">
       <t>In the context of this document, from a network anomaly detection
-        point of view a network problem is defined as a collection of
+        point of view a Problem is defined as a collection of
         interrelated Symptoms, as specified in <xref
         target="I-D.netana-nmop-network-anomaly-semantics"/>.
       </t>
 
       <t>
-        The understanding of a network problem can change over time.
+        The understanding of a Problem can change over time.
         Moreover, multiple actors are involved in the process of refining this
         understanding in the different phases.
       </t>
 
       <t>
         From this perspective, a problem can be refined according to the
-        following states (<xref target="state_machine"/>).
+        following States (<xref target="state_machine"/>).
       </t>
 
       <figure anchor="state_machine" title="Network Anomaly State Machine">
@@ -583,7 +566,7 @@ Adjustments |          +-------------+          | Symptoms
       </t>
       <t>
         The base for the modules is the "ietf-relevant-state" data model.
-        Relevant state is at the root of the data model, with its parameters 
+        Relevant State is at the root of the data model, with its parameters 
         (ID, description, start-time, end-time) and a collection of anomalies.
         This allows the relevant state to be considered as a container of 
         anomalies.
@@ -604,6 +587,28 @@ Adjustments |          +-------------+          | Symptoms
         In particular, for what concerns the symptom, a concern score is 
         defined as necessary field, which has the meaning of expressing how 
         much the anomaly is impacting connectivity services.
+      </t>
+
+      <t>
+        Concern and Confidence scores are used to express two very 
+        different concepts, and it is important to make a clear 
+        distinction between them:
+        <list style="symbols">
+          <t>the Confidence score tends to be higher when symptoms 
+          are more abnormal, for instance if some given values are 
+          very rare in the data or if they substantially deviate 
+          from expected behaviours. In those cases, detectors are 
+          more sure about the anomaly and this is reflected into 
+          higher confidence scores.</t>
+
+          <t>the Concern score tends to be higher when the symptom 
+          is likely having a higher impact on connectivity services.
+          </t>
+        </list>
+        Although the two concepts can be somehow intertwined, 
+        in the scope of this document a clear way on how to use 
+        them it is not provided, as this has been shown to be 
+        dependent on the use case and on the user of the system.
       </t>
 
       <t>In case additional information related to the symptom and to 
@@ -647,7 +652,7 @@ Adjustments |          +-------------+          | Symptoms
       </t>
 
       <t>
-      The data model defines a relevant state container and a relevant state notification:
+      The data model defines a Relevant State container and a Relevant State notification:
       the notification is primarily used by the Network Anomaly Detector, 
       to notify the "Alarm and Problem Management System" 
       and the "Post-mortem System" 
@@ -659,9 +664,9 @@ Adjustments |          +-------------+          | Symptoms
 
       <section anchor="network-anomaly-model-tree" 
           title="Overview of the Data Model for the Relevant State and all the related entities">
-        <t>The "ietf-relevant-state" module defines a relevant state container
+        <t>The "ietf-relevant-state" module defines a Relevant State container
         to report associated anomalies and a "relevant-state-notification" used
-        for exchanging the relevant state information. The following YANG tree diagram
+        for exchanging the relevant State information. The following YANG tree diagram
         <xref target="RFC8340"/> shows the "ietf-relevant-state" model.</t>
         <sourcecode type="yangtree"><![CDATA[
 module: ietf-relevant-state
@@ -673,6 +678,8 @@ module: ietf-relevant-state
      +--rw end-time?           yang:date-and-time
      +--rw confidence-score?   score
      +--rw concern-score       score
+     +--rw service
+     |  +--rw id    yang:uuid
      +--rw anomaly* [id revision]
         +--rw id                  yang:uuid
         +--rw revision            yang:counter32
@@ -700,6 +707,8 @@ module: ietf-relevant-state
        +--ro end-time?           yang:date-and-time
        +--ro confidence-score?   score
        +--ro concern-score       score
+       +--ro service
+       |  +--ro id    yang:uuid
        +--ro anomaly* [id revision]
           +--ro id                  yang:uuid
           +--ro revision            yang:counter32
@@ -775,7 +784,7 @@ module ietf-relevant-state {
      This version of this YANG module is part of RFC XXXX; see
      the RFC itself for full legal notices.";
 
-  revision 2025-03-23 {
+  revision 2025-04-08 {
     description
       "Initial version";
     reference
@@ -905,7 +914,7 @@ module ietf-relevant-state {
   grouping relevant-state-grouping {
     description
       "Relevant State is a state that could lead to
-       problems or might be clear indications of problem
+       Problems or might be clear indications of problem
        already happening.";
     leaf id {
       type yang:uuid;
@@ -950,6 +959,19 @@ module ietf-relevant-state {
       description
         "Score indicating the degree of concern in
          relation to the overall relevant state.";
+    }
+    container service {
+      description
+        "Indication of the service that is affected 
+        (or potentially affected) by the relevant state";
+      leaf id {
+        type yang:uuid;
+        mandatory true;
+        description
+          "Unique ID of the connectivity service. 
+          It is unique in the scope of the service 
+          inventory.";
+      }
     }
   }
 
@@ -1108,7 +1130,7 @@ module ietf-relevant-state {
     description
       "A Relevant State is a state that have relevancy
        for network operators, as those are states that could lead
-       to problems or might be clear indications of problem already
+       to Problems or might be clear indications of problem already
        happening.";
     uses relevant-state-grouping;
     uses anomaly-grouping;
@@ -1133,7 +1155,7 @@ module ietf-relevant-state {
         draft. Antagonist provides visual support for two important use cases
         in the scope of this document: <ul>
             <li>the generation of a ground truth in relation to symptoms and
-            problems in timeseries data</li>
+            Problems in timeseries data</li>
 
             <li>the visual validation of results produced by automated network
             anomaly detection tools.</li>
