@@ -5,11 +5,11 @@
 NMOP                                                        V. Riccobene
 Internet-Draft                                                    Huawei
 Intended status: Experimental                                    T. Graf
-Expires: 7 November 2025                                           W. Du
+Expires: 9 November 2025                                           W. Du
                                                                 Swisscom
                                                            A. Huang Feng
                                                                INSA-Lyon
-                                                              6 May 2025
+                                                              8 May 2025
 
 
                 An Experiment: Network Anomaly Lifecycle
@@ -53,7 +53,7 @@ Discussion Venues
 
 
 
-Riccobene, et al.        Expires 7 November 2025                [Page 1]
+Riccobene, et al.        Expires 9 November 2025                [Page 1]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -82,7 +82,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 November 2025.
+   This Internet-Draft will expire on 9 November 2025.
 
 Copyright Notice
 
@@ -100,8 +100,8 @@ Copyright Notice
 
 Table of Contents
 
-   1.  Status of this document . . . . . . . . . . . . . . . . . . .   3
-   2.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+   2.  Status of this document . . . . . . . . . . . . . . . . . . .   4
    3.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   4
    4.  Defining Desired States . . . . . . . . . . . . . . . . . . .   5
    5.  Lifecycle of a Network Anomaly  . . . . . . . . . . . . . . .   6
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Riccobene, et al.        Expires 7 November 2025                [Page 2]
+Riccobene, et al.        Expires 9 November 2025                [Page 2]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -131,20 +131,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
      12.2.  Informative References . . . . . . . . . . . . . . . . .  26
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  27
 
-1.  Status of this document
-
-   This document is experimental.  The main goal of this document is to
-   propose an iterative lifecycle process to network anomaly detection
-   by proposing a data model for metadata to be addressed at different
-   lifecycle stages.
-
-   The experiment consists of verifying whether the approach is usable
-   in real use case scenarios to support proper refinement and
-   adjustments of network anomaly detection algorithms.  The experiment
-   can be deemed successful if validated at least with an open-source
-   implementation successfully applied with real networks.
-
-2.  Introduction
+1.  Introduction
 
    The main objective of a network anomaly detection system is to
    identify Relevant States of the network as those are States that
@@ -162,14 +149,6 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
    false positives and false negatives.  Moreover, the behaviour of the
    network naturally changes over time.  When more connectivity services
    are deployed, more customers are on-boarded to the network, network
-
-
-
-Riccobene, et al.        Expires 7 November 2025                [Page 3]
-
-Internet-Draft          network-anomaly-lifecycle               May 2025
-
-
    devices are upgraded or replaced, and therefore, it is almost
    impossible to identify anomaly detection techniques that can keep
    working accurately over time, without changing the detection
@@ -180,6 +159,16 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
    connectivity services: this might require different actors (both
    human and algorithmic) to act together during the process and refine
    their understanding across the network anomaly lifecycle.
+
+
+
+
+
+
+Riccobene, et al.        Expires 9 November 2025                [Page 3]
+
+Internet-Draft          network-anomaly-lifecycle               May 2025
+
 
    Finally, once validation has happened, this might lead to refinements
    to the logic that is used by the detection, so that this process can
@@ -205,6 +194,19 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
    mortem stage of the network anomaly detection process, as described
    in [I-D.ietf-nmop-network-anomaly-architecture].
 
+2.  Status of this document
+
+   This document is experimental.  The main goal of this document is to
+   propose an iterative lifecycle process to network anomaly detection
+   by proposing a data model for metadata to be addressed at different
+   lifecycle stages.
+
+   The experiment consists of verifying whether the approach is usable
+   in real use case scenarios to support proper refinement and
+   adjustments of network anomaly detection algorithms.  The experiment
+   can be deemed successful if validated at least with an open-source
+   implementation successfully applied with real networks.
+
 3.  Terminology
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -216,15 +218,15 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
    This document makes use of the terms defined in
    [I-D.ietf-nmop-terminology].
 
-   *  State
 
 
 
-
-Riccobene, et al.        Expires 7 November 2025                [Page 4]
+Riccobene, et al.        Expires 9 November 2025                [Page 4]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
+
+   *  State
 
    *  Problem
 
@@ -272,16 +274,16 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
    point in time.  To approach this, network operators can rely on
    different methodologies, more or less deterministic and more or less
    sensitive: on the one side, the definition of intents (including
-   Service Level Objectives and Service Level Agreements) which
-   approaches the Problem top-down; on the other side, the definition of
 
 
 
-Riccobene, et al.        Expires 7 November 2025                [Page 5]
+Riccobene, et al.        Expires 9 November 2025                [Page 5]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
+   Service Level Objectives and Service Level Agreements) which
+   approaches the Problem top-down; on the other side, the definition of
    Symptoms, by mean of solutions like SAIN [RFC9417], [RFC9418] and
    [I-D.ietf-nmop-network-anomaly-architecture], which approaches the
    Problem bottom-up.  At the center of these approaches, there are the
@@ -331,9 +333,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-
-
-Riccobene, et al.        Expires 7 November 2025                [Page 6]
+Riccobene, et al.        Expires 9 November 2025                [Page 6]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -389,7 +389,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025                [Page 7]
+Riccobene, et al.        Expires 9 November 2025                [Page 7]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -445,7 +445,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025                [Page 8]
+Riccobene, et al.        Expires 9 November 2025                [Page 8]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -501,7 +501,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025                [Page 9]
+Riccobene, et al.        Expires 9 November 2025                [Page 9]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -557,7 +557,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 10]
+Riccobene, et al.        Expires 9 November 2025               [Page 10]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -613,7 +613,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 11]
+Riccobene, et al.        Expires 9 November 2025               [Page 11]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -669,7 +669,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 12]
+Riccobene, et al.        Expires 9 November 2025               [Page 12]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -725,7 +725,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 13]
+Riccobene, et al.        Expires 9 November 2025               [Page 13]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -781,7 +781,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 14]
+Riccobene, et al.        Expires 9 November 2025               [Page 14]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -837,7 +837,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 15]
+Riccobene, et al.        Expires 9 November 2025               [Page 15]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -893,7 +893,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 16]
+Riccobene, et al.        Expires 9 November 2025               [Page 16]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -949,7 +949,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 17]
+Riccobene, et al.        Expires 9 November 2025               [Page 17]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -1005,7 +1005,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 18]
+Riccobene, et al.        Expires 9 November 2025               [Page 18]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -1061,7 +1061,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 19]
+Riccobene, et al.        Expires 9 November 2025               [Page 19]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -1117,7 +1117,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 20]
+Riccobene, et al.        Expires 9 November 2025               [Page 20]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -1173,7 +1173,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 21]
+Riccobene, et al.        Expires 9 November 2025               [Page 21]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -1229,7 +1229,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 22]
+Riccobene, et al.        Expires 9 November 2025               [Page 22]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -1285,7 +1285,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 23]
+Riccobene, et al.        Expires 9 November 2025               [Page 23]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -1341,7 +1341,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 24]
+Riccobene, et al.        Expires 9 November 2025               [Page 24]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -1397,7 +1397,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 25]
+Riccobene, et al.        Expires 9 November 2025               [Page 25]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -1453,7 +1453,7 @@ Internet-Draft          network-anomaly-lifecycle               May 2025
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 26]
+Riccobene, et al.        Expires 9 November 2025               [Page 26]
 
 Internet-Draft          network-anomaly-lifecycle               May 2025
 
@@ -1509,4 +1509,4 @@ Authors' Addresses
 
 
 
-Riccobene, et al.        Expires 7 November 2025               [Page 27]
+Riccobene, et al.        Expires 9 November 2025               [Page 27]

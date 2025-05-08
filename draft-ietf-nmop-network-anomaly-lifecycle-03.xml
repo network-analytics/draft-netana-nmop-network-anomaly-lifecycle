@@ -101,7 +101,7 @@
       </address>
     </author>
 
-    <date day="06" month="May" year="2025"/>
+    <date day="08" month="May" year="2025"/>
 
     <area>Operations and Management</area>
 
@@ -158,19 +158,6 @@
   </front>
 
   <middle>
-    <section anchor="status" title="Status of this document">
-      <t>This document is experimental. The main goal of this document is to
-      propose an iterative lifecycle process to network anomaly detection by
-      proposing a data model for metadata to be addressed at different
-      lifecycle stages.</t>
-
-      <t>The experiment consists of verifying whether the approach is usable
-      in real use case scenarios to support proper refinement and adjustments
-      of network anomaly detection algorithms. The experiment can be deemed
-      successful if validated at least with an open-source implementation
-      successfully applied with real networks.</t>
-    </section>
-
     <section anchor="introduction" title="Introduction">
       <t>
       The main objective of a network anomaly detection system 
@@ -234,6 +221,19 @@
       relates to the post-mortem stage of the network anomaly detection process, 
       as described in <xref
 			target="I-D.ietf-nmop-network-anomaly-architecture"/>.</t>
+    </section>
+
+    <section anchor="status" title="Status of this document">
+      <t>This document is experimental. The main goal of this document is to
+      propose an iterative lifecycle process to network anomaly detection by
+      proposing a data model for metadata to be addressed at different
+      lifecycle stages.</t>
+
+      <t>The experiment consists of verifying whether the approach is usable
+      in real use case scenarios to support proper refinement and adjustments
+      of network anomaly detection algorithms. The experiment can be deemed
+      successful if validated at least with an open-source implementation
+      successfully applied with real networks.</t>
     </section>
 
     <section anchor="notation" title="Terminology">
