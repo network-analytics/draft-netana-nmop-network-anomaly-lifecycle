@@ -730,7 +730,7 @@ Riccobene, et al.         Expires 25 March 2026                [Page 13]
 Internet-Draft          network-anomaly-lifecycle         September 2025
 
 
-   <CODE BEGINS> file "ietf-relevant-state@2025-03-23.yang"
+   <CODE BEGINS> file "ietf-relevant-state@2025-04-25.yang"
    module ietf-relevant-state {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-relevant-state";
@@ -809,26 +809,26 @@ Internet-Draft          network-anomaly-lifecycle         September 2025
          "Number that indicates a score between 0 and 100.";
      }
 
-     identity network-anomaly-state {
+     identity network-anomaly-phase {
        description
-         "Base identity for representing the state of the network
-          anomaly.";
+         "Base identity for representing the of the network anomaly
+          phase.";
        reference
          "Section 6 in draft-ietf-nmop-network-anomaly-lifecycle.";
      }
 
      identity detection {
-       base network-anomaly-state;
+       base network-anomaly-phase;
        description
-         "A problem reached detection state.";
+         "A problem is int the detection phase.";
        reference
          "Section 6.1 in draft-ietf-nmop-network-anomaly-lifecycle.";
      }
 
      identity validation {
-       base network-anomaly-state;
+       base network-anomaly-phase;
        description
-         "A problem reached validation state.";
+         "A problem is int the validation phase.";
        reference
          "Section 6.2 in draft-ietf-nmop-network-anomaly-lifecycle.";
      }
@@ -842,9 +842,9 @@ Riccobene, et al.         Expires 25 March 2026                [Page 15]
 Internet-Draft          network-anomaly-lifecycle         September 2025
 
 
-       base network-anomaly-state;
+       base network-anomaly-phase;
        description
-         "A problem reached refinement state.";
+         "A problem is int the refinement phase.";
        reference
          "Section 6.3 in draft-ietf-nmop-network-anomaly-lifecycle.";
      }
@@ -1326,7 +1326,7 @@ Internet-Draft          network-anomaly-lifecycle         September 2025
 
    The authors would like to thank Antonio Roberto for his contribution
    to the ideas in this document and Mohamed Boucadair and Adrian Farrel
-   for his review and valuable comments.
+   and Reshad Rahman for his review and valuable comments.
 
 12.  References
 
