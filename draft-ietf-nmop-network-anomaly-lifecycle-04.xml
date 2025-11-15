@@ -120,7 +120,7 @@
       high detection accuracy. To guarantee acceptable results, the
       process needs to be properly designed, adopting well-defined
       stages to accurately collect evidence of anomalies, validate their
-      relevancy and improve the detection systems  over time,
+      relevancy and improve the detection systems over time,
       iteratively.</t>
 
       <t>This document describes a well-defined approach on managing the
@@ -273,6 +273,14 @@
 
           <t>False Negative: Is anomalous but has not been identified by
           the anomaly detection system.</t>
+
+          <t>Confidence Score: Indicates the degree of how abnormal the
+					detected anomaly is.</t>
+
+          <t>Concern Score: Indicates the possible degree of
+					connectivity service degradation by taking the Confidence
+					Scores from multiple anomalies and their relationships into
+					account.</t>
         </list></t>
     </section>
 
@@ -327,7 +335,7 @@
       <dl>
         <dt>Daisy</dt>
 
-        <dd>introduces the concept of "concern score" to indicate what
+        <dd>introduces the concept of "Concern Score" to indicate what
         is the degree of concern that a given Symptom could cause a
         degradation for a connectivity service.</dd>
       </dl>
@@ -566,7 +574,7 @@ Adjustments |          +-------------+          | Symptoms
       the meaning of expressing how much the anomaly is impacting
       connectivity services.</t>
 
-      <t>Concern and Confidence scores are used to express two very 
+      <t>Concern and Confidence Scores are used to express two very 
       different concepts, and it is important to make a clear
       distinction between them:
       
@@ -578,7 +586,7 @@ Adjustments |          +-------------+          | Symptoms
           more sure about the anomaly and this is reflected into 
           higher confidence scores.</t>
 
-          <t>the Concern score tends to be higher when the symptom 
+          <t>the Concern Score tends to be higher when the symptom 
           is likely having a higher impact on connectivity services.</t>
         </list>
         
@@ -658,7 +666,7 @@ module: ietf-relevant-state
         +--rw id                  yang:uuid
         +--rw revision            yang:counter32
         +--rw uri?                inet:uri
-        +--rw state               identityref
+        +--rw phase               identityref
         +--rw description?        string
         +--rw start-time          yang:date-and-time
         +--rw end-time?           yang:date-and-time
@@ -692,7 +700,7 @@ module: ietf-relevant-state
           +--ro id                  yang:uuid
           +--ro revision            yang:counter32
           +--ro uri?                inet:uri
-          +--ro state               identityref
+          +--ro phase               identityref
           +--ro description?        string
           +--ro start-time          yang:date-and-time
           +--ro end-time?           yang:date-and-time
@@ -709,7 +717,7 @@ module: ietf-relevant-state
   ]]></sourcecode>
         </section>
         <section title="YANG Module">
-        <sourcecode name="ietf-relevant-state@2025-04-25.yang" type="yang" markers="true"><![CDATA[
+        <sourcecode name="ietf-relevant-state@2025-11-15.yang" type="yang" markers="true"><![CDATA[
 module ietf-relevant-state {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-relevant-state";
@@ -765,7 +773,7 @@ module ietf-relevant-state {
      This version of this YANG module is part of RFC XXXX; see
      the RFC itself for full legal notices.";
 
-  revision 2025-04-25 {
+  revision 2025-11-15 {
     description
       "Initial version";
     reference
@@ -784,7 +792,7 @@ module ietf-relevant-state {
   identity network-anomaly-phase {
     description
       "Base identity for representing the of the network anomaly
-       phase.";
+        \t\t phase.";
     reference
       "Section 6 in draft-ietf-nmop-network-anomaly-lifecycle.";
   }
@@ -903,7 +911,7 @@ module ietf-relevant-state {
   grouping relevant-state-grouping {
     description
       "Relevant State is a state that could lead to
-       problems or might be clear indications of problems
+       problems or might be clear indications of problem
        already happening.";
     reference
       "Figure 4 in draft-ietf-nmop-terminology.";
@@ -917,7 +925,7 @@ module ietf-relevant-state {
     leaf uri {
       type inet:uri;
       description
-        "URI to visualize the analytical metrics of the
+        "URI to viusalize the analytical metrics of the
          relevant-state.";
     }
     leaf description {
@@ -944,7 +952,7 @@ module ietf-relevant-state {
          does) to observe if an abnormal situation is arising.";
       reference
         "Section 3.5.3 in
-        draft-ietf-nmop-network-anomaly-architecture.";
+         draft-ietf-nmop-network-anomaly-architecture.";
     }
     leaf confidence-score {
       type score;
@@ -1032,13 +1040,13 @@ module ietf-relevant-state {
           "URI to viusalize the analytical metrics of the
            anomaly.";
       }
-      leaf state {
+      leaf phase {
         type identityref {
-          base network-anomaly-state;
+          base network-anomaly-phase;
         }
         mandatory true;
         description
-          "State of the anomaly.";
+          "Phase of the anomaly.";
       }
       leaf description {
         type string;
@@ -1145,7 +1153,7 @@ module ietf-relevant-state {
     description
       "A Relevant State is a state that have relevancy
        for network operators, as those are states that could lead
-       to problems or might be clear indications of problems already
+       to problems or might be clear indications of problem already
        happening.";
     uses relevant-state-grouping;
     uses anomaly-grouping;
@@ -1238,8 +1246,8 @@ module ietf-relevant-state {
     <section anchor="Acknowledgements" title="Acknowledgements">
       <t>The authors would like to thank Antonio Roberto for his
       contribution to the ideas in this document and Mohamed Boucadair
-      and Adrian Farrel, Paul Aitken and Reshad Rahman for his review
-			and valuable comments. </t>
+      and Adrian Farrel, Paul Aitken, Reshad Rahman and Ruediger Geib
+			for his review and valuable comments. </t>
     </section>
   </middle>
 

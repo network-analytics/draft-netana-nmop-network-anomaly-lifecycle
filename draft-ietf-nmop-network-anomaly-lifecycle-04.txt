@@ -116,7 +116,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
      5.2.  Network Anomaly Validation  . . . . . . . . . . . . . . .   8
      5.3.  Network Anomaly Refinement  . . . . . . . . . . . . . . .   8
-   6.  Introducing a Label Store for Network Anomaly labels  . . . .   8
+   6.  Introducing a Label Store for Network Anomaly labels  . . . .   9
    7.  Network Anomaly State Machine . . . . . . . . . . . . . . . .   9
    8.  Network Anomaly Lifecycle Data Model  . . . . . . . . . . . .  10
      8.1.  Overview of the Data Model for the Relevant State and all
@@ -253,6 +253,13 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    *  False Negative: Is anomalous but has not been identified by the
       anomaly detection system.
 
+   *  Confidence Score: Indicates the degree of how abnormal the
+      detected anomaly is.
+
+   *  Concern Score: Indicates the possible degree of connectivity
+      service degradation by taking the Confidence Scores from multiple
+      anomalies and their relationships into account.
+
 4.  Defining Desired States
 
    The Problem, as defined in Section 1, provide the scope for what to
@@ -267,13 +274,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    and Service Level Agreements) which approaches the Problem top-down;
    on the other side, the definition of Symptoms, by mean of solutions
    like SAIN [RFC9417], [RFC9418] and
-   [I-D.ietf-nmop-network-anomaly-architecture], which approaches the
-   Problem bottom-up.  At the center of these approaches, there are the
-   so-called Symptoms, explaining what is not working as expected in the
-   network, sometimes also providing hints towards issues and their
-   causes.
-
-
 
 
 
@@ -281,6 +281,12 @@ Riccobene, et al.          Expires 15 May 2026                  [Page 5]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
+
+   [I-D.ietf-nmop-network-anomaly-architecture], which approaches the
+   Problem bottom-up.  At the center of these approaches, there are the
+   so-called Symptoms, explaining what is not working as expected in the
+   network, sometimes also providing hints towards issues and their
+   causes.
 
    One of the more deterministic approaches is to rely on Symptoms based
    on measurable service-based KPIs, for example, by using Service Level
@@ -302,7 +308,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
       of impact that a given Symptom will have on the services relying
       on the related subservice to which the Symptom is attached.
 
-   Daisy  introduces the concept of "concern score" to indicate what is
+   Daisy  introduces the concept of "Concern Score" to indicate what is
       the degree of concern that a given Symptom could cause a
       degradation for a connectivity service.
 
@@ -318,6 +324,20 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    The lifecycle of a network anomaly can be articulated in three
    phases, structured as a loop: Detection, Validation, Refinement.
 
+
+
+
+
+
+
+
+
+
+Riccobene, et al.          Expires 15 May 2026                  [Page 6]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
                                +-------------+
                     +--------> |  Detection  | ---------+
         Adjustments |          +-------------+          | Symptoms
@@ -329,14 +349,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
                                 Confirmation
 
               Figure 1: Anomaly Detection Refinement Lifecycle
-
-
-
-
-Riccobene, et al.          Expires 15 May 2026                  [Page 6]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
 
    Each of these phases can either be performed by a network expert or
    an algorithm or complementing each other.
@@ -375,6 +387,13 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    confirmed (e.g. sudden increase/decrease of timeseries Metrics,
    anomalous amounts of log entries, etc.).
 
+
+
+Riccobene, et al.          Expires 15 May 2026                  [Page 7]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
    The first category requires immediate intervention (a.k.a.  the
    problem is "confirmed"), the second one provides pointers towards
    early signs of an problem potentially happening in the near future
@@ -386,14 +405,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    the first two, which would make the network anomaly detection system
    more deterministic.  The main objective is to reduce uncertainty
    around the raised alarms by refining the detection algorithms.  This
-
-
-
-Riccobene, et al.          Expires 15 May 2026                  [Page 7]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
-
    can be achieved by either generating new Symptom definitions,
    adjusting the weights of automated algorithms or other similar
    approaches.
@@ -430,6 +441,15 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    detection can be improved by capturing additional or more appropriate
    metrics.
 
+
+
+
+
+Riccobene, et al.          Expires 15 May 2026                  [Page 8]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
 6.  Introducing a Label Store for Network Anomaly labels
 
    The information that is produced at each stage needs to be persisted
@@ -442,14 +462,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    Once the notification arrives to the Label Store, the anomaly label
    is persisted.  In the following stages (i.e. validation and
    refinement), the information about the labels are retrieved,
-
-
-
-Riccobene, et al.          Expires 15 May 2026                  [Page 8]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
-
    reviewed, modified and persisted again, generating every time a new
    version of the same annotation, or tagging the annotation as
    irrelevant, if it would be necessary to remove it.
@@ -476,18 +488,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
    From this perspective, a problem can be refined according to the
    following States (Figure 2).
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -576,7 +576,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    defined as necessary field, which has the meaning of expressing how
    much the anomaly is impacting connectivity services.
 
-   Concern and Confidence scores are used to express two very different
+   Concern and Confidence Scores are used to express two very different
    concepts, and it is important to make a clear distinction between
    them:
 
@@ -586,7 +586,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
       In those cases, detectors are more sure about the anomaly and this
       is reflected into higher confidence scores.
 
-   *  the Concern score tends to be higher when the symptom is likely
+   *  the Concern Score tends to be higher when the symptom is likely
       having a higher impact on connectivity services.
 
    Although the two concepts can be somehow intertwined, in the scope of
@@ -654,7 +654,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
            +--rw id                  yang:uuid
            +--rw revision            yang:counter32
            +--rw uri?                inet:uri
-           +--rw state               identityref
+           +--rw phase               identityref
            +--rw description?        string
            +--rw start-time          yang:date-and-time
            +--rw end-time?           yang:date-and-time
@@ -696,7 +696,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
              +--ro id                  yang:uuid
              +--ro revision            yang:counter32
              +--ro uri?                inet:uri
-             +--ro state               identityref
+             +--ro phase               identityref
              +--ro description?        string
              +--ro start-time          yang:date-and-time
              +--ro end-time?           yang:date-and-time
@@ -713,7 +713,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
 8.2.  YANG Module
 
-   <CODE BEGINS> file "ietf-relevant-state@2025-04-25.yang"
+   <CODE BEGINS> file "ietf-relevant-state@2025-11-15.yang"
    module ietf-relevant-state {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-relevant-state";
@@ -777,7 +777,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
         This version of this YANG module is part of RFC XXXX; see
         the RFC itself for full legal notices.";
 
-     revision 2025-04-25 {
+     revision 2025-11-15 {
 
 
 
@@ -804,7 +804,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
      identity network-anomaly-phase {
        description
          "Base identity for representing the of the network anomaly
-          phase.";
+           \t\t phase.";
        reference
          "Section 6 in draft-ietf-nmop-network-anomaly-lifecycle.";
      }
@@ -939,7 +939,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
      grouping relevant-state-grouping {
        description
          "Relevant State is a state that could lead to
-          problems or might be clear indications of problems
+          problems or might be clear indications of problem
           already happening.";
        reference
          "Figure 4 in draft-ietf-nmop-terminology.";
@@ -961,7 +961,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
        leaf uri {
          type inet:uri;
          description
-           "URI to visualize the analytical metrics of the
+           "URI to viusalize the analytical metrics of the
             relevant-state.";
        }
        leaf description {
@@ -988,7 +988,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
             does) to observe if an abnormal situation is arising.";
          reference
            "Section 3.5.3 in
-           draft-ietf-nmop-network-anomaly-architecture.";
+            draft-ietf-nmop-network-anomaly-architecture.";
        }
        leaf confidence-score {
          type score;
@@ -1092,13 +1092,13 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
              "URI to viusalize the analytical metrics of the
               anomaly.";
          }
-         leaf state {
+         leaf phase {
            type identityref {
-             base network-anomaly-state;
+             base network-anomaly-phase;
            }
            mandatory true;
            description
-             "State of the anomaly.";
+             "Phase of the anomaly.";
          }
          leaf description {
            type string;
@@ -1221,7 +1221,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
        description
          "A Relevant State is a state that have relevancy
           for network operators, as those are states that could lead
-          to problems or might be clear indications of problems already
+          to problems or might be clear indications of problem already
           happening.";
        uses relevant-state-grouping;
        uses anomaly-grouping;
@@ -1319,8 +1319,8 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
    The authors would like to thank Antonio Roberto for his contribution
    to the ideas in this document and Mohamed Boucadair and Adrian
-   Farrel, Paul Aitken and Reshad Rahman for his review and valuable
-   comments.
+   Farrel, Paul Aitken, Reshad Rahman and Ruediger Geib for his review
+   and valuable comments.
 
 12.  References
 
