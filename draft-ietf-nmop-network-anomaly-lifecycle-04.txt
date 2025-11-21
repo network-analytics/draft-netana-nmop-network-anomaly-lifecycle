@@ -5,11 +5,11 @@
 NMOP                                                        V. Riccobene
 Internet-Draft                                                    Huawei
 Intended status: Experimental                                    T. Graf
-Expires: 22 May 2026                                               W. Du
+Expires: 25 May 2026                                               W. Du
                                                                 Swisscom
                                                            A. Huang Feng
                                                                INSA-Lyon
-                                                        18 November 2025
+                                                        21 November 2025
 
 
            An Experiment: Network Anomaly Detection Lifecycle
@@ -53,7 +53,7 @@ Discussion Venues
 
 
 
-Riccobene, et al.          Expires 22 May 2026                  [Page 1]
+Riccobene, et al.          Expires 25 May 2026                  [Page 1]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
@@ -82,7 +82,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 May 2026.
+   This Internet-Draft will expire on 25 May 2026.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Riccobene, et al.          Expires 22 May 2026                  [Page 2]
+Riccobene, et al.          Expires 25 May 2026                  [Page 2]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
@@ -121,15 +121,15 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    8.  Network Anomaly Lifecycle Data Model  . . . . . . . . . . . .  10
      8.1.  Overview of the Data Model for the Relevant State and all
            the related entities  . . . . . . . . . . . . . . . . . .  12
-     8.2.  YANG Module . . . . . . . . . . . . . . . . . . . . . . .  13
-   9.  Implementation status . . . . . . . . . . . . . . . . . . . .  23
-     9.1.  Antagonist  . . . . . . . . . . . . . . . . . . . . . . .  23
-   10. Security Considerations . . . . . . . . . . . . . . . . . . .  23
-   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  24
-   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  24
-     12.1.  Normative References . . . . . . . . . . . . . . . . . .  24
-     12.2.  Informative References . . . . . . . . . . . . . . . . .  26
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  27
+     8.2.  YANG Module . . . . . . . . . . . . . . . . . . . . . . .  14
+   9.  Implementation status . . . . . . . . . . . . . . . . . . . .  24
+     9.1.  Antagonist  . . . . . . . . . . . . . . . . . . . . . . .  24
+   10. Security Considerations . . . . . . . . . . . . . . . . . . .  24
+   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  25
+   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  25
+     12.1.  Normative References . . . . . . . . . . . . . . . . . .  25
+     12.2.  Informative References . . . . . . . . . . . . . . . . .  27
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  28
 
 1.  Introduction
 
@@ -165,7 +165,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
 
 
-Riccobene, et al.          Expires 22 May 2026                  [Page 3]
+Riccobene, et al.          Expires 25 May 2026                  [Page 3]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
@@ -189,9 +189,9 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    The adjustment of the detection process can happen after problems are
    solved and well understood, so the learning can be transferred into
    the detection system for future faster detections.  For this reason,
-   the network anomaly Detection lifecycle mainly relates to the post-
-   mortem stage of the network anomaly detection process, as described
-   in [I-D.ietf-nmop-network-anomaly-architecture].
+   the network anomaly Detection lifecycle mainly relates to the
+   Postmortem stage of the network anomaly detection process, as
+   described in [I-D.ietf-nmop-network-anomaly-architecture].
 
 2.  Status of this document
 
@@ -221,7 +221,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
 
 
-Riccobene, et al.          Expires 22 May 2026                  [Page 4]
+Riccobene, et al.          Expires 25 May 2026                  [Page 4]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
@@ -277,7 +277,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
 
 
-Riccobene, et al.          Expires 22 May 2026                  [Page 5]
+Riccobene, et al.          Expires 25 May 2026                  [Page 5]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
@@ -333,7 +333,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
 
 
-Riccobene, et al.          Expires 22 May 2026                  [Page 6]
+Riccobene, et al.          Expires 25 May 2026                  [Page 6]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
@@ -389,7 +389,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
 
 
-Riccobene, et al.          Expires 22 May 2026                  [Page 7]
+Riccobene, et al.          Expires 25 May 2026                  [Page 7]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
@@ -445,7 +445,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
 
 
-Riccobene, et al.          Expires 22 May 2026                  [Page 8]
+Riccobene, et al.          Expires 25 May 2026                  [Page 8]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
@@ -456,9 +456,9 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    and retrieved to perform the network anomaly lifecycle.
 
    The lifecycle begins with the detector notifying anomalies to the
-   "Alarm and Problem Management System" and to the "Post-mortem System"
+   "Alarm and Problem Management System" and to the "Postmortem System"
    according to (see [I-D.ietf-nmop-network-anomaly-architecture]).  In
-   this case the Post-mortem system is identified as the Label Store.
+   this case the Postmortem system is identified as the Label Store.
    Once the notification arrives to the Label Store, the anomaly label
    is persisted.  In the following stages (i.e. validation and
    refinement), the information about the labels are retrieved,
@@ -501,7 +501,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
 
 
-Riccobene, et al.          Expires 22 May 2026                  [Page 9]
+Riccobene, et al.          Expires 25 May 2026                  [Page 9]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
@@ -557,7 +557,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
 
 
-Riccobene, et al.          Expires 22 May 2026                 [Page 10]
+Riccobene, et al.          Expires 25 May 2026                 [Page 10]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
@@ -573,13 +573,14 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    trend as types of data patterns and can be easily extended by
    additing new YANG identities.
 
-   Each anomaly also includes the symptom and the service container.
-   These containers are placeholders to represent the information about
-   the symptom (what exactly is happening as anomalous behaviour) and
-   the connectivity service (what entity is affected by the anomaly).
-   In particular, for what concerns the symptom, a concern score is
-   defined as necessary field, which has the meaning of expressing how
-   much the anomaly is impacting connectivity services.
+   Each anomaly also includes the operational-data, symptom and the
+   service container.  These containers are placeholders to represent
+   the information whoch operational data was used, the symptom (what
+   exactly is happening as anomalous behaviour) was observed and the
+   connectivity service (what entity is affected by the anomaly).  In
+   particular, for what concerns the symptom, a concern score is defined
+   as necessary field, which has the meaning of expressing how much the
+   anomaly is impacting connectivity services.
 
    Concern and Confidence Scores are used to express two very different
    concepts, and it is important to make a clear distinction between
@@ -609,15 +610,15 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    Also a list of various actors that are involved in the process is
    presented as following:
 
-   In the detection stage:  the detectors are either Network Engineers
 
 
 
-Riccobene, et al.          Expires 22 May 2026                 [Page 11]
+Riccobene, et al.          Expires 25 May 2026                 [Page 11]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
 
+   In the detection stage:  the detectors are either Network Engineers
       and/or Automatic detectors (including Rule-based detectors and ML-
       based detectors)
 
@@ -631,9 +632,9 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    The data model defines a Relevant State container and a Relevant
    State notification: the notification is primarily used by the Network
    Anomaly Detector, to notify the "Alarm and Problem Management System"
-   and the "Post-mortem System" (see
+   and the "Postmortem System" (see
    [I-D.ietf-nmop-network-anomaly-architecture]); the container instead
-   is used inside the Post-mortem system to exhance anomaly detection
+   is used inside the Postmortem system to exhance anomaly detection
    lables between the anomaly detection stages defined above
    (validation, refinement, detection).
 
@@ -655,6 +656,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
         +--rw strategy?           string
         +--rw confidence-score?   score
         +--rw concern-score       score
+        +--rw stage               identityref
         +--rw (service)?
         +--rw anomaly* [id revision]
            +--rw id                  yang:uuid
@@ -664,21 +666,24 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
            +--rw description?        string
            +--rw start-time          yang:date-and-time
            +--rw end-time?           yang:date-and-time
-           +--rw confidence-score?   score
-           +--rw pattern?            identityref
 
 
 
-Riccobene, et al.          Expires 22 May 2026                 [Page 12]
+Riccobene, et al.          Expires 25 May 2026                 [Page 12]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
 
+           +--rw confidence-score?   score
+           +--rw pattern?            identityref
            +--rw annotator
            |  +--rw id?               yang:uuid
            |  +--rw name              string
            |  +--rw version?          string
            |  +--rw annotator-type?   enumeration
+           +--rw operational-data
+           |  +--rw topic-name?     inet:host-name
+           |  +--rw subject-name?   inet:host-name
            +--rw symptom!
               +--rw id               yang:uuid
               +--rw concern-score    score
@@ -697,6 +702,7 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
           +--ro strategy?           string
           +--ro confidence-score?   score
           +--ro concern-score       score
+          +--ro stage               identityref
           +--ro (service)?
           +--ro anomaly* [id revision]
              +--ro id                  yang:uuid
@@ -713,22 +719,22 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
              |  +--ro name              string
              |  +--ro version?          string
              |  +--ro annotator-type?   enumeration
+             +--ro operational-data
+             |  +--ro topic-name?     inet:host-name
+             |  +--ro subject-name?   inet:host-name
+
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 13]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
              +--ro symptom!
                 +--ro id               yang:uuid
                 +--ro concern-score    score
 
 8.2.  YANG Module
-
-
-
-
-
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 13]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
 
    <CODE BEGINS> file "ietf-relevant-state@2025-11-15.yang"
    module ietf-relevant-state {
@@ -739,12 +745,12 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
      import ietf-yang-types {
        prefix yang;
        reference
-         "RFC 6991: Common YANG Data Types";
+         "draft-ietf-netmod-rfc6991-bis-18: Common YANG Data Types";
      }
      import ietf-inet-types {
        prefix inet;
        reference
-         "RFC 6991: Common YANG Data Types";
+         "draft-ietf-netmod-rfc6991-bis-18: Common YANG Data Types";
      }
 
      organization
@@ -772,19 +778,20 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
         Copyright (c) 2025 IETF Trust and the persons
         identified as authors of the code.  All rights reserved.
 
+
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 14]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
         Redistribution and use in source and binary forms, with or
         without modification, is permitted pursuant to, and subject
         to the license terms contained in, the Revised BSD License
         set forth in Section 4.c of the IETF Trust's Legal Provisions
         Relating to IETF Documents
         (https://trustee.ietf.org/license-info).
-
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 14]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
 
         All revisions of IETF and IANA published modules can be found
         at the YANG Parameters registry
@@ -827,6 +834,14 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
      identity validation {
        base network-anomaly-stage;
+
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 15]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
        description
          "A problem is int the validation stage.";
        reference
@@ -834,14 +849,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
      }
 
      identity refinement {
-
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 15]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
-
        base network-anomaly-stage;
        description
          "A problem is int the refinement stage.";
@@ -883,6 +890,14 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
      identity analyzed {
        base refinement;
        description
+
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 16]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
          "The anomaly detection went through analysis to identify
           potential ways to further improve the detection process in
           for future anomalies.";
@@ -890,14 +905,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
      identity adjusted {
        base refinement;
-
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 16]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
-
        description
          "The network anomaly has been solved and analysed.
           No further action is required.";
@@ -939,6 +946,14 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
      }
 
      identity other {
+
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 17]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
        base pattern;
        description
          "Any other type of pattern.";
@@ -946,14 +961,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
      grouping relevant-state-grouping {
        description
-
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 17]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
-
          "Relevant State is a state that could lead to
           problems or might be clear indications of problem
           already happening.";
@@ -995,6 +1002,14 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
            "Captures one approach to look at the data (as a human operator
             does) to observe if an abnormal situation is arising.";
          reference
+
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 18]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
            "Section 3.5.3 in
             draft-ietf-nmop-network-anomaly-architecture.";
        }
@@ -1002,14 +1017,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
          type score;
          description
            "Score indicating how confident were the detectors
-
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 18]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
-
             in relation to the overall relevant state.";
        }
        leaf concern-score {
@@ -1018,6 +1025,14 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
          description
            "Score indicating the degree of concern in
             relation to the overall relevant state.";
+       }
+       leaf stage {
+         type identityref {
+           base network-anomaly-stage;
+         }
+         mandatory true;
+         description
+           "Stage of the relevant state.";
        }
        choice service {
          description
@@ -1043,6 +1058,14 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
        }
        leaf version {
          type string;
+
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 19]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
          mandatory false;
          description
            "Version of the annotator.";
@@ -1058,18 +1081,25 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
                "This option is used if a algorithm or software
                 provided the label.";
            }
-
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 19]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
-
          }
          description
            "An annotator can be either a human user or a
             programmatic entity, such as an algorithm.";
+       }
+     }
+
+     grouping message-broker-grouping {
+       description
+         "References message broker draft-ietf-nmop-yang-message-broker-integration entities.";
+       leaf topic-name {
+         type inet:host-name;
+         description
+           "From which message broker topic the operational data was consumed from.";
+       }
+       leaf subject-name {
+         type inet:host-name;
+         description
+           "To which message broker subject the operational data references to.";
        }
      }
 
@@ -1084,6 +1114,14 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
            type yang:uuid;
            description
              "Unique identifier of the anomaly.";
+
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 20]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
          }
          leaf revision {
            type yang:counter32;
@@ -1114,14 +1152,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
              "Textual description of the anomaly.";
          }
          leaf start-time {
-
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 20]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
-
            type yang:date-and-time;
            mandatory true;
            description
@@ -1140,6 +1170,14 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
                time of generation of the label.";
          }
          leaf confidence-score {
+
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 21]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
            type score;
            description
              "Score indicating how confident was the detector
@@ -1161,6 +1199,11 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
                annotation.";
            uses annotator-grouping;
          }
+         container operational-data {
+           description
+             "References the operational data from where the anomaly was observed.";
+           uses message-broker-grouping;
+         }
          container symptom {
            presence "It specifies the symptom for the anomaly";
            description
@@ -1170,14 +1213,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
            leaf id {
              type yang:uuid;
              mandatory true;
-
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 21]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
-
              description
                "Unique identifier of the symptom type.";
            }
@@ -1191,6 +1226,14 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
                  concern that is specific to the symptom.";
            }
          }
+
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 22]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
        }
      }
 
@@ -1226,14 +1269,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
      }
 
      container relevant-state {
-
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 22]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
-
        description
          "A Relevant State is a state that have relevancy
           for network operators, as those are states that could lead
@@ -1244,6 +1279,16 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
      }
    }
    <CODE ENDS>
+
+
+
+
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 23]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
 
 9.  Implementation status
 
@@ -1283,19 +1328,23 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    This section is modeled after the template described in Section 3.7
    of [I-D.ietf-netmod-rfc8407bis].
 
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 23]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
-
    The "ietf-network-anomaly-symptom-cbl" and "ietf-network-anomaly-
    service-topology" YANG modules defines two data models that are
    designed to be accessed via YANG-based management protocols, such as
    NETCONF [RFC6141] and RESTCONF [RFC8040].  These protocols have to
    use a secure transport layer (e.g., SSH [RFC4252], TLS [RFC8446], and
    QUIC [RFC9000]) and have to use mutual authentication.
+
+
+
+
+
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 24]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
 
    The Network Configuration Access Control Model (NACM) [RFC8341]
    provides the means to restrict access for particular NETCONF or
@@ -1338,10 +1387,17 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
               "Antagonist: Anomaly tagging on historical data",
               <https://github.com/vriccobene/antagonist>.
 
+   [I-D.ietf-netmod-rfc6991-bis]
+              Schönwälder, J., "Common YANG Data Types", Work in
+              Progress, Internet-Draft, draft-ietf-netmod-rfc6991-bis-
+              18, 23 June 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-netmod-rfc6991-bis-18>.
 
 
 
-Riccobene, et al.          Expires 22 May 2026                 [Page 24]
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 25]
 
 Internet-Draft          network-anomaly-lifecycle          November 2025
 
@@ -1370,6 +1426,14 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
               terminology-23>.
 
+   [I-D.ietf-nmop-yang-message-broker-integration]
+              Graf, T. and A. Elhassany, "An Architecture for YANG-Push
+              to Message Broker Integration", Work in Progress,
+              Internet-Draft, draft-ietf-nmop-yang-message-broker-
+              integration-09, 20 October 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
+              yang-message-broker-integration-09>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -1385,6 +1449,15 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
               DOI 10.17487/RFC6141, March 2011,
               <https://www.rfc-editor.org/info/rfc6141>.
 
+
+
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 26]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
    [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
               <https://www.rfc-editor.org/info/rfc8040>.
@@ -1392,15 +1465,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
-
-
-
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 25]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
 
    [RFC8340]  Bjorklund, M. and L. Berger, Ed., "YANG Tree Diagrams",
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
@@ -1443,6 +1507,13 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
 
 12.2.  Informative References
 
+
+
+Riccobene, et al.          Expires 25 May 2026                 [Page 27]
+
+Internet-Draft          network-anomaly-lifecycle          November 2025
+
+
    [I-D.ietf-netmod-rfc8407bis]
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
@@ -1450,13 +1521,6 @@ Internet-Draft          network-anomaly-lifecycle          November 2025
               netmod-rfc8407bis-28, 5 June 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
               rfc8407bis-28>.
-
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 26]
-
-Internet-Draft          network-anomaly-lifecycle          November 2025
-
 
 Authors' Addresses
 
@@ -1501,12 +1565,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-Riccobene, et al.          Expires 22 May 2026                 [Page 27]
+Riccobene, et al.          Expires 25 May 2026                 [Page 28]

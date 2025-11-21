@@ -101,7 +101,7 @@
       </address>
     </author>
 
-    <date day="18" month="November" year="2025"/>
+    <date day="21" month="November" year="2025"/>
 
     <area>Operations and Management</area>
 
@@ -208,7 +208,7 @@
       problems  are solved and well understood, so the learning can be
       transferred into the detection system for future faster
       detections. For this reason, the network anomaly Detection
-      lifecycle mainly relates to the post-mortem stage of the network
+      lifecycle mainly relates to the Postmortem stage of the network
       anomaly detection process, as described in <xref
       target="I-D.ietf-nmop-network-anomaly-architecture"/>.</t>
     </section>
@@ -468,9 +468,9 @@ Adjustments |          +-------------+          | Symptoms
 
       <t>The lifecycle begins with the detector notifying anomalies 
       to the "Alarm and Problem Management System" and to the
-      "Post-mortem System" according to (see <xref
+      "Postmortem System" according to (see <xref
       target="I-D.ietf-nmop-network-anomaly-architecture"/>). In this
-      case the Post-mortem system is identified as the Label Store. Once
+      case the Postmortem system is identified as the Label Store. Once
       the notification arrives to the Label Store, the anomaly label is
       persisted. In the following stages (i.e. validation and
       refinement), the information about the labels are retrieved,
@@ -570,14 +570,15 @@ Adjustments |          +-------------+          | Symptoms
 			seasonality-shift and trend as types of data patterns and can
 			be easily extended by additing new YANG identities.</t>
       
-      <t>Each anomaly also includes the symptom and the service
-      container. These containers are placeholders to represent the
-      information about the symptom (what exactly is happening as
-      anomalous behaviour) and the connectivity service (what entity is
-      affected by the anomaly). In particular, for what concerns the
-      symptom, a concern score is defined as necessary field, which has
-      the meaning of expressing how much the anomaly is impacting
-      connectivity services.</t>
+      <t>Each anomaly also includes the operational-data, symptom and
+			the service container. These containers are placeholders to
+			represent the information whoch operational data was used, the
+			symptom (what exactly is happening as anomalous behaviour) was
+			observed and the connectivity service (what entity is affected by
+			the anomaly). In particular, for what concerns the symptom, a
+			concern score is defined as necessary field, which has the meaning
+			of expressing how much the anomaly is impacting connectivity
+			services.</t>
 
       <t>Concern and Confidence Scores are used to express two very 
       different concepts, and it is important to make a clear
@@ -641,9 +642,9 @@ Adjustments |          +-------------+          | Symptoms
       <t>The data model defines a Relevant State container and a Relevant
       State notification: the notification is primarily used by the
       Network Anomaly Detector, to notify the "Alarm and Problem
-      Management System"  and the "Post-mortem System" (see <xref
+      Management System"  and the "Postmortem System" (see <xref
       target="I-D.ietf-nmop-network-anomaly-architecture"/>); the
-      container instead is used inside the Post-mortem system to exhance
+      container instead is used inside the Postmortem system to exhance
       anomaly detection lables between the anomaly detection stages
       defined above (validation, refinement, detection).</t>
       
@@ -666,6 +667,7 @@ module: ietf-relevant-state
      +--rw strategy?           string
      +--rw confidence-score?   score
      +--rw concern-score       score
+     +--rw stage               identityref
      +--rw (service)?
      +--rw anomaly* [id revision]
         +--rw id                  yang:uuid
@@ -682,6 +684,9 @@ module: ietf-relevant-state
         |  +--rw name              string
         |  +--rw version?          string
         |  +--rw annotator-type?   enumeration
+        +--rw operational-data
+        |  +--rw topic-name?     inet:host-name
+        |  +--rw subject-name?   inet:host-name
         +--rw symptom!
            +--rw id               yang:uuid
            +--rw concern-score    score
@@ -700,6 +705,7 @@ module: ietf-relevant-state
        +--ro strategy?           string
        +--ro confidence-score?   score
        +--ro concern-score       score
+       +--ro stage               identityref
        +--ro (service)?
        +--ro anomaly* [id revision]
           +--ro id                  yang:uuid
@@ -716,6 +722,9 @@ module: ietf-relevant-state
           |  +--ro name              string
           |  +--ro version?          string
           |  +--ro annotator-type?   enumeration
+          +--ro operational-data
+          |  +--ro topic-name?     inet:host-name
+          |  +--ro subject-name?   inet:host-name
           +--ro symptom!
              +--ro id               yang:uuid
              +--ro concern-score    score
@@ -731,12 +740,12 @@ module ietf-relevant-state {
   import ietf-yang-types {
     prefix yang;
     reference
-      "RFC 6991: Common YANG Data Types";
+      "draft-ietf-netmod-rfc6991-bis-18: Common YANG Data Types";
   }
   import ietf-inet-types {
     prefix inet;
     reference
-      "RFC 6991: Common YANG Data Types";
+      "draft-ietf-netmod-rfc6991-bis-18: Common YANG Data Types";
   }
 
   organization
@@ -972,6 +981,14 @@ module ietf-relevant-state {
         "Score indicating the degree of concern in
          relation to the overall relevant state.";
     }
+    leaf stage {
+      type identityref {
+        base network-anomaly-stage;
+      }
+      mandatory true;
+      description
+        "Stage of the relevant state.";
+    }
     choice service {
       description
         "Indication of the service that is affected
@@ -1015,6 +1032,21 @@ module ietf-relevant-state {
       description
         "An annotator can be either a human user or a
          programmatic entity, such as an algorithm.";
+    }
+  }
+
+  grouping message-broker-grouping {
+    description
+      "References message broker draft-ietf-nmop-yang-message-broker-integration entities.";
+    leaf topic-name {
+      type inet:host-name;
+      description
+        "From which message broker topic the operational data was consumed from.";
+    }
+    leaf subject-name {
+      type inet:host-name;
+      description
+        "To which message broker subject the operational data references to.";
     }
   }
 
@@ -1097,6 +1129,11 @@ module ietf-relevant-state {
           "Annotator represents the entity that produced the
             annotation.";
         uses annotator-grouping;
+      }
+      container operational-data {
+        description
+          "References the operational data from where the anomaly was observed.";
+        uses message-broker-grouping;
       }
       container symptom {
         presence "It specifies the symptom for the anomaly";
@@ -1289,6 +1326,10 @@ module ietf-relevant-state {
       <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-nmop-terminology.xml"?>
 
       <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-nmop-network-anomaly-architecture.xml"?>
+
+      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-netmod-rfc6991-bis.xml"?>
+
+      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-nmop-yang-message-broker-integration.xml"?>
 
       <reference anchor="Antagonist"
                  target="https://github.com/vriccobene/antagonist">
