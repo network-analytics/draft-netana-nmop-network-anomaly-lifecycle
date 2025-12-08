@@ -278,8 +278,8 @@
 					detected an outlier. The value ranges between 0 and 100. The
 					higher the value the higher the confidence. For example, if
 					the normal value of the operational-data is in the range of
-					0-10 and the detected value is 1000, a confidence score of 100
-					could make sense. Where a detected value of 100 would lead to
+					0-10 and the detected value is 1000, a confidence score of 99
+					could make sense. Where a detected value of 120 would lead to
 					a confidence level of 10. The Confidence Score is applicable
 					to a single anomaly or for a detection strategy on one ore
 					more anomalies.</t>
@@ -601,9 +601,8 @@ Adjustments |          +-------------+          | Symptoms
 			observed and the connectivity service (what entity is affected by
 			the anomaly). In particular, for what concerns the symptom, a
 			confidence and concern score is defined as necessary field, which
-			has the meaning of expressing how cofident the anomaly was
-			detected and much potentially it is impacting the connectivity
-			service.</t>
+      indicates how confident the anomaly and its potential impact on
+			the connectivity service was detected.</t>
 
       <t>In case additional information related to the symptom and to 
       the connectivity service need to be provided, augmentation would
