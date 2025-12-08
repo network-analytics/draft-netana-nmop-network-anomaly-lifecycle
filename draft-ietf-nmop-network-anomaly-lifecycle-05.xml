@@ -274,13 +274,37 @@
           <t>False Negative: Is anomalous but has not been identified by
           the anomaly detection system.</t>
 
-          <t>Confidence Score: Indicates the degree of how abnormal the
-					detected anomaly is.</t>
+          <t>Confidence Score: Indicates how confident the detector
+					detected an outlier. The value ranges between 0 and 100. The
+					higher the value the higher the confidence. For example, if
+					the normal value of the operational-data is in the range of
+					0-10 and the detected value is 1000, a confidence score of 100
+					could make sense. Where a detected value of 100 would lead to
+					a confidence level of 10. The Confidence Score is applicable
+					to a single anomaly or for a detection strategy on one ore
+					more anomalies.</t>
 
-          <t>Concern Score: Indicates the possible degree of
-					connectivity service degradation by taking the Confidence
-					Scores from multiple anomalies and their relationships into
-					account.</t>
+          <t>Concern Score: Indicates how concerned network operation on
+					connectivity service degradation should be. The value ranges
+					between 0 and 100. The higher the value the higher the
+					concern. The concern takes the confidence and the knowledge,
+					<xref section="3.5.1" sectionFormat="of"
+          target="I-D.ietf-nmop-network-anomaly-architecture"/>, of the
+					detection system into account. For example, if the normal
+					value of the operational-data is in the range of 0-10, the
+					detected value is 20, from data profiling, section 3.5.1.3 of
+					architecture, it learned that given time series has usually
+					not many deviations from normal and therefore is rather
+					sensitive to deviations, a Concern Score of 40 could make
+					sense. The Confidence Score is applicable to one ore more
+					anomalies. In case of multiple anomalies, knowledge from
+					expert rules as in <xref section="3.5.1.1" sectionFormat="of"
+          target="I-D.ietf-nmop-network-anomaly-architecture"/> or
+					network modelling as in section <xref section="3.5.1.2"
+					sectionFormat="of"
+          target="I-D.ietf-nmop-network-anomaly-architecture"/> are
+					taken into account in the calculation of the Confidence Score.
+					</t>
         </list></t>
     </section>
 
@@ -576,35 +600,15 @@ Adjustments |          +-------------+          | Symptoms
 			symptom (what exactly is happening as anomalous behaviour) was
 			observed and the connectivity service (what entity is affected by
 			the anomaly). In particular, for what concerns the symptom, a
-			concern score is defined as necessary field, which has the meaning
-			of expressing how much the anomaly is impacting connectivity
-			services.</t>
-
-      <t>Concern and Confidence Scores are used to express two very 
-      different concepts, and it is important to make a clear
-      distinction between them:
-      
-        <list style="symbols">
-          <t>the Confidence score tends to be higher when symptoms 
-          are more abnormal, for instance if some given values are 
-          very rare in the data or if they substantially deviate 
-          from expected behaviours. In those cases, detectors are 
-          more sure about the anomaly and this is reflected into 
-          higher confidence scores.</t>
-
-          <t>the Concern Score tends to be higher when the symptom 
-          is likely having a higher impact on connectivity services.</t>
-        </list>
-        
-      Although the two concepts can be somehow intertwined, in the scope
-      of this document a clear way on how to use them is not
-      provided, as this has been shown to be dependent on the use case
-      and on the user of the system.</t>
+			confidence and concern score is defined as necessary field, which
+			has the meaning of expressing how cofident the anomaly was
+			detected and much potentially it is impacting the connectivity
+			service.</t>
 
       <t>In case additional information related to the symptom and to 
-      the service need to be provided, augmentation would be the 
-      appropriate mechanism to do so. An example of this is
-      provided in <xref
+      the connectivity service need to be provided, augmentation would
+			be the appropriate mechanism to do so. An example of this is
+      provided in <xref 
       target="I-D.ietf-nmop-network-anomaly-semantics"/>, where an
       augmentation of both symptom and service is provided for the
       specific case of anomaly labels related to connectivity services.
@@ -971,15 +975,17 @@ module ietf-relevant-state {
     leaf confidence-score {
       type score;
       description
-        "Score indicating how confident were the detectors
-         in relation to the overall relevant state.";
+        "Indicates how confident the detector detected an outlier. The
+         higher the value the higher the confidence in relation to the
+         overall relevant state.";
     }
     leaf concern-score {
       type score;
       mandatory true;
       description
-        "Score indicating the degree of concern in
-         relation to the overall relevant state.";
+        "Indicates how concerned network operation on connectivity
+         service degradation should be. The higher the value the higher
+         the concern in relation to the overall relevant state.";
     }
     leaf stage {
       type identityref {
@@ -1111,9 +1117,9 @@ module ietf-relevant-state {
       leaf confidence-score {
         type score;
         description
-          "Score indicating how confident was the detector
-            while considering the given anomaly as part of the
-            relevant event.";
+          "Indicates how confident the detector detected an outlier. The
+           higher the value the higher the confidence in relation to the
+           anomaly.";
       }
       leaf pattern {
         type identityref {
