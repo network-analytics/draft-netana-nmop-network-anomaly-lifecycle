@@ -101,7 +101,7 @@
       </address>
     </author>
 
-    <date day="08" month="December" year="2025"/>
+    <date day="12" month="February" year="2026"/>
 
     <area>Operations and Management</area>
 
@@ -275,36 +275,36 @@
           the anomaly detection system.</t>
 
           <t>Confidence Score: Indicates how confident the detector
-					detected an outlier. The value ranges between 0 and 100. The
-					higher the value the higher the confidence. For example, if
-					the normal value of the operational-data is in the range of
-					0-10 and the detected value is 1000, a confidence score of 99
-					could make sense. Where a detected value of 120 would lead to
-					a confidence level of 10. The Confidence Score is applicable
-					to a single anomaly or for a detection strategy on one ore
-					more anomalies.</t>
+          detected an outlier. The value ranges between 0 and 100. The
+          higher the value the higher the confidence. For example, if
+          the normal value of the operational-data is in the range of
+          0-10 and the detected value is 1000, a confidence score of 99
+          could make sense. Where a detected value of 120 would lead to
+          a confidence level of 10. The Confidence Score is applicable
+          to a single anomaly or for a detection strategy on one ore
+          more anomalies.</t>
 
           <t>Concern Score: Indicates how concerned network operation on
-					connectivity service degradation should be. The value ranges
-					between 0 and 100. The higher the value the higher the
-					concern. The concern takes the confidence and the knowledge,
-					<xref section="3.5.1" sectionFormat="of"
+          connectivity service degradation should be. The value ranges
+          between 0 and 100. The higher the value the higher the
+          concern. The concern takes the confidence and the knowledge,
+          <xref section="3.5.1" sectionFormat="of"
           target="I-D.ietf-nmop-network-anomaly-architecture"/>, of the
-					detection system into account. For example, if the normal
-					value of the operational-data is in the range of 0-10, the
-					detected value is 20, from data profiling, section 3.5.1.3 of
-					architecture, it learned that given time series has usually
-					not many deviations from normal and therefore is rather
-					sensitive to deviations, a Concern Score of 40 could make
-					sense. The Confidence Score is applicable to one ore more
-					anomalies. In case of multiple anomalies, knowledge from
-					expert rules as in <xref section="3.5.1.1" sectionFormat="of"
+          detection system into account. For example, if the normal
+          value of the operational-data is in the range of 0-10, the
+          detected value is 20, from data profiling, section 3.5.1.3 of
+          architecture, it learned that given time series has usually
+          not many deviations from normal and therefore is rather
+          sensitive to deviations, a Concern Score of 40 could make
+          sense. The Confidence Score is applicable to one ore more
+          anomalies. In case of multiple anomalies, knowledge from
+          expert rules as in <xref section="3.5.1.1" sectionFormat="of"
           target="I-D.ietf-nmop-network-anomaly-architecture"/> or
-					network modelling as in section <xref section="3.5.1.2"
-					sectionFormat="of"
+          network modelling as in section <xref section="3.5.1.2"
+          sectionFormat="of"
           target="I-D.ietf-nmop-network-anomaly-architecture"/> are
-					taken into account in the calculation of the Confidence Score.
-					</t>
+          taken into account in the calculation of the Confidence Score.
+          </t>
         </list></t>
     </section>
 
@@ -312,17 +312,17 @@
       <t>The Problem, as defined in <xref target="introduction"/>,
       provide the scope for what to be looking for when detecting
       network anomalies. This poses the attention on a significant
-			Problem that network operators have to face: the definition of
-			what is to be considered "desirable" or "undesirable". It is not
-			always easy to detect if a network is operating in an undesired
-			State at a given point in time. To approach this, network
-			operators can rely on different methodologies, more or less
-			deterministic and more or less sensitive: on the one side, the
-			definition of Intents (including Service Level Objectives and
-			Service Level Agreements) which approaches the Problem top-down;
-			on the other side, the definition of Symptoms, by mean of
-			solutions like <xref target="RFC9417">SAIN</xref>, <xref
-			target="RFC9418"/> and <xref
+      Problem that network operators have to face: the definition of
+      what is to be considered "desirable" or "undesirable". It is not
+      always easy to detect if a network is operating in an undesired
+      State at a given point in time. To approach this, network
+      operators can rely on different methodologies, more or less
+      deterministic and more or less sensitive: on the one side, the
+      definition of Intents (including Service Level Objectives and
+      Service Level Agreements) which approaches the Problem top-down;
+      on the other side, the definition of Symptoms, by mean of
+      solutions like <xref target="RFC9417">SAIN</xref>, <xref
+      target="RFC9418"/> and <xref
       target="I-D.ietf-nmop-network-anomaly-architecture"/>, which
       approaches the Problem bottom-up. At the center of these
       approaches, there are the so-called Symptoms, explaining what is
@@ -479,7 +479,7 @@ Adjustments |          +-------------+          | Symptoms
         network anomaly and checking if there is any measurable
         improvement in the ability to detect Problems by using the
         updated method. In some cases, detection can be improved by
-				capturing additional or more appropriate metrics.</t>
+        capturing additional or more appropriate metrics.</t>
       </section>
     </section>
 
@@ -591,22 +591,22 @@ Adjustments |          +-------------+          | Symptoms
 
       <t>Data patterns are being classified into different types.
       currently the model accommodates, drop, spike mean-shift,
-			seasonality-shift and trend as types of data patterns and can
-			be easily extended by adding new YANG identities.</t>
+      seasonality-shift and trend as types of data patterns and can
+      be easily extended by adding new YANG identities.</t>
       
       <t>Each anomaly also includes the operational-data, symptom and
-			the service container. These containers are placeholders to
-			represent the information whoch operational data was used, the
-			symptom (what exactly is happening as anomalous behaviour) was
-			observed and the connectivity service (what entity is affected by
-			the anomaly). In particular, for what concerns the symptom, a
-			confidence and concern score is defined as necessary field, which
+      the service container. These containers are placeholders to
+      represent the information whoch operational data was used, the
+      symptom (what exactly is happening as anomalous behaviour) was
+      observed and the connectivity service (what entity is affected by
+      the anomaly). In particular, for what concerns the symptom, a
+      confidence and concern score is defined as necessary field, which
       indicates how confident the anomaly and its potential impact on
-			the connectivity service was detected.</t>
+      the connectivity service was detected.</t>
 
       <t>In case additional information related to the symptom and to 
       the connectivity service need to be provided, augmentation would
-			be the appropriate mechanism to do so. An example of this is
+      be the appropriate mechanism to do so. An example of this is
       provided in <xref 
       target="I-D.ietf-nmop-network-anomaly-semantics"/>, where an
       augmentation of both symptom and service is provided for the
@@ -661,7 +661,7 @@ Adjustments |          +-------------+          | Symptoms
         target="RFC8340"/> shows the "ietf-relevant-state" model.</t>
         <sourcecode type="yangtree"><![CDATA[
 module: ietf-relevant-state
-  +--rw relevant-state
+  +--rw relevant-state!
      +--rw id                  yang:uuid
      +--rw uri?                inet:uri
      +--rw description?        string
@@ -773,7 +773,7 @@ module ietf-relevant-state {
      analytical problem data equally. Describing the relevant-state
      of observed symptoms.
 
-     Copyright (c) 2025 IETF Trust and the persons
+     Copyright (c) 2026 IETF Trust and the persons
      identified as authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -790,7 +790,7 @@ module ietf-relevant-state {
      This version of this YANG module is part of RFC XXXX; see
      the RFC itself for full legal notices.";
 
-  revision 2025-11-15 {
+  revision 2026-02-12 {
     description
       "Initial version";
     reference
@@ -963,7 +963,6 @@ module ietf-relevant-state {
     }
     leaf strategy {
       type string;
-      mandatory false;
       description
         "Captures one approach to look at the data (as a human operator
          does) to observe if an abnormal situation is arising.";
@@ -1018,7 +1017,6 @@ module ietf-relevant-state {
     }
     leaf version {
       type string;
-      mandatory false;
       description
         "Version of the annotator.";
     }
@@ -1187,7 +1185,6 @@ module ietf-relevant-state {
       }
       leaf version {
         type string;
-        mandatory false;
         description
           "Version of the publisher.";
       }
@@ -1197,6 +1194,7 @@ module ietf-relevant-state {
   }
 
   container relevant-state {
+    presence "relevant-state";
     description
       "A Relevant State is a state that have relevancy
        for network operators, as those are states that could lead
@@ -1294,7 +1292,7 @@ module ietf-relevant-state {
       <t>The authors would like to thank Antonio Roberto for his
       contribution to the ideas in this document and Mohamed Boucadair
       and Adrian Farrel, Paul Aitken, Reshad Rahman and Ruediger Geib
-			for his review and valuable comments. </t>
+      for his review and valuable comments. </t>
     </section>
   </middle>
 

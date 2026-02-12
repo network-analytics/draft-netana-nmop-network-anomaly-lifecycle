@@ -191,7 +191,7 @@ module ietf-relevant-state {
   grouping relevant-state-grouping {
     description
       "Relevant State is a state that could lead to
-       problems or might be clear indications of problem
+       problems or might be clear indications of problems
        already happening.";
     reference
       "Figure 4 in draft-ietf-nmop-terminology.";
@@ -205,7 +205,7 @@ module ietf-relevant-state {
     leaf uri {
       type inet:uri;
       description
-        "URI to viusalize the analytical metrics of the
+        "URI to visualize the analytical metrics of the
          relevant-state.";
     }
     leaf description {
@@ -433,7 +433,7 @@ module ietf-relevant-state {
     description
       "A Relevant State is a state that have relevancy
        for network operators, as those are states that could lead
-       to problems or might be clear indications of problem already
+       to problems or might be clear indications of problems already
        happening.";
     uses relevant-state-grouping;
     uses anomaly-grouping;
