@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="exp" docName="draft-ietf-nmop-network-anomaly-lifecycle-05" ipr="trust200902" submissionType="IETF">
+<rfc category="exp" docName="draft-ietf-nmop-network-anomaly-lifecycle-06" ipr="trust200902" submissionType="IETF">
   <front>
     <title abbrev="network-anomaly-lifecycle">An Experiment: Network Anomaly
     Detection Lifecycle</title>
@@ -101,7 +101,7 @@
       </address>
     </author>
 
-    <date day="25" month="May" year="2026"/>
+    <date day="08" month="June" year="2026"/>
 
     <area>Operations and Management</area>
 
@@ -530,7 +530,7 @@ Adjustments |          +-------------+          | Symptoms
             |                          +-----+---------+           |
 +-----------------------+     +--------|---------------|------+    |
 |  +-----------------+  |     | +------v-----+  +------v----+ |    |
-|  |    Detection    |------->| |  Problem   |  |  Problem  | |    |
+|  |    Detection    |--------->|  Problem   |  |  Problem  | |    |
 |  |     Adjusted    |  |     | | Forecasted |  | Potential | |    |
 |  +--------^--------+  |     | +------------+  +-----------+ |    |
 |           |           |     +--------|--Detection---|-------+    |
@@ -542,19 +542,24 @@ Adjustments |          +-------------+          | Symptoms
 |           |           |                      v                   |
 | +---------|--------+  |     +-----------Validation------------+  |
 | |     Problem      |  |     |  +-----------+   +-----------+  |  |
-| |     Analyzed     |<-------|  |  Problem  |   |  Problem  |  |  |
-| +------------------+  |     |  | Discarded |   | Confirmed |<-|--+
-|                       |     |  +-----|-----+   +-----------+  |
-+-------Refinement------+     +---------------------------------+
-                                       |
-                                   +---v---+
-                                   | Final |
-                                   +-------+
+| |     Analyzed     |<----------|  Problem  |   |  Problem  |  |  |
+| +------------------+  |     |  | Confirmed |   | Discarded |<----+
+|                       |     |  +-----------+   +-----|-----+  |
++-------Refinement------+     +------------------------|--------+
+                                                       |
+                                                   +---v---+
+                                                   | Final |
+                                                   +-------+
 ]]></artwork>
       </figure>
 
       <t>The knowledge gained at each stage is encoded as a list of
-      anomaly labels that can be stored on a Label Store.</t>
+      anomaly labels that can be stored on a Label Store. When a Problem
+			is confirmed by a human in the validation stage, it transitions to
+			Problem analyzed in the refinement stage where the false positive
+			cause is being evaluated. When the cause is related to detection,
+			the detection strategy or profile is being adjusted and passed
+			back to the Detection stage for verification.</t>
     </section>
 
     <section anchor="network_anomaly_data model" 
@@ -617,8 +622,8 @@ Adjustments |          +-------------+          | Symptoms
         <dl>
           <dt>In the validation stage:</dt>
           <dd>
-            the validators are Network Engineers manually validating
-            the labels
+            the validators are Network Engineers manually or with AI
+						assistance validating the labels.
           </dd>
         </dl>
 
@@ -780,7 +785,7 @@ module ietf-relevant-state {
      This version of this YANG module is part of RFC XXXX; see
      the RFC itself for full legal notices.";
 
-  revision 2026-02-12 {
+  revision 2026-06-08 {
     description
       "Initial version";
     reference
@@ -807,7 +812,7 @@ module ietf-relevant-state {
   identity detection {
     base network-anomaly-stage;
     description
-      "A problem is int the detection stage.";
+      "A problem is in the detection stage.";
     reference
       "Section 6.1 in draft-ietf-nmop-network-anomaly-lifecycle.";
   }
@@ -815,7 +820,7 @@ module ietf-relevant-state {
   identity validation {
     base network-anomaly-stage;
     description
-      "A problem is int the validation stage.";
+      "A problem is in the validation stage.";
     reference
       "Section 6.2 in draft-ietf-nmop-network-anomaly-lifecycle.";
   }
@@ -823,7 +828,7 @@ module ietf-relevant-state {
   identity refinement {
     base network-anomaly-stage;
     description
-      "A problem is int the refinement stage.";
+      "A problem is in the refinement stage.";
     reference
       "Section 6.3 in draft-ietf-nmop-network-anomaly-lifecycle.";
   }
@@ -917,7 +922,7 @@ module ietf-relevant-state {
 
   grouping relevant-state-grouping {
     description
-      "Relevant State is a state that could lead to
+      "Relevant state is a state that could lead to
        problems or might be clear indications of problem
        already happening.";
     reference
@@ -933,12 +938,12 @@ module ietf-relevant-state {
       type inet:uri;
       description
         "URI to viusalize the analytical metrics of the
-         relevant-state.";
+         relevant state.";
     }
     leaf description {
       type string;
       description
-        "Textual description of the fault.";
+        "Textual description of the problem.";
     }
     leaf start-time {
       type yang:date-and-time;
@@ -1030,16 +1035,19 @@ module ietf-relevant-state {
 
   grouping message-broker-grouping {
     description
-      "References message broker draft-ietf-nmop-yang-message-broker-integration entities.";
+      "References message broker
+       draft-ietf-nmop-yang-message-broker-integration entities.";
     leaf topic-name {
       type inet:host-name;
       description
-        "From which message broker topic the operational data was consumed from.";
+        "From which message broker topic the operational data was
+         consumed from.";
     }
     leaf subject-name {
       type inet:host-name;
       description
-        "To which message broker subject the operational data references to.";
+        "To which message broker subject the operational data
+         references to.";
     }
   }
 
@@ -1104,9 +1112,9 @@ module ietf-relevant-state {
       leaf confidence-score {
         type score;
         description
-          "Indicates how confident the detector detected an outlier. The
-           higher the value the higher the confidence in relation to the
-           anomaly.";
+          "Indicates how confident the detector detected an outlier.
+           The higher the value the higher the confidence in relation
+           to the anomaly.";
       }
       leaf pattern {
         type identityref {
@@ -1125,7 +1133,8 @@ module ietf-relevant-state {
       }
       container operational-data {
         description
-          "References the operational data from where the anomaly was observed.";
+          "References the operational data from where the anomaly was
+           observed.";
         uses message-broker-grouping;
       }
       container symptom {
