@@ -663,7 +663,7 @@ Adjustments |          +-------------+          | Symptoms
         target="RFC8340"/> shows the "ietf-relevant-state" model.</t>
         <sourcecode type="yangtree"><![CDATA[
 module: ietf-relevant-state
-  +--rw relevant-state!
+  +--rw relevant-state
      +--rw id                  yang:uuid
      +--rw uri?                inet:uri
      +--rw description?        string
@@ -690,8 +690,8 @@ module: ietf-relevant-state
         |  +--rw version?          string
         |  +--rw annotator-type?   enumeration
         +--rw operational-data
-        |  +--rw topic-name?     inet:host-name
-        |  +--rw subject-name?   inet:host-name
+        |  +--rw topic-name?     message-broker-topic
+        |  +--rw subject-name?   message-broker-subject
         +--rw symptom!
            +--rw id               yang:uuid
            +--rw concern-score    score
@@ -728,15 +728,15 @@ module: ietf-relevant-state
           |  +--ro version?          string
           |  +--ro annotator-type?   enumeration
           +--ro operational-data
-          |  +--ro topic-name?     inet:host-name
-          |  +--ro subject-name?   inet:host-name
+          |  +--ro topic-name?     message-broker-topic
+          |  +--ro subject-name?   message-broker-subject
           +--ro symptom!
              +--ro id               yang:uuid
              +--ro concern-score    score
   ]]></sourcecode>
         </section>
         <section title="YANG Module">
-        <sourcecode name="ietf-relevant-state@2025-11-15.yang" type="yang" markers="true"><![CDATA[
+        <sourcecode name="ietf-relevant-state@2026-07-04.yang" type="yang" markers="true"><![CDATA[
 module ietf-relevant-state {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-relevant-state";
@@ -745,12 +745,12 @@ module ietf-relevant-state {
   import ietf-yang-types {
     prefix yang;
     reference
-      "RFC 9911: Common YANG Data Types";
+      "RFC9911: Common YANG Data Types";
   }
   import ietf-inet-types {
     prefix inet;
     reference
-      "RFC 9911: Common YANG Data Types";
+      "RFC9911: Common YANG Data Types";
   }
 
   organization
@@ -792,7 +792,7 @@ module ietf-relevant-state {
      This version of this YANG module is part of RFC XXXX; see
      the RFC itself for full legal notices.";
 
-  revision 2026-06-08 {
+  revision 2026-07-04 {
     description
       "Initial version";
     reference
@@ -806,6 +806,30 @@ module ietf-relevant-state {
     }
     description
       "Number that indicates a score between 0 and 100.";
+  }
+
+  typedef message-broker-topic {
+    type string {
+      length "1..249";
+      pattern '[a-zA-Z0-9._-]+';
+    }
+    description
+      "String that indicates the message broker topic name.";
+    reference
+      "draft-ietf-nmop-yang-message-broker-integration: An Architecture
+        \t\tfor YANG-Push to Message Broker Integration";
+  }
+
+  typedef message-broker-subject {
+    type string {
+      length "1..249";
+      pattern '[a-zA-Z0-9._-~%+/]+';
+    }
+    description
+      "String that indicates the message broker subject name.";
+    reference
+      "draft-ietf-nmop-yang-message-broker-integration: An Architecture
+        \t\tfor YANG-Push to Message Broker Integration";
   }
 
   identity network-anomaly-stage {
@@ -929,7 +953,7 @@ module ietf-relevant-state {
 
   grouping relevant-state-grouping {
     description
-      "Relevant state is a state that could lead to
+      "Relevant State is a state that could lead to
        problems or might be clear indications of problem
        already happening.";
     reference
@@ -965,6 +989,7 @@ module ietf-relevant-state {
     }
     leaf strategy {
       type string;
+      mandatory false;
       description
         "Captures one approach to look at the data (as a human operator
          does) to observe if an abnormal situation is arising.";
@@ -1019,6 +1044,7 @@ module ietf-relevant-state {
     }
     leaf version {
       type string;
+      mandatory false;
       description
         "Version of the annotator.";
     }
@@ -1042,19 +1068,16 @@ module ietf-relevant-state {
 
   grouping message-broker-grouping {
     description
-      "References message broker
-       draft-ietf-nmop-yang-message-broker-integration entities.";
+      "References message broker draft-ietf-nmop-yang-message-broker-integration entities.";
     leaf topic-name {
-      type inet:host-name;
+      type message-broker-topic;
       description
-        "From which message broker topic the operational data was
-         consumed from.";
+        "From which message broker topic the operational data was consumed from.";
     }
     leaf subject-name {
-      type inet:host-name;
+      type message-broker-subject;
       description
-        "To which message broker subject the operational data
-         references to.";
+        "To which message broker subject the operational data references to.";
     }
   }
 
@@ -1119,9 +1142,9 @@ module ietf-relevant-state {
       leaf confidence-score {
         type score;
         description
-          "Indicates how confident the detector is about an outlier.
-           The higher the value the higher the confidence in relation
-           to the anomaly.";
+          "Indicates how confident the detector is about an outlier. The
+           higher the value the higher the confidence in relation to the
+           anomaly.";
       }
       leaf pattern {
         type identityref {
@@ -1140,8 +1163,7 @@ module ietf-relevant-state {
       }
       container operational-data {
         description
-          "References the operational data from where the anomaly was
-           observed.";
+          "References the operational data from where the anomaly was observed.";
         uses message-broker-grouping;
       }
       container symptom {
@@ -1191,6 +1213,7 @@ module ietf-relevant-state {
       }
       leaf version {
         type string;
+        mandatory false;
         description
           "Version of the publisher.";
       }
@@ -1200,7 +1223,6 @@ module ietf-relevant-state {
   }
 
   container relevant-state {
-    presence "relevant-state";
     description
       "A Relevant State is a state that have relevancy
        for network operators, as those are states that could lead

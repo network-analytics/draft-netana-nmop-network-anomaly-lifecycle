@@ -93,9 +93,9 @@ Table of Contents
    9.  Implementation status . . . . . . . . . . . . . . . . . . . .  24
      9.1.  Antagonist  . . . . . . . . . . . . . . . . . . . . . . .  24
    10. Security Considerations . . . . . . . . . . . . . . . . . . .  25
-   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  25
-   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  25
-     12.1.  Normative References . . . . . . . . . . . . . . . . . .  25
+   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  26
+   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  26
+     12.1.  Normative References . . . . . . . . . . . . . . . . . .  26
      12.2.  Informative References . . . . . . . . . . . . . . . . .  28
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  28
 
@@ -657,7 +657,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
    YANG tree diagram [RFC8340] shows the "ietf-relevant-state" model.
 
    module: ietf-relevant-state
-     +--rw relevant-state!
+     +--rw relevant-state
         +--rw id                  yang:uuid
         +--rw uri?                inet:uri
         +--rw description?        string
@@ -692,8 +692,8 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
            |  +--rw version?          string
            |  +--rw annotator-type?   enumeration
            +--rw operational-data
-           |  +--rw topic-name?     inet:host-name
-           |  +--rw subject-name?   inet:host-name
+           |  +--rw topic-name?     message-broker-topic
+           |  +--rw subject-name?   message-broker-subject
            +--rw symptom!
               +--rw id               yang:uuid
               +--rw concern-score    score
@@ -738,15 +738,15 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
              |  +--ro version?          string
              |  +--ro annotator-type?   enumeration
              +--ro operational-data
-             |  +--ro topic-name?     inet:host-name
-             |  +--ro subject-name?   inet:host-name
+             |  +--ro topic-name?     message-broker-topic
+             |  +--ro subject-name?   message-broker-subject
              +--ro symptom!
                 +--ro id               yang:uuid
                 +--ro concern-score    score
 
 8.2.  YANG Module
 
-   <CODE BEGINS> file "ietf-relevant-state@2025-11-15.yang"
+   <CODE BEGINS> file "ietf-relevant-state@2026-07-04.yang"
    module ietf-relevant-state {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-relevant-state";
@@ -755,12 +755,12 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
      import ietf-yang-types {
        prefix yang;
        reference
-         "RFC 9911: Common YANG Data Types";
+         "RFC9911: Common YANG Data Types";
      }
      import ietf-inet-types {
        prefix inet;
        reference
-         "RFC 9911: Common YANG Data Types";
+         "RFC9911: Common YANG Data Types";
      }
 
      organization
@@ -810,7 +810,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
         This version of this YANG module is part of RFC XXXX; see
         the RFC itself for full legal notices.";
 
-     revision 2026-06-08 {
+     revision 2026-07-04 {
        description
          "Initial version";
        reference
@@ -826,14 +826,14 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
          "Number that indicates a score between 0 and 100.";
      }
 
-     identity network-anomaly-stage {
+     typedef message-broker-topic {
+       type string {
+         length "1..249";
+         pattern '[a-zA-Z0-9._-]+';
+       }
        description
-         "Base identity for representing the of the network anomaly
-          stage.";
+         "String that indicates the message broker topic name.";
        reference
-         "Section 6 in draft-ietf-nmop-network-anomaly-lifecycle.";
-     }
-
 
 
 
@@ -841,6 +841,30 @@ Riccobene, et al.        Expires 5 January 2027                [Page 15]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
+
+         "draft-ietf-nmop-yang-message-broker-integration: An Architecture
+           \t\tfor YANG-Push to Message Broker Integration";
+     }
+
+     typedef message-broker-subject {
+       type string {
+         length "1..249";
+         pattern '[a-zA-Z0-9._-~%+/]+';
+       }
+       description
+         "String that indicates the message broker subject name.";
+       reference
+         "draft-ietf-nmop-yang-message-broker-integration: An Architecture
+           \t\tfor YANG-Push to Message Broker Integration";
+     }
+
+     identity network-anomaly-stage {
+       description
+         "Base identity for representing the of the network anomaly
+          stage.";
+       reference
+         "Section 6 in draft-ietf-nmop-network-anomaly-lifecycle.";
+     }
 
      identity detection {
        base network-anomaly-stage;
@@ -866,6 +890,14 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
          "Section 6.3 in draft-ietf-nmop-network-anomaly-lifecycle.";
      }
 
+
+
+
+Riccobene, et al.        Expires 5 January 2027                [Page 16]
+
+Internet-Draft          network-anomaly-lifecycle              July 2026
+
+
      identity problem-forecasted {
        base detection;
        description
@@ -890,14 +922,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
      }
 
      identity discarded {
-
-
-
-Riccobene, et al.        Expires 5 January 2027                [Page 16]
-
-Internet-Draft          network-anomaly-lifecycle              July 2026
-
-
        base validation;
        description
          "After validation, the network anomaly has been
@@ -922,6 +946,14 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
      identity pattern {
        description
+
+
+
+Riccobene, et al.        Expires 5 January 2027                [Page 17]
+
+Internet-Draft          network-anomaly-lifecycle              July 2026
+
+
          "Pattern identified by the Detector.";
      }
 
@@ -946,14 +978,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
      identity seasonality-shift {
        base pattern;
        description
-
-
-
-Riccobene, et al.        Expires 5 January 2027                [Page 17]
-
-Internet-Draft          network-anomaly-lifecycle              July 2026
-
-
          "Shift of the seasonality of the value.";
      }
 
@@ -971,13 +995,21 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
      grouping relevant-state-grouping {
        description
-         "Relevant state is a state that could lead to
+         "Relevant State is a state that could lead to
           problems or might be clear indications of problem
           already happening.";
        reference
          "Figure 4 in draft-ietf-nmop-terminology.";
        leaf id {
          type yang:uuid;
+
+
+
+Riccobene, et al.        Expires 5 January 2027                [Page 18]
+
+Internet-Draft          network-anomaly-lifecycle              July 2026
+
+
          mandatory true;
          description
            "Unique ID of the relevant state. It is unique
@@ -1002,19 +1034,12 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
        }
        leaf end-time {
          type yang:date-and-time;
-
-
-
-Riccobene, et al.        Expires 5 January 2027                [Page 18]
-
-Internet-Draft          network-anomaly-lifecycle              July 2026
-
-
          description
            "Date and time indicating the end of the problem.";
        }
        leaf strategy {
          type string;
+         mandatory false;
          description
            "Captures one approach to look at the data (as a human operator
             does) to observe if an abnormal situation is arising.";
@@ -1033,6 +1058,14 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
          type score;
          mandatory true;
          description
+
+
+
+Riccobene, et al.        Expires 5 January 2027                [Page 19]
+
+Internet-Draft          network-anomaly-lifecycle              July 2026
+
+
            "Indicates how concerned network operation on connectivity
             service degradation should be. The higher the value the higher
             the concern in relation to the overall relevant state.";
@@ -1058,14 +1091,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
           annotation (it is either a human or an algorithm).";
        leaf id {
          type yang:uuid;
-
-
-
-Riccobene, et al.        Expires 5 January 2027                [Page 19]
-
-Internet-Draft          network-anomaly-lifecycle              July 2026
-
-
          description
            "Unique ID of the annotator (either user or algorithm).";
        }
@@ -1077,6 +1102,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
        }
        leaf version {
          type string;
+         mandatory false;
          description
            "Version of the annotator.";
        }
@@ -1088,6 +1114,14 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
            }
            enum algorithm {
              description
+
+
+
+Riccobene, et al.        Expires 5 January 2027                [Page 20]
+
+Internet-Draft          network-anomaly-lifecycle              July 2026
+
+
                "This option is used if a algorithm or software
                 provided the label.";
            }
@@ -1100,28 +1134,17 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
      grouping message-broker-grouping {
        description
-         "References message broker
-          draft-ietf-nmop-yang-message-broker-integration entities.";
+         "References message broker draft-ietf-nmop-yang-message-broker-integration entities.";
        leaf topic-name {
-         type inet:host-name;
+         type message-broker-topic;
          description
-           "From which message broker topic the operational data was
-            consumed from.";
+           "From which message broker topic the operational data was consumed from.";
        }
        leaf subject-name {
-         type inet:host-name;
+         type message-broker-subject;
          description
-           "To which message broker subject the operational data
-            references to.";
+           "To which message broker subject the operational data references to.";
        }
-
-
-
-Riccobene, et al.        Expires 5 January 2027                [Page 20]
-
-Internet-Draft          network-anomaly-lifecycle              July 2026
-
-
      }
 
      grouping anomaly-grouping {
@@ -1147,6 +1170,14 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
          }
          leaf uri {
            type inet:uri;
+
+
+
+Riccobene, et al.        Expires 5 January 2027                [Page 21]
+
+Internet-Draft          network-anomaly-lifecycle              July 2026
+
+
            description
              "URI to viusalize the analytical metrics of the
               anomaly.";
@@ -1170,14 +1201,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
            description
              "Date and time indicating the beginning of the anomaly.
                A detection system will alwasys set a start time,
-
-
-
-Riccobene, et al.        Expires 5 January 2027                [Page 21]
-
-Internet-Draft          network-anomaly-lifecycle              July 2026
-
-
                as it represents the moment in time from which the
                behaviour of the monitored system is considered
                to be anomalous with respect its expected behaviour.";
@@ -1193,9 +1216,9 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
          leaf confidence-score {
            type score;
            description
-             "Indicates how confident the detector is about an outlier.
-              The higher the value the higher the confidence in relation
-              to the anomaly.";
+             "Indicates how confident the detector is about an outlier. The
+              higher the value the higher the confidence in relation to the
+              anomaly.";
          }
          leaf pattern {
            type identityref {
@@ -1203,6 +1226,14 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
            }
            description
              "Pattern describes the type of pattern that was
+
+
+
+Riccobene, et al.        Expires 5 January 2027                [Page 22]
+
+Internet-Draft          network-anomaly-lifecycle              July 2026
+
+
                detected by the annotator (e.g. spike, drop,
                mean-shift, etc.).";
          }
@@ -1214,8 +1245,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
          }
          container operational-data {
            description
-             "References the operational data from where the anomaly was
-              observed.";
+             "References the operational data from where the anomaly was observed.";
            uses message-broker-grouping;
          }
          container symptom {
@@ -1226,14 +1256,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
               or potential Problem.";
            leaf id {
              type yang:uuid;
-
-
-
-Riccobene, et al.        Expires 5 January 2027                [Page 22]
-
-Internet-Draft          network-anomaly-lifecycle              July 2026
-
-
              mandatory true;
              description
                "Unique identifier of the symptom type.";
@@ -1260,6 +1282,14 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
          description
            "Publisher represents the entity that produced the
              relevant-state.";
+
+
+
+Riccobene, et al.        Expires 5 January 2027                [Page 23]
+
+Internet-Draft          network-anomaly-lifecycle              July 2026
+
+
          leaf id {
            type yang:uuid;
            description
@@ -1273,6 +1303,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
          }
          leaf version {
            type string;
+           mandatory false;
            description
              "Version of the publisher.";
          }
@@ -1282,15 +1313,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
      }
 
      container relevant-state {
-
-
-
-Riccobene, et al.        Expires 5 January 2027                [Page 23]
-
-Internet-Draft          network-anomaly-lifecycle              July 2026
-
-
-       presence "relevant-state";
        description
          "A Relevant State is a state that have relevancy
           for network operators, as those are states that could lead
@@ -1316,6 +1338,14 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
    document.  Antagonist provides visual support for two important use
    cases in the scope of this document:
 
+
+
+
+Riccobene, et al.        Expires 5 January 2027                [Page 24]
+
+Internet-Draft          network-anomaly-lifecycle              July 2026
+
+
    *  the generation of a ground truth in relation to symptoms and
       Problems in timeseries data
 
@@ -1334,17 +1364,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
       ongoing.
 
       Integration with ML-based detection systems.
-
-
-
-
-
-
-
-Riccobene, et al.        Expires 5 January 2027                [Page 24]
-
-Internet-Draft          network-anomaly-lifecycle              July 2026
-
 
 10.  Security Considerations
 
@@ -1374,6 +1393,15 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
    "There are no particularly sensitive writable data nodes."
 
+
+
+
+
+Riccobene, et al.        Expires 5 January 2027                [Page 25]
+
+Internet-Draft          network-anomaly-lifecycle              July 2026
+
+
    Some of the readable data nodes in this YANG module may be considered
    sensitive or vulnerable in some network environments.  It is thus
    important to control read access (e.g., via get, get-config, or
@@ -1393,14 +1421,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 12.  References
 
 12.1.  Normative References
-
-
-
-
-Riccobene, et al.        Expires 5 January 2027                [Page 25]
-
-Internet-Draft          network-anomaly-lifecycle              July 2026
-
 
    [Antagonist]
               Riccobene, V., Du, W., Graf, T., and H. Huang Feng,
@@ -1431,6 +1451,13 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
               terminology-23>.
 
+
+
+Riccobene, et al.        Expires 5 January 2027                [Page 26]
+
+Internet-Draft          network-anomaly-lifecycle              July 2026
+
+
    [I-D.ietf-nmop-yang-message-broker-integration]
               Graf, T. and A. Elhassany, "An Architecture for YANG-Push
               to Message Broker Integration", Work in Progress,
@@ -1447,16 +1474,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
    [RFC4252]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
               Authentication Protocol", RFC 4252, DOI 10.17487/RFC4252,
               January 2006, <https://www.rfc-editor.org/info/rfc4252>.
-
-
-
-
-
-
-Riccobene, et al.        Expires 5 January 2027                [Page 26]
-
-Internet-Draft          network-anomaly-lifecycle              July 2026
-
 
    [RFC6141]  Camarillo, G., Ed., Holmberg, C., and Y. Gao, "Re-INVITE
               and Target-Refresh Request Handling in the Session
@@ -1490,6 +1507,13 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
               DOI 10.17487/RFC9000, May 2021,
               <https://www.rfc-editor.org/info/rfc9000>.
 
+
+
+Riccobene, et al.        Expires 5 January 2027                [Page 27]
+
+Internet-Draft          network-anomaly-lifecycle              July 2026
+
+
    [RFC9232]  Song, H., Qin, F., Martinez-Julia, P., Ciavaglia, L., and
               A. Wang, "Network Telemetry Framework", RFC 9232,
               DOI 10.17487/RFC9232, May 2022,
@@ -1504,15 +1528,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
               Arumugam, "A YANG Data Model for Service Assurance",
               RFC 9418, DOI 10.17487/RFC9418, July 2023,
               <https://www.rfc-editor.org/info/rfc9418>.
-
-
-
-
-
-Riccobene, et al.        Expires 5 January 2027                [Page 27]
-
-Internet-Draft          network-anomaly-lifecycle              July 2026
-
 
    [RFC9543]  Farrel, A., Ed., Drake, J., Ed., Rokui, R., Homma, S.,
               Makhijani, K., Contreras, L., and J. Tantsura, "A
@@ -1543,6 +1558,18 @@ Authors' Addresses
    Email: vincenzo.riccobene@huawei-partners.com
 
 
+
+
+
+
+
+
+
+Riccobene, et al.        Expires 5 January 2027                [Page 28]
+
+Internet-Draft          network-anomaly-lifecycle              July 2026
+
+
    Thomas Graf
    Swisscom
    Binzring 17
@@ -1559,38 +1586,11 @@ Authors' Addresses
    Email: wanting.du@swisscom.com
 
 
-
-
-
-
-
-
-Riccobene, et al.        Expires 5 January 2027                [Page 28]
-
-Internet-Draft          network-anomaly-lifecycle              July 2026
-
-
    Alex Huang Feng
    Deutsche Telekom
    Barcelona
    Spain
    Email: alex.huang-feng@t-systems.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
