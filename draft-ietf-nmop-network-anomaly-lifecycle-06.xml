@@ -101,7 +101,7 @@
       </address>
     </author>
 
-    <date day="24" month="June" year="2026"/>
+    <date day="04" month="July" year="2026"/>
 
     <area>Operations and Management</area>
 
@@ -265,14 +265,22 @@
           the anomaly detection system.</t>
 
           <t>Confidence Score: Indicates how confident the detector
-          detected an outlier. The value ranges between 0 and 100. The
+          is about an outlier. The value ranges between 0 and 100. The
           higher the value the higher the confidence. For example, if
           the normal value of the operational-data is in the range of
           0-10 and the detected value is 1000, a confidence score of 99
           could make sense. Where a detected value of 120 would lead to
           a confidence level of 10. The Confidence Score is applicable
           to a single anomaly or for a detection strategy on one ore
-          more anomalies.</t>
+          more anomalies. The Confidence Score is applicable to one or
+					more anomalies. In case of multiple anomalies, knowledge from
+          expert rules as in <xref section="3.5.1.1" sectionFormat="of"
+          target="I-D.ietf-nmop-network-anomaly-architecture"/> or
+          network modelling as in section <xref section="3.5.1.2"
+          sectionFormat="of"
+					target="I-D.ietf-nmop-network-anomaly-architecture"/> are
+          taken into account in the calculation of the Confidence Score.
+					</t>
 
           <t>Concern Score: Indicates how concerned network operation on
           connectivity service degradation should be. The value ranges
@@ -622,8 +630,7 @@ Adjustments |          +-------------+          | Symptoms
         <dl>
           <dt>In the validation stage:</dt>
           <dd>
-            the validators are Network Engineers manually or with AI
-						assistance validating the labels.
+            the validators are Network Engineers validating the labels.
           </dd>
         </dl>
 
@@ -968,7 +975,7 @@ module ietf-relevant-state {
     leaf confidence-score {
       type score;
       description
-        "Indicates how confident the detector detected an outlier. The
+        "Indicates how confident the detector is about an outlier. The
          higher the value the higher the confidence in relation to the
          overall relevant state.";
     }
@@ -1112,7 +1119,7 @@ module ietf-relevant-state {
       leaf confidence-score {
         type score;
         description
-          "Indicates how confident the detector detected an outlier.
+          "Indicates how confident the detector is about an outlier.
            The higher the value the higher the confidence in relation
            to the anomaly.";
       }
