@@ -672,7 +672,7 @@ Adjustments |          +-------------+          | Symptoms
         target="RFC8340"/> shows the "ietf-relevant-state" model.</t>
         <sourcecode type="yangtree"><![CDATA[
 module: ietf-relevant-state
-  +--rw relevant-state
+  +--rw relevant-state!
      +--rw id                  yang:uuid
      +--rw uri?                inet:uri
      +--rw description?        string
@@ -768,14 +768,14 @@ module ietf-relevant-state {
     "WG Web:   <https://datatracker.ietf.org/wg/nmop/>
      WG List:  <mailto:nmop@ietf.org>
 
-     Editor:   Vincenzo Riccobene
+     Editor:  Vincenzo Riccobene
               <mailto:vincenzo.riccobene@huawei-partners.com>
               Thomas Graf
               <mailto:thomas.graf@swisscom.com>
               Wanting Du
               <mailto:wanting.du@swisscom.com>
               Alex Huang Feng
-              <mailto:alex.huang-feng@insa-lyon.fr>";
+              <mailto:alex.huang-feng@t-systems.com>";
   description
     "This module defines the relevant-state container and
      notifications to be used by a network anomaly detection
@@ -998,7 +998,6 @@ module ietf-relevant-state {
     }
     leaf strategy {
       type string;
-      mandatory false;
       description
         "Captures one approach to look at the data (as a human operator
          does) to observe if an abnormal situation is arising.";
@@ -1053,7 +1052,6 @@ module ietf-relevant-state {
     }
     leaf version {
       type string;
-      mandatory false;
       description
         "Version of the annotator.";
     }
@@ -1077,16 +1075,22 @@ module ietf-relevant-state {
 
   grouping message-broker-grouping {
     description
-      "References message broker draft-ietf-nmop-yang-message-broker-integration entities.";
+      "Grouping with references towards the message broker
+      identities.";
+    reference
+      "draft-ietf-nmop-yang-message-broker-integration: An
+      Architecture for YANG-Push to Message Broker Integration";
     leaf topic-name {
       type message-broker-topic;
       description
-        "From which message broker topic the operational data was consumed from.";
+        "Topic from which the operational data was consumed
+        from in the message broker.";
     }
     leaf subject-name {
       type message-broker-subject;
       description
-        "To which message broker subject the operational data references to.";
+        "Reference towards the message broker subject of
+        the operational data.";
     }
   }
 
@@ -1106,10 +1110,10 @@ module ietf-relevant-state {
         type yang:counter32;
         description
           "Revision of the anomaly metadata object.
-            It allows multiple revisions of the metadata to be
-            generated in order to support the definition of
-            multiple problem objects from the same source to
-            facilitate improvements overtime.";
+           It allows multiple revisions of the metadata to be
+           generated in order to support the definition of
+           multiple problem objects from the same source to
+           facilitate improvements overtime.";
       }
       leaf uri {
         type inet:uri;
@@ -1167,12 +1171,13 @@ module ietf-relevant-state {
       container annotator {
         description
           "Annotator represents the entity that produced the
-            annotation.";
+          annotation.";
         uses annotator-grouping;
       }
       container operational-data {
         description
-          "References the operational data from where the anomaly was observed.";
+          "References the operational data from where the anomaly
+          was observed.";
         uses message-broker-grouping;
       }
       container symptom {
@@ -1222,7 +1227,6 @@ module ietf-relevant-state {
       }
       leaf version {
         type string;
-        mandatory false;
         description
           "Version of the publisher.";
       }
@@ -1232,6 +1236,7 @@ module ietf-relevant-state {
   }
 
   container relevant-state {
+    presence "relevant-state";
     description
       "A Relevant State is a state that have relevancy
        for network operators, as those are states that could lead
