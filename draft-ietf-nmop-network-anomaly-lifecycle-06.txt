@@ -5,11 +5,11 @@
 NMOP                                                        V. Riccobene
 Internet-Draft                                                    Huawei
 Intended status: Experimental                                    T. Graf
-Expires: 5 January 2027                                            W. Du
+Expires: 7 January 2027                                            W. Du
                                                                 Swisscom
                                                            A. Huang Feng
                                                         Deutsche Telekom
-                                                             4 July 2026
+                                                             6 July 2026
 
 
            An Experiment: Network Anomaly Detection Lifecycle
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Riccobene, et al.        Expires 5 January 2027                 [Page 1]
+Riccobene, et al.        Expires 7 January 2027                 [Page 1]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
-   This Internet-Draft will expire on 5 January 2027.
+   This Internet-Draft will expire on 7 January 2027.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Riccobene, et al.        Expires 5 January 2027                 [Page 2]
+Riccobene, et al.        Expires 7 January 2027                 [Page 2]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -165,7 +165,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                 [Page 3]
+Riccobene, et al.        Expires 7 January 2027                 [Page 3]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -221,7 +221,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                 [Page 4]
+Riccobene, et al.        Expires 7 January 2027                 [Page 4]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -277,7 +277,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                 [Page 5]
+Riccobene, et al.        Expires 7 January 2027                 [Page 5]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -333,7 +333,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                 [Page 6]
+Riccobene, et al.        Expires 7 January 2027                 [Page 6]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -389,7 +389,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                 [Page 7]
+Riccobene, et al.        Expires 7 January 2027                 [Page 7]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -445,7 +445,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                 [Page 8]
+Riccobene, et al.        Expires 7 January 2027                 [Page 8]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -501,7 +501,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                 [Page 9]
+Riccobene, et al.        Expires 7 January 2027                 [Page 9]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -557,7 +557,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 10]
+Riccobene, et al.        Expires 7 January 2027                [Page 10]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -613,7 +613,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 11]
+Riccobene, et al.        Expires 7 January 2027                [Page 11]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -669,7 +669,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 12]
+Riccobene, et al.        Expires 7 January 2027                [Page 12]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -725,7 +725,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 13]
+Riccobene, et al.        Expires 7 January 2027                [Page 13]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -781,7 +781,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 14]
+Riccobene, et al.        Expires 7 January 2027                [Page 14]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -837,7 +837,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 15]
+Riccobene, et al.        Expires 7 January 2027                [Page 15]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -893,7 +893,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 16]
+Riccobene, et al.        Expires 7 January 2027                [Page 16]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -949,7 +949,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 17]
+Riccobene, et al.        Expires 7 January 2027                [Page 17]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -1005,7 +1005,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 18]
+Riccobene, et al.        Expires 7 January 2027                [Page 18]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -1061,7 +1061,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 19]
+Riccobene, et al.        Expires 7 January 2027                [Page 19]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -1117,7 +1117,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 20]
+Riccobene, et al.        Expires 7 January 2027                [Page 20]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -1173,7 +1173,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 21]
+Riccobene, et al.        Expires 7 January 2027                [Page 21]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -1229,7 +1229,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 22]
+Riccobene, et al.        Expires 7 January 2027                [Page 22]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -1285,7 +1285,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 23]
+Riccobene, et al.        Expires 7 January 2027                [Page 23]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -1341,7 +1341,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 24]
+Riccobene, et al.        Expires 7 January 2027                [Page 24]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -1397,7 +1397,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 25]
+Riccobene, et al.        Expires 7 January 2027                [Page 25]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -1453,7 +1453,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 26]
+Riccobene, et al.        Expires 7 January 2027                [Page 26]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -1509,7 +1509,7 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 27]
+Riccobene, et al.        Expires 7 January 2027                [Page 27]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -1565,7 +1565,7 @@ Authors' Addresses
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 28]
+Riccobene, et al.        Expires 7 January 2027                [Page 28]
 
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
@@ -1621,4 +1621,4 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
 
-Riccobene, et al.        Expires 5 January 2027                [Page 29]
+Riccobene, et al.        Expires 7 January 2027                [Page 29]
