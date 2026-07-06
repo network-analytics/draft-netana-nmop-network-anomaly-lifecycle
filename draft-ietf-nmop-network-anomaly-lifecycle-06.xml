@@ -1085,12 +1085,16 @@ module ietf-relevant-state {
       description
         "Topic from which the operational data was consumed
         from in the message broker.";
+      reference
+        "draft-ietf-nmop-yang-message-broker-integration";
     }
     leaf subject-name {
       type message-broker-subject;
       description
         "Reference towards the message broker subject of
         the operational data.";
+      reference
+        "draft-ietf-nmop-yang-message-broker-integration";
     }
   }
 

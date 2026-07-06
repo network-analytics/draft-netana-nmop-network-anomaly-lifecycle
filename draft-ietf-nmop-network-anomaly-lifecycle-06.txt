@@ -1141,12 +1141,16 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
          description
            "Topic from which the operational data was consumed
            from in the message broker.";
+         reference
+           "draft-ietf-nmop-yang-message-broker-integration";
        }
        leaf subject-name {
          type message-broker-subject;
          description
            "Reference towards the message broker subject of
            the operational data.";
+         reference
+           "draft-ietf-nmop-yang-message-broker-integration";
        }
      }
 
@@ -1166,10 +1170,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
            type yang:counter32;
            description
              "Revision of the anomaly metadata object.
-              It allows multiple revisions of the metadata to be
-              generated in order to support the definition of
-              multiple problem objects from the same source to
-              facilitate improvements overtime.";
 
 
 
@@ -1178,6 +1178,10 @@ Riccobene, et al.        Expires 5 January 2027                [Page 21]
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
+              It allows multiple revisions of the metadata to be
+              generated in order to support the definition of
+              multiple problem objects from the same source to
+              facilitate improvements overtime.";
          }
          leaf uri {
            type inet:uri;
@@ -1222,10 +1226,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
              "Indicates how confident the detector is about an outlier. The
               higher the value the higher the confidence in relation to the
               anomaly.";
-         }
-         leaf pattern {
-           type identityref {
-             base pattern;
 
 
 
@@ -1234,6 +1234,10 @@ Riccobene, et al.        Expires 5 January 2027                [Page 22]
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
+         }
+         leaf pattern {
+           type identityref {
+             base pattern;
            }
            description
              "Pattern describes the type of pattern that was
@@ -1278,10 +1282,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
      }
 
      notification relevant-state-notification {
-       description
-         "Notification of a relevant state that can be sent by the
-          anomaly detection system to the postmortem management
-          system or to the incident management system.";
 
 
 
@@ -1290,6 +1290,10 @@ Riccobene, et al.        Expires 5 January 2027                [Page 23]
 Internet-Draft          network-anomaly-lifecycle              July 2026
 
 
+       description
+         "Notification of a relevant state that can be sent by the
+          anomaly detection system to the postmortem management
+          system or to the incident management system.";
        container publisher {
          description
            "Publisher represents the entity that produced the
@@ -1333,10 +1337,6 @@ Internet-Draft          network-anomaly-lifecycle              July 2026
    This section provides pointers to existing open source
    implementations of this document.  Note to the RFC-editor: Please
    remove this before publishing.
-
-
-
-
 
 
 
